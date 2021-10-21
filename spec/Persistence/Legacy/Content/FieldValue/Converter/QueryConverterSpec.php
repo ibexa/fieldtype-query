@@ -4,11 +4,11 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace spec\EzSystems\EzPlatformQueryFieldType\eZ\Persistence\Legacy\Content\FieldValue\Converter;
+namespace spec\Ibexa\FieldTypeQuery\Persistence\Legacy\Content\FieldValue\Converter;
 
 use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldDefinition;
 use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
-use EzSystems\EzPlatformQueryFieldType\eZ\Persistence\Legacy\Content\FieldValue\Converter\QueryConverter;
+use Ibexa\FieldTypeQuery\Persistence\Legacy\Content\FieldValue\Converter\QueryConverter;
 use PhpSpec\ObjectBehavior;
 use Webmozart\Assert\Assert;
 

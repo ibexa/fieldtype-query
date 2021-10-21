@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace spec\EzSystems\EzPlatformQueryFieldType\eZ\ContentView;
+namespace spec\Ibexa\FieldTypeQuery\ContentView;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Repository;
@@ -16,7 +16,7 @@ use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
-use EzSystems\EzPlatformQueryFieldType\eZ\ContentView\FieldDefinitionIdentifierMatcher;
+use Ibexa\FieldTypeQuery\ContentView\FieldDefinitionIdentifierMatcher;
 use PhpSpec\ObjectBehavior;
 
 class FieldDefinitionIdentifierMatcherSpec extends ObjectBehavior

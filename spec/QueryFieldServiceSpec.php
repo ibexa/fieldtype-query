@@ -4,11 +4,11 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace spec\EzSystems\EzPlatformQueryFieldType\API;
+namespace spec\Ibexa\FieldTypeQuery;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Query as ApiContentQuery;
-use EzSystems\EzPlatformQueryFieldType\API\QueryFieldService;
+use Ibexa\FieldTypeQuery\QueryFieldService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;

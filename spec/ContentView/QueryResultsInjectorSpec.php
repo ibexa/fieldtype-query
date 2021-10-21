@@ -4,14 +4,14 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace spec\EzSystems\EzPlatformQueryFieldType\eZ\ContentView;
+namespace spec\Ibexa\FieldTypeQuery\ContentView;
 
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewParametersEvent;
 use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
 use eZ\Publish\Core\Repository\Values\Content\Content;
-use EzSystems\EzPlatformQueryFieldType\API\QueryFieldServiceInterface;
-use EzSystems\EzPlatformQueryFieldType\eZ\ContentView\QueryResultsInjector;
+use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
+use Ibexa\FieldTypeQuery\ContentView\QueryResultsInjector;
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;

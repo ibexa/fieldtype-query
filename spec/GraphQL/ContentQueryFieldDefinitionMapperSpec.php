@@ -4,9 +4,9 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace spec\EzSystems\EzPlatformQueryFieldType\GraphQL;
+namespace spec\Ibexa\FieldTypeQuery\GraphQL;
 
-use EzSystems\EzPlatformQueryFieldType\GraphQL\ContentQueryFieldDefinitionMapper;
+use Ibexa\FieldTypeQuery\GraphQL\ContentQueryFieldDefinitionMapper;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;

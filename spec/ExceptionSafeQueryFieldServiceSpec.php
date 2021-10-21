@@ -4,11 +4,11 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace spec\EzSystems\EzPlatformQueryFieldType\API;
+namespace spec\Ibexa\FieldTypeQuery;
 
 use eZ\Publish\Core\Repository\Values\Content\Content;
-use EzSystems\EzPlatformQueryFieldType\API\ExceptionSafeQueryFieldService;
-use EzSystems\EzPlatformQueryFieldType\API\QueryFieldServiceInterface;
+use Ibexa\FieldTypeQuery\ExceptionSafeQueryFieldService;
+use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
