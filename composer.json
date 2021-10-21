@@ -1,8 +1,11 @@
 {
-    "name": "ezsystems/ezplatform-query-fieldtype",
-    "description": "An eZ Platform Field Type that defines a query.",
-    "type": "ezplatform-bundle",
+    "name": "ibexa/fieldtype-query",
+    "description": "Ibexa Field Type that defines a query.",
+    "type": "ibexa-bundle",
     "license": "GPL-2.0-only",
+    "replace": {
+        "ezsystems/ezplatform-query-fieldtype": "*"
+    },
     "authors": [
         {
             "name": "Bertrand Dunogier",
@@ -32,7 +35,16 @@
     },
     "autoload": {
         "psr-4": {
-            "EzSystems\\EzPlatformQueryFieldType\\": "src"
+            "EzSystems\\EzPlatformQueryFieldType\\": "src",
+            "Ibexa\\Bundle\\FieldTypeQuery\\": "src/bundle/",
+            "Ibexa\\FieldTypeQuery\\": "src/lib/",
+            "Ibexa\\Contracts\\FieldTypeQuery\\": "src/contracts/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ibexa\\Tests\\FieldTypeQuery\\": "tests/lib/",
+            "Ibexa\\Tests\\Bundle\\FieldTypeQuery\\": "tests/bundle/"
         }
     },
     "require-dev": {
@@ -54,7 +66,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.0.x-dev"
+            "dev-main": "4.0.x-dev"
         }
     }
 }
