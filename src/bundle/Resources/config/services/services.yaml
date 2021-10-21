@@ -4,12 +4,12 @@ services:
         autowire: true
         public: true
 
-    EzSystems\EzPlatformQueryFieldType\Controller\QueryFieldRestController:
+    Ibexa\Bundle\FieldTypeQuery\Controller\QueryFieldRestController:
         arguments:
             $requestParser: '@ezpublish_rest.request_parser'
 
-    EzSystems\EzPlatformQueryFieldType\API\QueryFieldService:
+    Ibexa\FieldTypeQuery\QueryFieldService:
         arguments:
             $queryTypeRegistry: '@ezpublish.query_type.registry'
 
-    EzSystems\EzPlatformQueryFieldType\API\QueryFieldServiceInterface: '@EzSystems\EzPlatformQueryFieldType\API\QueryFieldService'
+    Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface: '@Ibexa\FieldTypeQuery\QueryFieldService'
