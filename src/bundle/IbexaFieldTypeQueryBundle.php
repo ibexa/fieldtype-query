@@ -6,7 +6,7 @@
  */
 namespace Ibexa\Bundle\FieldTypeQuery;
 
-use Ibexa\FieldTypeQuery\Symfony\DependencyInjection\Compiler;
+use Ibexa\Bundle\FieldTypeQuery\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
