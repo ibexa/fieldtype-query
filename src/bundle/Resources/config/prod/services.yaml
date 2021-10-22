@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: true
+
+    Ibexa\FieldTypeQuery\ExceptionSafeQueryFieldService:
+        decorates: 'Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface'

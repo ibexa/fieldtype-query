@@ -4,10 +4,10 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace spec\EzSystems\EzPlatformQueryFieldType\GraphQL;
+namespace spec\Ibexa\FieldTypeQuery\GraphQL;
 
-use EzSystems\EzPlatformQueryFieldType\API\QueryFieldServiceInterface;
-use EzSystems\EzPlatformQueryFieldType\GraphQL\QueryFieldResolver;
+use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
+use Ibexa\FieldTypeQuery\GraphQL\QueryFieldResolver;
 use eZ\Publish\Core\Repository\Values\Content\Content;
 use EzSystems\EzPlatformGraphQL\GraphQL\Value\Field;
 use PhpSpec\ObjectBehavior;
