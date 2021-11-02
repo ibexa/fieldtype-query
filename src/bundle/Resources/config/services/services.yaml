@@ -1,0 +1,15 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: true
+
+    Ibexa\Bundle\FieldTypeQuery\Controller\QueryFieldRestController:
+        arguments:
+            $requestParser: '@ezpublish_rest.request_parser'
+
+    Ibexa\FieldTypeQuery\QueryFieldService:
+        arguments:
+            $queryTypeRegistry: '@ezpublish.query_type.registry'
+
+    Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface: '@Ibexa\FieldTypeQuery\QueryFieldService'

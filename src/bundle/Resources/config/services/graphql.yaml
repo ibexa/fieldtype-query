@@ -1,0 +1,18 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Ibexa\FieldTypeQuery\GraphQL\QueryFieldResolver:
+        tags:
+            - { name: overblog_graphql.resolver, alias: "QueryFieldValue", method: "resolveQueryField" }
+            - { name: overblog_graphql.resolver, alias: "QueryFieldValueConnection", method: "resolveQueryFieldConnection" }
+            - { name: overblog_graphql.resolver, alias: "QueryFieldDefinitionParameters", method: "resolveQueryFieldDefinitionParameters" }
+
+
+    Ibexa\FieldTypeQuery\GraphQL\ContentQueryFieldDefinitionMapper:
+        decorates: EzSystems\EzPlatformGraphQL\Schema\Domain\Content\Mapper\FieldDefinition\FieldDefinitionMapper
+        arguments:
+            $innerMapper: '@Ibexa\FieldTypeQuery\GraphQL\ContentQueryFieldDefinitionMapper.inner'
+            $fieldTypeIdentifier: '%ezcontentquery_identifier%'
