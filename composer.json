@@ -61,7 +61,7 @@
     "scripts": {
         "fix-cs": [
             "php-cs-fixer fix --config=.php-cs-fixer.php --show-progress=dots",
-            "php-cs-fixer --ansi fix --config=.php-cs-fixer-spec.php -v --show-progress=dots"
+            "php-cs-fixer --ansi fix --config=.php-cs-fixer-spec.php --show-progress=dots"
         ]
     },
     "extra": {
