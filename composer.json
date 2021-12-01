@@ -48,7 +48,7 @@
         }
     },
     "require-dev": {
-        "ibexa/doctrine-dbal-schema": "^4.0@dev",
+        "ibexa/doctrine-schema": "^4.0@dev",
         "ibexa/design-engine": "^4.0@dev",
         "ibexa/fieldtype-richtext": "^4.0@dev",
         "ibexa/search": "^4.0@dev",
