@@ -7,11 +7,11 @@
 namespace spec\Ibexa\FieldTypeQuery\GraphQL;
 
 use Ibexa\FieldTypeQuery\GraphQL\ContentQueryFieldDefinitionMapper;
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use EzSystems\EzPlatformGraphQL\Schema\Domain\Content\Mapper\FieldDefinition\FieldDefinitionMapper;
-use EzSystems\EzPlatformGraphQL\Schema\Domain\Content\NameHelper;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Contracts\GraphQL\Schema\Domain\Content\Mapper\FieldDefinition\FieldDefinitionMapper;
+use Ibexa\GraphQL\Schema\Domain\Content\NameHelper;
 use PhpSpec\ObjectBehavior;
 
 class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
@@ -102,7 +102,7 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
     /**
      * @param bool $enablePagination
      *
-     * @return FieldDefinition
+     * @return \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
      */
     private function fieldDefinition(bool $enablePagination = false): FieldDefinition
     {
@@ -117,9 +117,9 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
     }
 
     /**
-     * @return \eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition
+     * @return \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
      */
-    protected function getLambdaFieldDefinition(): \eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition
+    protected function getLambdaFieldDefinition(): \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
     {
         return new FieldDefinition(['fieldTypeIdentifier' => 'lambda']);
     }

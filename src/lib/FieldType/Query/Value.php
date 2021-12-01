@@ -6,7 +6,7 @@
  */
 namespace Ibexa\FieldTypeQuery\FieldType\Query;
 
-use eZ\Publish\Core\FieldType\Value as BaseValue;
+use Ibexa\Core\FieldType\Value as BaseValue;
 
 class Value extends BaseValue
 {
@@ -28,7 +28,7 @@ class Value extends BaseValue
     }
 
     /**
-     * @see \eZ\Publish\Core\FieldType\Value
+     * @see \Ibexa\Core\FieldType\Value
      */
     public function __toString()
     {

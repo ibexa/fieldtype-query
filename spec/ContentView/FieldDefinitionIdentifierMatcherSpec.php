@@ -6,16 +6,16 @@
  */
 namespace spec\Ibexa\FieldTypeQuery\ContentView;
 
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\Core\MVC\Symfony\Matcher\ViewMatcherInterface;
-use eZ\Publish\Core\MVC\Symfony\View\ContentView;
-use eZ\Publish\Core\Repository\Values\Content\Content;
-use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Core\MVC\Symfony\Matcher\ViewMatcherInterface;
+use Ibexa\Core\MVC\Symfony\View\ContentView;
+use Ibexa\Core\Repository\Values\Content\Content;
+use Ibexa\Core\Repository\Values\Content\VersionInfo;
+use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Ibexa\FieldTypeQuery\ContentView\FieldDefinitionIdentifierMatcher;
 use PhpSpec\ObjectBehavior;
 

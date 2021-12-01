@@ -8,8 +8,8 @@ namespace spec\Ibexa\FieldTypeQuery\GraphQL;
 
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Ibexa\FieldTypeQuery\GraphQL\QueryFieldResolver;
-use eZ\Publish\Core\Repository\Values\Content\Content;
-use EzSystems\EzPlatformGraphQL\GraphQL\Value\Field;
+use Ibexa\Core\Repository\Values\Content\Content;
+use Ibexa\GraphQL\Value\Field;
 use PhpSpec\ObjectBehavior;
 
 class QueryFieldResolverSpec extends ObjectBehavior

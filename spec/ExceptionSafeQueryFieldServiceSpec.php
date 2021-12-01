@@ -6,7 +6,7 @@
  */
 namespace spec\Ibexa\FieldTypeQuery;
 
-use eZ\Publish\Core\Repository\Values\Content\Content;
+use Ibexa\Core\Repository\Values\Content\Content;
 use Ibexa\FieldTypeQuery\ExceptionSafeQueryFieldService;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use PhpSpec\ObjectBehavior;

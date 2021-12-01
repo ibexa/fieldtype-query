@@ -6,8 +6,8 @@
  */
 namespace spec\Ibexa\FieldTypeQuery\Persistence\Legacy\Content\FieldValue\Converter;
 
-use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldDefinition;
-use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
+use Ibexa\Core\Persistence\Legacy\Content\StorageFieldDefinition;
+use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\FieldTypeQuery\Persistence\Legacy\Content\FieldValue\Converter\QueryConverter;
 use PhpSpec\ObjectBehavior;
 use Webmozart\Assert\Assert;

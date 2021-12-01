@@ -6,16 +6,16 @@
  */
 namespace Ibexa\FieldTypeQuery\FieldType\Mapper;
 
-use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
-use eZ\Publish\API\Repository\ContentTypeService;
+use Ibexa\AdminUi\FieldType\FieldDefinitionFormMapperInterface;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class QueryFormMapper implements FieldDefinitionFormMapperInterface
 {
-    /** @var ContentTypeService */
+    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
     private $contentTypeService;
 
     /**

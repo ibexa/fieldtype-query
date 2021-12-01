@@ -6,12 +6,12 @@
  */
 namespace Ibexa\FieldTypeQuery\ContentView;
 
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use eZ\Publish\Core\MVC\Symfony\Matcher\ContentBased\MultipleValued;
-use eZ\Publish\Core\MVC\Symfony\View\ContentValueView;
-use eZ\Publish\Core\MVC\Symfony\View\View;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\MVC\Symfony\Matcher\ContentBased\MultipleValued;
+use Ibexa\Core\MVC\Symfony\View\ContentValueView;
+use Ibexa\Core\MVC\Symfony\View\View;
 
 final class FieldDefinitionIdentifierMatcher extends MultipleValued
 {
@@ -40,7 +40,7 @@ final class FieldDefinitionIdentifierMatcher extends MultipleValued
     }
 
     /**
-     * @param ContentType $contentType
+     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
      *
      * @return bool
      */
@@ -56,11 +56,11 @@ final class FieldDefinitionIdentifierMatcher extends MultipleValued
     }
 
     /**
-     * @param \eZ\Publish\Core\MVC\Symfony\View\View $view
+     * @param \Ibexa\Core\MVC\Symfony\View\View $view
      *
      * @return bool
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function match(View $view)
     {

@@ -6,15 +6,15 @@
  */
 namespace Ibexa\FieldTypeQuery\FieldType\Form;
 
-use eZ\Publish\API\Repository\FieldTypeService;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType\FieldValueTransformer;
+use Ibexa\Contracts\Core\Repository\FieldTypeService;
+use Ibexa\AdminUi\Form\DataTransformer\FieldType\FieldValueTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class QueryFieldFormType extends AbstractType
 {
-    /** @var FieldTypeService */
+    /** @var \Ibexa\Contracts\Core\Repository\FieldTypeService */
     private $fieldTypeService;
 
     public function __construct(FieldTypeService $fieldTypeService)

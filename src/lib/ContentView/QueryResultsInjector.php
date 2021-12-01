@@ -6,11 +6,11 @@
  */
 namespace Ibexa\FieldTypeQuery\ContentView;
 
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use eZ\Publish\Core\MVC\Symfony\View\ContentValueView;
-use eZ\Publish\Core\MVC\Symfony\View\LocationValueView;
-use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewParametersEvent;
-use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\MVC\Symfony\View\ContentValueView;
+use Ibexa\Core\MVC\Symfony\View\LocationValueView;
+use Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent;
+use Ibexa\Core\MVC\Symfony\View\ViewEvents;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Pagerfanta\Pagerfanta;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class QueryResultsInjector implements EventSubscriberInterface
 {
-    /** @var \EzSystems\EzPlatformQueryFieldType\API\QueryFieldService */
+    /** @var \Ibexa\FieldTypeQuery\QueryFieldService */
     private $queryFieldService;
 
     /** @var array */
@@ -68,11 +68,11 @@ final class QueryResultsInjector implements EventSubscriberInterface
     }
 
     /**
-     * @param \eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewParametersEvent $event
+     * @param \Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent $event
      *
      * @return iterable
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     private function buildResults(FilterViewParametersEvent $event): iterable
     {

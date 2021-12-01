@@ -7,33 +7,33 @@
 namespace Ibexa\Bundle\FieldTypeQuery\Controller;
 
 use Ibexa\FieldTypeQuery\QueryFieldService;
-use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformRest\Exceptions\NotFoundException;
-use EzSystems\EzPlatformRest\RequestParser;
-use EzSystems\EzPlatformRest\Server\Values as RestValues;
+use Ibexa\Contracts\Core\Repository\ContentService;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\LocationService;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
+use Ibexa\Rest\RequestParser;
+use Ibexa\Rest\Server\Values as RestValues;
 use Symfony\Component\HttpFoundation\Request;
 
 final class QueryFieldRestController
 {
-    /** @var \EzSystems\EzPlatformQueryFieldType\API\QueryFieldService */
+    /** @var \Ibexa\FieldTypeQuery\QueryFieldService */
     private $queryFieldService;
 
-    /** @var \eZ\Publish\API\Repository\ContentService */
+    /** @var \Ibexa\Contracts\Core\Repository\ContentService */
     private $contentService;
 
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var \eZ\Publish\API\Repository\LocationService */
+    /** @var \Ibexa\Contracts\Core\Repository\LocationService */
     private $locationService;
 
-    /** @var \EzSystems\EzPlatformRest\RequestParser */
+    /** @var \Ibexa\Rest\RequestParser */
     private $requestParser;
 
     public function __construct(
@@ -110,8 +110,8 @@ final class QueryFieldRestController
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     private function loadLocationByPath(Request $request): Location
     {

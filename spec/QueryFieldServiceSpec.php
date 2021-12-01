@@ -6,17 +6,17 @@
  */
 namespace spec\Ibexa\FieldTypeQuery;
 
-use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\API\Repository\Values\Content\Query as ApiContentQuery;
+use Ibexa\Contracts\Core\Repository\LocationService;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query as ApiContentQuery;
 use Ibexa\FieldTypeQuery\QueryFieldService;
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\SearchService;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\API\Repository\Values\Content\Query as ApiQuery;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
-use eZ\Publish\Core\QueryType\QueryType;
-use eZ\Publish\Core\QueryType\QueryTypeRegistry;
-use eZ\Publish\Core\Repository\Values;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\SearchService;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query as ApiQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Ibexa\Core\QueryType\QueryType;
+use Ibexa\Core\QueryType\QueryTypeRegistry;
+use Ibexa\Core\Repository\Values;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -123,7 +123,7 @@ class QueryFieldServiceSpec extends ObjectBehavior
     }
 
     /**
-     * @return \eZ\Publish\Core\Repository\Values\Content\Content
+     * @return \Ibexa\Core\Repository\Values\Content\Content
      */
     private function getContent(int $contentTypeId = self::CONTENT_TYPE_ID): Values\Content\Content
     {
@@ -143,9 +143,9 @@ class QueryFieldServiceSpec extends ObjectBehavior
     /**
      * @param array $parameters
      *
-     * @return \eZ\Publish\API\Repository\Values\ContentType\ContentType
+     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
      */
-    private function getContentType(array $parameters, bool $enablePagination = true, $itemsPerPage = 10): \eZ\Publish\API\Repository\Values\ContentType\ContentType
+    private function getContentType(array $parameters, bool $enablePagination = true, $itemsPerPage = 10): \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
     {
         $contentType = new Values\ContentType\ContentType([
             'fieldDefinitions' => new Values\ContentType\FieldDefinitionCollection([

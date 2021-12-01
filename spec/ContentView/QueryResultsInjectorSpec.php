@@ -6,10 +6,10 @@
  */
 namespace spec\Ibexa\FieldTypeQuery\ContentView;
 
-use eZ\Publish\Core\MVC\Symfony\View\ContentView;
-use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewParametersEvent;
-use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
-use eZ\Publish\Core\Repository\Values\Content\Content;
+use Ibexa\Core\MVC\Symfony\View\ContentView;
+use Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent;
+use Ibexa\Core\MVC\Symfony\View\ViewEvents;
+use Ibexa\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Ibexa\FieldTypeQuery\ContentView\QueryResultsInjector;
 use Pagerfanta\Pagerfanta;
@@ -27,10 +27,10 @@ class QueryResultsInjectorSpec extends ObjectBehavior
     const VIEWS = ['field' => self::FIELD_VIEW, 'item' => self::ITEM_VIEW];
     const FIELD_DEFINITION_IDENTIFIER = 'query_field';
 
-    /** @var \eZ\Publish\Core\MVC\Symfony\View\ContentView */
+    /** @var \Ibexa\Core\MVC\Symfony\View\ContentView */
     private $view;
 
-    /** @var \eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewParametersEvent */
+    /** @var \Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent */
     private $event;
 
     public function __construct()

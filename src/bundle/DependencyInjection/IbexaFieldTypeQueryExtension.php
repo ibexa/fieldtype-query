@@ -41,7 +41,7 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     protected function addContentViewConfig(ContainerBuilder $container): void
     {
@@ -90,7 +90,7 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
     {
         $configFile = __DIR__ . '/../Resources/config/field_templates.yaml';
         $config = Yaml::parse(file_get_contents($configFile));
-        $container->prependExtensionConfig('ezpublish', $config);
+        $container->prependExtensionConfig('ibexa', $config);
         $container->addResource(new FileResource($configFile));
     }
 

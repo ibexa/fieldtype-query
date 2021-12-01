@@ -7,14 +7,14 @@
 namespace Ibexa\FieldTypeQuery\GraphQL;
 
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use EzSystems\EzPlatformGraphQL\GraphQL\Value\Field;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\GraphQL\Value\Field;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 final class QueryFieldResolver
 {
-    /** @var \EzSystems\EzPlatformQueryFieldType\API\QueryFieldServiceInterface */
+    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface */
     private $queryFieldService;
 
     public function __construct(QueryFieldServiceInterface $queryFieldService)

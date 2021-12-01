@@ -6,16 +6,16 @@
  */
 namespace Ibexa\FieldTypeQuery\ContentView;
 
-use eZ\Publish\API\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService;
 use Pagerfanta\Adapter\AdapterInterface;
 
 final class QueryResultsWithLocationPagerFantaAdapter implements AdapterInterface
 {
-    /** @var \EzSystems\EzPlatformQueryFieldType\API\QueryFieldLocationService */
+    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService */
     private $queryFieldService;
 
-    /** @var \eZ\Publish\API\Repository\Values\Content\Location */
+    /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location */
     private $location;
 
     /** @var string */

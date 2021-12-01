@@ -6,16 +6,16 @@
  */
 namespace Ibexa\FieldTypeQuery\ContentView;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Pagerfanta\Adapter\AdapterInterface;
 
 final class QueryResultsPagerFantaAdapter implements AdapterInterface
 {
-    /** @var \EzSystems\EzPlatformQueryFieldType\API\QueryFieldServiceInterface */
+    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface */
     private $queryFieldService;
 
-    /** @var \eZ\Publish\API\Repository\Values\Content\Content */
+    /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content */
     private $content;
 
     /** @var string */

@@ -6,16 +6,16 @@
  */
 namespace Ibexa\FieldTypeQuery\FieldType\Query;
 
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use eZ\Publish\Core\FieldType\FieldType;
-use eZ\Publish\Core\FieldType\ValidationError;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
-use eZ\Publish\Core\QueryType\QueryTypeRegistry;
-use eZ\Publish\SPI\FieldType\Value as SPIValue;
-use eZ\Publish\Core\FieldType\Value as BaseValue;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\FieldType\FieldType;
+use Ibexa\Core\FieldType\ValidationError;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
+use Ibexa\Core\QueryType\QueryTypeRegistry;
+use Ibexa\Contracts\Core\FieldType\Value as SPIValue;
+use Ibexa\Core\FieldType\Value as BaseValue;
 
 final class Type extends FieldType
 {
@@ -29,10 +29,10 @@ final class Type extends FieldType
         'ItemsPerPage' => ['type' => 'integer', 'default' => 10],
     ];
 
-    /** @var \eZ\Publish\Core\QueryType\QueryTypeRegistry */
+    /** @var \Ibexa\Core\QueryType\QueryTypeRegistry */
     private $queryTypeRegistry;
 
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
     private $contentTypeService;
 
     /** @var string */
@@ -50,7 +50,7 @@ final class Type extends FieldType
      *
      * @param mixed $validatorConfiguration
      *
-     * @return \eZ\Publish\SPI\FieldType\ValidationError[]
+     * @return \Ibexa\Contracts\Core\FieldType\ValidationError[]
      */
     public function validateValidatorConfiguration($validatorConfiguration)
     {
@@ -62,12 +62,12 @@ final class Type extends FieldType
     /**
      * Validates a field based on the validators in the field definition.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      *
-     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition The field definition of the field
-     * @param \eZ\Publish\Core\FieldType\TextLine\Value $fieldValue The field value for which an action is performed
+     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDefinition The field definition of the field
+     * @param \Ibexa\Core\FieldType\TextLine\Value $fieldValue The field value for which an action is performed
      *
-     * @return \eZ\Publish\SPI\FieldType\ValidationError[]
+     * @return \Ibexa\Contracts\Core\FieldType\ValidationError[]
      */
     public function validate(FieldDefinition $fieldDefinition, SPIValue $fieldValue)
     {
@@ -90,7 +90,7 @@ final class Type extends FieldType
      * It will be used to generate content name and url alias if current field is designated
      * to be used in the content name/urlAlias pattern.
      *
-     * @param \EzSystems\EzPlatformQueryFieldType\eZ\FieldType\Query\Value $value
+     * @param \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
      *
      * @return string
      */
@@ -128,9 +128,9 @@ final class Type extends FieldType
     /**
      * Throws an exception if value structure is not of expected format.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
      *
-     * @param \eZ\Publish\Core\FieldType\TextLine\Value $value
+     * @param \Ibexa\Core\FieldType\TextLine\Value $value
      */
     protected function checkValueStructure(BaseValue $value)
     {
@@ -146,7 +146,7 @@ final class Type extends FieldType
     /**
      * Returns information for FieldValue->$sortKey relevant to the field type.
      *
-     * @param \eZ\Publish\Core\FieldType\TextLine\Value $value
+     * @param \Ibexa\Core\FieldType\TextLine\Value $value
      *
      * @return array
      */
@@ -160,7 +160,7 @@ final class Type extends FieldType
      *
      * @param mixed $hash
      *
-     * @return \eZ\Publish\Core\FieldType\TextLine\Value $value
+     * @return \Ibexa\Core\FieldType\TextLine\Value $value
      */
     public function fromHash($hash)
     {
@@ -174,7 +174,7 @@ final class Type extends FieldType
     /**
      * Converts a $Value to a hash.
      *
-     * @param \eZ\Publish\Core\FieldType\TextLine\Value $value
+     * @param \Ibexa\Core\FieldType\TextLine\Value $value
      *
      * @return mixed
      */

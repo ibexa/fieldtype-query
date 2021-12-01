@@ -6,7 +6,7 @@
  */
 namespace Ibexa\Contracts\FieldTypeQuery;
 
-use eZ\Publish\API\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 
 /**
  * Executes queries for a query field for a given a location.
