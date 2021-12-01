@@ -1,12 +1,11 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Bundle\FieldTypeQuery\Controller;
 
-use Ibexa\FieldTypeQuery\QueryFieldService;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -15,6 +14,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
+use Ibexa\FieldTypeQuery\QueryFieldService;
 use Ibexa\Rest\RequestParser;
 use Ibexa\Rest\Server\Values as RestValues;
 use Symfony\Component\HttpFoundation\Request;

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Bundle\FieldTypeQuery\DependencyInjection\Compiler;
@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class ConfigurableFieldDefinitionMapperPass implements CompilerPassInterface
 {
-    const PARAMETER = 'ezplatform_graphql.schema.content.mapping.field_definition_type';
+    public const PARAMETER = 'ezplatform_graphql.schema.content.mapping.field_definition_type';
 
     public function process(ContainerBuilder $container)
     {

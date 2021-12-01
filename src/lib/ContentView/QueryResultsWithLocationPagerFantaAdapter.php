@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\FieldTypeQuery\ContentView;
@@ -24,8 +24,8 @@ final class QueryResultsWithLocationPagerFantaAdapter implements AdapterInterfac
     public function __construct(
         QueryFieldLocationService $queryFieldService,
         Location $location,
-        string $fieldDefinitionIdentifier)
-    {
+        string $fieldDefinitionIdentifier
+    ) {
         $this->queryFieldService = $queryFieldService;
         $this->location = $location;
         $this->fieldDefinitionIdentifier = $fieldDefinitionIdentifier;

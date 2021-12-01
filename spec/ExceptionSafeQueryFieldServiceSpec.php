@@ -1,20 +1,20 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace spec\Ibexa\FieldTypeQuery;
 
+use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Ibexa\Core\Repository\Values\Content\Content;
 use Ibexa\FieldTypeQuery\ExceptionSafeQueryFieldService;
-use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 class ExceptionSafeQueryFieldServiceSpec extends ObjectBehavior
 {
-    function let(QueryFieldServiceInterface $queryFieldService)
+    public function let(QueryFieldServiceInterface $queryFieldService)
     {
         $arguments = [
             Argument::type(Content::class),
@@ -30,24 +30,24 @@ class ExceptionSafeQueryFieldServiceSpec extends ObjectBehavior
         $this->beConstructedWith($queryFieldService);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(ExceptionSafeQueryFieldService::class);
     }
 
-    function it_should_return_empty_results_on_count_content_items()
+    public function it_should_return_empty_results_on_count_content_items()
     {
         $result = $this->countContentItems(new Content([]), 'any');
         $result->shouldBe(0);
     }
 
-    function it_should_return_empty_results_on_load_content_items()
+    public function it_should_return_empty_results_on_load_content_items()
     {
         $result = $this->loadContentItems(new Content([]), 'any');
         $result->shouldBe([]);
     }
 
-    function it_should_return_empty_results_on_load_content_items_slice()
+    public function it_should_return_empty_results_on_load_content_items_slice()
     {
         $result = $this->loadContentItemsSlice(new Content([]), 'any', 0, 5);
         $result->shouldBe([]);

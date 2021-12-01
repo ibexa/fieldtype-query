@@ -1,38 +1,40 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace spec\Ibexa\FieldTypeQuery;
 
-use Ibexa\Contracts\Core\Repository\LocationService;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query as ApiContentQuery;
-use Ibexa\FieldTypeQuery\QueryFieldService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query as ApiContentQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query as ApiQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Ibexa\Core\QueryType\QueryType;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
 use Ibexa\Core\Repository\Values;
+use Ibexa\FieldTypeQuery\QueryFieldService;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 class QueryFieldServiceSpec extends ObjectBehavior
 {
-    const CONTENT_TYPE_ID = 1;
-    const CONTENT_TYPE_ID_WITHOUT_PAGINATION = 2;
-    const LOCATION_ID = 1;
-    const QUERY_TYPE_IDENTIFIER = 'query_type_identifier';
-    const FIELD_DEFINITION_IDENTIFIER = 'test';
+    public const CONTENT_TYPE_ID = 1;
+    public const CONTENT_TYPE_ID_WITHOUT_PAGINATION = 2;
+    public const LOCATION_ID = 1;
+    public const QUERY_TYPE_IDENTIFIER = 'query_type_identifier';
+    public const FIELD_DEFINITION_IDENTIFIER = 'test';
 
     private $searchResult;
+
     private $searchHits;
+
     private $totalCount = 0;
 
-    function let(
+    public function let(
         SearchService $searchService,
         ContentTypeService $contentTypeService,
         LocationService $locationService,
@@ -65,22 +67,22 @@ class QueryFieldServiceSpec extends ObjectBehavior
         $this->beConstructedWith($searchService, $contentTypeService, $locationService, $queryTypeRegistry);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(QueryFieldService::class);
     }
 
-    function it_loads_items_from_a_query_field_for_a_given_content_item()
+    public function it_loads_items_from_a_query_field_for_a_given_content_item()
     {
         $this->loadContentItems($this->getContent(), self::FIELD_DEFINITION_IDENTIFIER)->shouldBe($this->searchHits);
     }
 
-    function it_counts_items_from_a_query_field_for_a_given_content_item()
+    public function it_counts_items_from_a_query_field_for_a_given_content_item()
     {
         $this->countContentItems($this->getContent(), self::FIELD_DEFINITION_IDENTIFIER)->shouldBe($this->totalCount);
     }
 
-    function it_deducts_any_offset_when_counting_results(QueryType $queryType, SearchService $searchService)
+    public function it_deducts_any_offset_when_counting_results(QueryType $queryType, SearchService $searchService)
     {
         $query = new ApiContentQuery();
         $query->offset = 5;
@@ -93,7 +95,7 @@ class QueryFieldServiceSpec extends ObjectBehavior
         $this->countContentItems($this->getContent(), self::FIELD_DEFINITION_IDENTIFIER)->shouldBe(2);
     }
 
-    function it_returns_zero_if_offset_is_bigger_than_count(QueryType $queryType, SearchService $searchService)
+    public function it_returns_zero_if_offset_is_bigger_than_count(QueryType $queryType, SearchService $searchService)
     {
         $query = new ApiContentQuery();
         $query->offset = 8;
@@ -106,7 +108,7 @@ class QueryFieldServiceSpec extends ObjectBehavior
         $this->countContentItems($this->getContent(), self::FIELD_DEFINITION_IDENTIFIER)->shouldBe(0);
     }
 
-    function it_returns_0_as_pagination_configuration_if_pagination_is_disabled()
+    public function it_returns_0_as_pagination_configuration_if_pagination_is_disabled()
     {
         $this->getPaginationConfiguration(
             $this->getContent(self::CONTENT_TYPE_ID_WITHOUT_PAGINATION),
@@ -114,7 +116,7 @@ class QueryFieldServiceSpec extends ObjectBehavior
         )->shouldBe(0);
     }
 
-    function it_returns_the_items_per_page_number_as_pagination_configuration_if_pagination_is_enabled()
+    public function it_returns_the_items_per_page_number_as_pagination_configuration_if_pagination_is_enabled()
     {
         $this->getPaginationConfiguration(
             $this->getContent(),

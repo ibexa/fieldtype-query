@@ -1,13 +1,11 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\FieldTypeQuery;
 
-use Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService;
-use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\SearchService;
@@ -16,6 +14,8 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService;
+use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
@@ -34,6 +34,7 @@ final class QueryFieldService implements QueryFieldServiceInterface, QueryFieldL
 
     /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
     private $contentTypeService;
+
     /**
      * @var \Ibexa\Contracts\Core\Repository\LocationService
      */
