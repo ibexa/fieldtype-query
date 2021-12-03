@@ -35,10 +35,10 @@
     },
     "autoload": {
         "psr-4": {
-            "EzSystems\\EzPlatformQueryFieldType\\": "src",
             "Ibexa\\Bundle\\FieldTypeQuery\\": "src/bundle/",
             "Ibexa\\FieldTypeQuery\\": "src/lib/",
-            "Ibexa\\Contracts\\FieldTypeQuery\\": "src/contracts/"
+            "Ibexa\\Contracts\\FieldTypeQuery\\": "src/contracts/",
+            "EzSystems\\EzPlatformQueryFieldType\\": "src/lib/"
         }
     },
     "autoload-dev": {
