@@ -1,21 +1,21 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\FieldTypeQuery\FieldType\Mapper;
 
-use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
-use eZ\Publish\API\Repository\ContentTypeService;
+use Ibexa\AdminUi\FieldType\FieldDefinitionFormMapperInterface;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class QueryFormMapper implements FieldDefinitionFormMapperInterface
 {
-    /** @var ContentTypeService */
+    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
     private $contentTypeService;
 
     /**
@@ -47,7 +47,9 @@ final class QueryFormMapper implements FieldDefinitionFormMapperInterface
             ->getForm();
 
         $fieldDefinitionForm
-            ->add('QueryType', Type\ChoiceType::class,
+            ->add(
+                'QueryType',
+                Type\ChoiceType::class,
                 [
                     'label' => 'Query type',
                     'property_path' => 'fieldSettings[QueryType]',
@@ -55,7 +57,9 @@ final class QueryFormMapper implements FieldDefinitionFormMapperInterface
                     'required' => true,
                 ]
             )
-            ->add('ReturnedType', Type\ChoiceType::class,
+            ->add(
+                'ReturnedType',
+                Type\ChoiceType::class,
                 [
                     'label' => 'Returned type',
                     'property_path' => 'fieldSettings[ReturnedType]',
@@ -63,14 +67,18 @@ final class QueryFormMapper implements FieldDefinitionFormMapperInterface
                     'required' => true,
                 ]
             )
-            ->add('EnablePagination', Type\CheckboxType::class,
+            ->add(
+                'EnablePagination',
+                Type\CheckboxType::class,
                 [
                     'label' => 'Enable pagination',
                     'property_path' => 'fieldSettings[EnablePagination]',
                     'required' => false,
                 ]
             )
-            ->add('ItemsPerPage', Type\NumberType::class,
+            ->add(
+                'ItemsPerPage',
+                Type\NumberType::class,
                 [
                     'label' => 'Items per page',
                     'property_path' => 'fieldSettings[ItemsPerPage]',

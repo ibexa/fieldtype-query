@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace spec\Ibexa\FieldTypeQuery\ContentView;
 
-use eZ\Publish\Core\MVC\Symfony\View\ContentView;
-use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewParametersEvent;
-use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
-use eZ\Publish\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
+use Ibexa\Core\MVC\Symfony\View\ContentView;
+use Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent;
+use Ibexa\Core\MVC\Symfony\View\ViewEvents;
+use Ibexa\Core\Repository\Values\Content\Content;
 use Ibexa\FieldTypeQuery\ContentView\QueryResultsInjector;
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
@@ -21,16 +21,16 @@ use Webmozart\Assert\Assert;
 
 class QueryResultsInjectorSpec extends ObjectBehavior
 {
-    const FIELD_VIEW = 'content_query_field';
-    const OTHER_VIEW = 'anything_else';
-    const ITEM_VIEW = 'line';
-    const VIEWS = ['field' => self::FIELD_VIEW, 'item' => self::ITEM_VIEW];
-    const FIELD_DEFINITION_IDENTIFIER = 'query_field';
+    public const FIELD_VIEW = 'content_query_field';
+    public const OTHER_VIEW = 'anything_else';
+    public const ITEM_VIEW = 'line';
+    public const VIEWS = ['field' => self::FIELD_VIEW, 'item' => self::ITEM_VIEW];
+    public const FIELD_DEFINITION_IDENTIFIER = 'query_field';
 
-    /** @var \eZ\Publish\Core\MVC\Symfony\View\ContentView */
+    /** @var \Ibexa\Core\MVC\Symfony\View\ContentView */
     private $view;
 
-    /** @var \eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewParametersEvent */
+    /** @var \Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent */
     private $event;
 
     public function __construct()
@@ -51,12 +51,12 @@ class QueryResultsInjectorSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(QueryResultsInjector::class);
     }
 
-    function let(
+    public function let(
         QueryFieldServiceInterface $queryFieldService,
         FilterViewParametersEvent $event,
         RequestStack $requestStack
@@ -72,7 +72,7 @@ class QueryResultsInjectorSpec extends ObjectBehavior
         );
     }
 
-    function it_throws_an_InvalidArgumentException_if_no_item_view_is_provided(
+    public function it_throws_an_InvalidArgumentException_if_no_item_view_is_provided(
         QueryFieldServiceInterface $queryFieldService,
         RequestStack $requestStack
     ) {
@@ -80,7 +80,7 @@ class QueryResultsInjectorSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
-    function it_throws_an_InvalidArgumentException_if_no_field_view_is_provided(
+    public function it_throws_an_InvalidArgumentException_if_no_field_view_is_provided(
         QueryFieldServiceInterface $queryFieldService,
         RequestStack $requestStack
     ) {
@@ -88,24 +88,24 @@ class QueryResultsInjectorSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
-    function it_is_an_event_subscriber()
+    public function it_is_an_event_subscriber()
     {
         $this->shouldHaveType(EventSubscriberInterface::class);
     }
 
-    function it_subscribes_to_the_FILTER_VIEW_PARAMETERS_View_Event()
+    public function it_subscribes_to_the_FILTER_VIEW_PARAMETERS_View_Event()
     {
         $this->getSubscribedEvents()->shouldSubscribeTo(ViewEvents::FILTER_VIEW_PARAMETERS);
     }
 
-    function it_does_nothing_for_non_field_views(QueryFieldServiceInterface $queryFieldService)
+    public function it_does_nothing_for_non_field_views(QueryFieldServiceInterface $queryFieldService)
     {
         $this->event->getView()->setViewType(self::OTHER_VIEW);
         $this->injectQueryResults($this->event);
         $queryFieldService->getPaginationConfiguration(Argument::any())->shouldNotHaveBeenCalled();
     }
 
-    function it_adds_the_query_results_for_the_field_view_without_pagination(QueryFieldServiceInterface $queryFieldService)
+    public function it_adds_the_query_results_for_the_field_view_without_pagination(QueryFieldServiceInterface $queryFieldService)
     {
         $content = $this->createContentItem();
 
@@ -129,7 +129,7 @@ class QueryResultsInjectorSpec extends ObjectBehavior
         Assert::eq($parameters->get('items'), $this->getResults());
     }
 
-    function it_adds_the_query_results_for_the_field_view_with_pagination(
+    public function it_adds_the_query_results_for_the_field_view_with_pagination(
         FilterViewParametersEvent $event,
         QueryFieldServiceInterface $queryFieldService
     ) {
@@ -157,10 +157,10 @@ class QueryResultsInjectorSpec extends ObjectBehavior
         Assert::isInstanceOf($parameters->get('items'), Pagerfanta::class);
     }
 
-    function getMatchers(): array
+    public function getMatchers(): array
     {
         return [
-            'subscribeTo' => function ($return, $event) {
+            'subscribeTo' => static function ($return, $event) {
                 return is_array($return) && isset($return[$event]);
             },
         ];

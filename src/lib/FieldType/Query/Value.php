@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\FieldTypeQuery\FieldType\Query;
 
-use eZ\Publish\Core\FieldType\Value as BaseValue;
+use Ibexa\Core\FieldType\Value as BaseValue;
 
 class Value extends BaseValue
 {
@@ -28,7 +28,7 @@ class Value extends BaseValue
     }
 
     /**
-     * @see \eZ\Publish\Core\FieldType\Value
+     * @see \Ibexa\Core\FieldType\Value
      */
     public function __toString()
     {

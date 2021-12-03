@@ -1,20 +1,20 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\FieldTypeQuery\GraphQL;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use EzSystems\EzPlatformGraphQL\GraphQL\Value\Field;
+use Ibexa\GraphQL\Value\Field;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 final class QueryFieldResolver
 {
-    /** @var \EzSystems\EzPlatformQueryFieldType\API\QueryFieldServiceInterface */
+    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface */
     private $queryFieldService;
 
     public function __construct(QueryFieldServiceInterface $queryFieldService)

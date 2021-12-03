@@ -1,21 +1,21 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\FieldTypeQuery\ContentView;
 
-use eZ\Publish\API\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService;
 use Pagerfanta\Adapter\AdapterInterface;
 
 final class QueryResultsWithLocationPagerFantaAdapter implements AdapterInterface
 {
-    /** @var \EzSystems\EzPlatformQueryFieldType\API\QueryFieldLocationService */
+    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService */
     private $queryFieldService;
 
-    /** @var \eZ\Publish\API\Repository\Values\Content\Location */
+    /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location */
     private $location;
 
     /** @var string */
@@ -24,8 +24,8 @@ final class QueryResultsWithLocationPagerFantaAdapter implements AdapterInterfac
     public function __construct(
         QueryFieldLocationService $queryFieldService,
         Location $location,
-        string $fieldDefinitionIdentifier)
-    {
+        string $fieldDefinitionIdentifier
+    ) {
         $this->queryFieldService = $queryFieldService;
         $this->location = $location;
         $this->fieldDefinitionIdentifier = $fieldDefinitionIdentifier;

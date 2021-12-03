@@ -1,25 +1,25 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\FieldTypeQuery\ContentView;
 
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use eZ\Publish\Core\MVC\Symfony\View\ContentValueView;
-use eZ\Publish\Core\MVC\Symfony\View\LocationValueView;
-use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewParametersEvent;
-use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\MVC\Symfony\View\ContentValueView;
+use Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent;
+use Ibexa\Core\MVC\Symfony\View\LocationValueView;
+use Ibexa\Core\MVC\Symfony\View\ViewEvents;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class QueryResultsInjector implements EventSubscriberInterface
 {
-    /** @var \EzSystems\EzPlatformQueryFieldType\API\QueryFieldService */
+    /** @var \Ibexa\FieldTypeQuery\QueryFieldService */
     private $queryFieldService;
 
     /** @var array */
@@ -68,11 +68,11 @@ final class QueryResultsInjector implements EventSubscriberInterface
     }
 
     /**
-     * @param \eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewParametersEvent $event
+     * @param \Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent $event
      *
      * @return iterable
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     private function buildResults(FilterViewParametersEvent $event): iterable
     {
@@ -116,13 +116,17 @@ final class QueryResultsInjector implements EventSubscriberInterface
             if ($location !== null) {
                 $pager = new Pagerfanta(
                     new QueryResultsWithLocationPagerFantaAdapter(
-                        $this->queryFieldService, $location, $fieldDefinitionIdentifier
+                        $this->queryFieldService,
+                        $location,
+                        $fieldDefinitionIdentifier
                     )
                 );
             } else {
                 $pager = new Pagerfanta(
                     new QueryResultsPagerFantaAdapter(
-                        $this->queryFieldService, $content, $fieldDefinitionIdentifier
+                        $this->queryFieldService,
+                        $content,
+                        $fieldDefinitionIdentifier
                     )
                 );
             }
