@@ -3,7 +3,7 @@
 In this how-to, you will learn how to customize all the rendering phases.
 
 ## Rendering process
-Content query fields are rendered using `ez_render_field()`. 
+Content query fields are rendered using `ibexa_render_field()`. 
 The query is executed, the items iterated on, and each is rendered using the `line` content view.
 
 That template renders the content, the view controller, with a custom view type (`content_query_view`). A custom view
@@ -16,7 +16,7 @@ The field renderer for a query field supports the following parameters:
   used and pagination is disabled in the field definition
 
 ### Summary
-1. Your template: `ez_render_field(content, 'queryfield')`
+1. Your template: `ibexa_render_field(content, 'queryfield')`
 2. Field view template: `fieldtype_ui.html.twig`:
 3. Render the content with the `content_query_view` type: `render( controller( "ez_content:viewAction" ) )`
 4. The View Builder executes the query and assigns the results to the `items` iterable
