@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "ibexa/admin-ui": "^4.0@dev",
         "ibexa/content-forms": "^4.0@dev",
