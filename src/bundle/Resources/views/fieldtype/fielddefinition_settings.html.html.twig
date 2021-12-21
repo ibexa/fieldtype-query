@@ -1,9 +1,9 @@
 {% trans_default_domain "fielddefinition" %}
 
 {% block ezcontentquery_settings %}
-    <li class="ez-fielddefinition-setting query-type">
-        <div class="ez-fielddefinition-setting-name">{{ 'ezcontentquery.query_type.label'|trans|desc("Query type:")}}</div>
-        <div class="ez-fielddefinition-setting-value">
+    <li class="ibexa-fielddefinition-setting query-type">
+        <div class="ibexa-fielddefinition-setting-name">{{ 'ezcontentquery.query_type.label'|trans|desc("Query type:")}}</div>
+        <div class="ibexa-fielddefinition-setting-value">
             {% if fielddefinition.fieldSettings.QueryType %}
                 {{ fielddefinition.fieldSettings.QueryType }}
             {% else %}
@@ -11,7 +11,7 @@
             {% endif %}
         </div>
     </li>
-    <ul class="ez-fielddefinition-settings ez-fielddefinition-{{ fielddefinition.fieldTypeIdentifier }}-settings">
+    <ul class="ibexa-fielddefinition-settings ibexa-fielddefinition-{{ fielddefinition.fieldTypeIdentifier }}-settings">
         {% set defaultValue = null %}
         {% if fielddefinition.defaultValue.text is not same as('') %}
             {% set defaultValue = fielddefinition.defaultValue.text %}
