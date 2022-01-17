@@ -1,0 +1,8 @@
+system:
+    default:
+        fielddefinition_settings_templates:
+            - { template: "@IbexaFieldTypeQuery/fieldtype/fielddefinition_settings.html.twig" }
+        fielddefinition_edit_templates:
+            - { template: "@IbexaFieldTypeQuery/fieldtype/fielddefinition_edit.html.twig" }
+        field_templates:
+            - { template: "@IbexaFieldTypeQuery/fieldtype/field_view.html.twig" }

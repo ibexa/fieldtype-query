@@ -1,25 +1,25 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace spec\EzSystems\EzPlatformQueryFieldType\GraphQL;
+namespace spec\Ibexa\FieldTypeQuery\GraphQL;
 
-use EzSystems\EzPlatformQueryFieldType\GraphQL\ContentQueryFieldDefinitionMapper;
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use EzSystems\EzPlatformGraphQL\Schema\Domain\Content\Mapper\FieldDefinition\FieldDefinitionMapper;
-use EzSystems\EzPlatformGraphQL\Schema\Domain\Content\NameHelper;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\GraphQL\Schema\Domain\Content\Mapper\FieldDefinition\FieldDefinitionMapper;
+use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\FieldTypeQuery\GraphQL\ContentQueryFieldDefinitionMapper;
+use Ibexa\GraphQL\Schema\Domain\Content\NameHelper;
 use PhpSpec\ObjectBehavior;
 
 class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
 {
-    const FIELD_IDENTIFIER = 'test';
-    const FIELD_TYPE_IDENTIFIER = 'ezcontentquery';
-    const RETURNED_CONTENT_TYPE_IDENTIFIER = 'folder';
-    const GRAPHQL_TYPE = 'FolderContent';
+    public const FIELD_IDENTIFIER = 'test';
+    public const FIELD_TYPE_IDENTIFIER = 'ezcontentquery';
+    public const RETURNED_CONTENT_TYPE_IDENTIFIER = 'folder';
+    public const GRAPHQL_TYPE = 'FolderContent';
 
     public function let(
         FieldDefinitionMapper $innerMapper,
@@ -102,7 +102,7 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
     /**
      * @param bool $enablePagination
      *
-     * @return FieldDefinition
+     * @return \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
      */
     private function fieldDefinition(bool $enablePagination = false): FieldDefinition
     {
@@ -117,9 +117,9 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
     }
 
     /**
-     * @return \eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition
+     * @return \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
      */
-    protected function getLambdaFieldDefinition(): \eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition
+    protected function getLambdaFieldDefinition(): \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
     {
         return new FieldDefinition(['fieldTypeIdentifier' => 'lambda']);
     }

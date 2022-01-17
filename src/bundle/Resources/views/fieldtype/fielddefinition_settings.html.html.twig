@@ -1,0 +1,21 @@
+{% trans_default_domain "fielddefinition" %}
+
+{% block ezcontentquery_settings %}
+    <li class="ibexa-fielddefinition-setting query-type">
+        <div class="ibexa-fielddefinition-setting-name">{{ 'ezcontentquery.query_type.label'|trans|desc("Query type:")}}</div>
+        <div class="ibexa-fielddefinition-setting-value">
+            {% if fielddefinition.fieldSettings.QueryType %}
+                {{ fielddefinition.fieldSettings.QueryType }}
+            {% else %}
+                <em>{{ "ezcontentquery.no_defined_query_types"|trans()|desc("There are no query types defined") }}</em>
+            {% endif %}
+        </div>
+    </li>
+    <ul class="ibexa-fielddefinition-settings ibexa-fielddefinition-{{ fielddefinition.fieldTypeIdentifier }}-settings">
+        {% set defaultValue = null %}
+        {% if fielddefinition.defaultValue.text is not same as('') %}
+            {% set defaultValue = fielddefinition.defaultValue.text %}
+        {% endif %}
+        {{ block( 'settings_defaultvalue' ) }}
+    </ul>
+{% endblock %}
