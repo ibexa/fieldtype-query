@@ -21,6 +21,7 @@ return $configFactory
                 array_filter([
                     __DIR__ . '/src',
                     __DIR__ . '/tests',
+                    __DIR__ . '/spec',
                 ], 'is_dir')
             )
             ->files()->name('*.php')
