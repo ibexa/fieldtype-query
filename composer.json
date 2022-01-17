@@ -54,7 +54,7 @@
         "ibexa/search": "^4.0@dev",
         "ibexa/user": "^4.0@dev",
         "ibexa/http-cache": "^4.0@dev",
-        "phpspec/phpspec": "^6.0",
+        "phpspec/phpspec": "^7.1",
         "ibexa/code-style": "^1.0",
         "friendsofphp/php-cs-fixer": "^3.0"
     },
