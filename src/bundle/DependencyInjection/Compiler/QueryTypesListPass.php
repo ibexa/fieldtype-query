@@ -25,12 +25,12 @@ class QueryTypesListPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has('ezpublish.query_type.registry') || !$container->has(QueryFormMapper::class)) {
+        if (!$container->has(\Ibexa\Core\QueryType\ArrayQueryTypeRegistry::class) || !$container->has(QueryFormMapper::class)) {
             return;
         }
 
         $queryTypes = [];
-        foreach ($container->getDefinition('ezpublish.query_type.registry')->getMethodCalls() as $methodCall) {
+        foreach ($container->getDefinition(\Ibexa\Core\QueryType\ArrayQueryTypeRegistry::class)->getMethodCalls() as $methodCall) {
             if ($methodCall[0] === 'addQueryType') {
                 $queryTypes[] = $methodCall[1][0];
             } elseif ($methodCall[0] === 'addQueryTypes') {
