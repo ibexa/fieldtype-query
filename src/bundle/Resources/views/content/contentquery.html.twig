@@ -10,7 +10,7 @@
 {% if isPaginationEnabled %}
     {{ pagerfanta( items, 'ez', {
         'pageParameter': pageParameter,
-        'routeName': '_ez_content_view',
+        'routeName': 'ibexa.content.view',
         'routeParams' : {'contentId': content.id, 'locationId': location.id }
     } ) }}
 {% endif %}
