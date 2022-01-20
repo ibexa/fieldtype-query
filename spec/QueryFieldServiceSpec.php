@@ -13,6 +13,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query as ApiContentQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query as ApiQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Core\QueryType\QueryType;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
 use Ibexa\Core\Repository\Values;
@@ -147,7 +148,7 @@ class QueryFieldServiceSpec extends ObjectBehavior
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
      */
-    private function getContentType(array $parameters, bool $enablePagination = true, $itemsPerPage = 10): \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
+    private function getContentType(array $parameters, bool $enablePagination = true, $itemsPerPage = 10): ContentType
     {
         $contentType = new Values\ContentType\ContentType([
             'fieldDefinitions' => new Values\ContentType\FieldDefinitionCollection([

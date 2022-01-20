@@ -6,10 +6,10 @@ services:
 
     Ibexa\Bundle\FieldTypeQuery\Controller\QueryFieldRestController:
         arguments:
-            $requestParser: '@ezpublish_rest.request_parser'
+            $requestParser: '@Ibexa\Bundle\Rest\RequestParser\Router'
 
     Ibexa\FieldTypeQuery\QueryFieldService:
         arguments:
-            $queryTypeRegistry: '@ezpublish.query_type.registry'
+            $queryTypeRegistry: '@Ibexa\Core\QueryType\ArrayQueryTypeRegistry'
 
     Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface: '@Ibexa\FieldTypeQuery\QueryFieldService'

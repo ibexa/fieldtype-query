@@ -6,6 +6,7 @@
  */
 namespace Ibexa\Bundle\FieldTypeQuery\DependencyInjection\Compiler;
 
+use Ibexa\Core\QueryType\ArrayQueryTypeRegistry;
 use Ibexa\FieldTypeQuery\FieldType\Mapper\QueryFormMapper;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -25,12 +26,12 @@ class QueryTypesListPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has('ezpublish.query_type.registry') || !$container->has(QueryFormMapper::class)) {
+        if (!$container->has(ArrayQueryTypeRegistry::class) || !$container->has(QueryFormMapper::class)) {
             return;
         }
 
         $queryTypes = [];
-        foreach ($container->getDefinition('ezpublish.query_type.registry')->getMethodCalls() as $methodCall) {
+        foreach ($container->getDefinition(ArrayQueryTypeRegistry::class)->getMethodCalls() as $methodCall) {
             if ($methodCall[0] === 'addQueryType') {
                 $queryTypes[] = $methodCall[1][0];
             } elseif ($methodCall[0] === 'addQueryTypes') {
