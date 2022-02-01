@@ -1,4 +1,4 @@
 parameters:
-    ezcontentquery_field_view: 'content_query_field'
-    ezcontentquery_item_view: 'line'
-    ezcontentquery_identifier: 'ezcontentquery'
+    ibexa.field_type.query.content.view.field: 'content_query_field'
+    ibexa.field_type.query.content.view.item: 'line'
+    ibexa.field_type.query.content.identifier: 'ezcontentquery'

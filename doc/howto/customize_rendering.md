@@ -75,7 +75,7 @@ The line view template, used to render each result, can be customized by creatin
 In the example above, gallery images, each image content item will be rendered using the `line` view.  
 THat examples defines a custom template for `image` content items returned by `gallery.images` query field:
 ```yaml
-ezplatform:
+ibexa:
     system:
         default:
             content_view:
@@ -96,6 +96,6 @@ project's config:
 
 ```yaml
 parameters:
-    ezcontentquery_field_view: 'my_content_query_field'
-    ezcontentquery_item_view: 'my_line'
+    ibexa.field_type.query.content.view.field: 'my_content_query_field'
+    ibexa.field_type.query.content.view.item: 'my_line'
 ```  
