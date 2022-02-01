@@ -45,14 +45,14 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
      */
     protected function addContentViewConfig(ContainerBuilder $container): void
     {
-        $contentViewDefaults = $container->getParameter('ezsettings.default.content_view_defaults');
+        $contentViewDefaults = $container->getParameter('ibexa.site_access.config.default.content_view_defaults');
         $contentViewDefaults['content_query_field'] = [
             'default' => [
                 'template' => '@IbexaFieldTypeQuery/content/contentquery.html.twig',
                 'match' => [],
             ],
         ];
-        $container->setParameter('ezsettings.default.content_view_defaults', $contentViewDefaults);
+        $container->setParameter('ibexa.site_access.config.default.content_view_defaults', $contentViewDefaults);
     }
 
     protected function prependTwigConfig(ContainerBuilder $container): void
@@ -60,8 +60,8 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
         $views = Yaml::parseFile(__DIR__ . '/../Resources/config/default_parameters.yaml')['parameters'];
         $twigGlobals = [
             'ezContentQueryViews' => [
-                'field' => $views['ezcontentquery_field_view'],
-                'item' => $views['ezcontentquery_item_view'],
+                'field' => $views['ibexa.field_type.query.content.view.field'],
+                'item' => $views['ibexa.field_type.query.content.view.item'],
             ],
         ];
         $container->prependExtensionConfig('twig', ['globals' => $twigGlobals]);
