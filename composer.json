@@ -1,21 +1,11 @@
 {
     "name": "ibexa/fieldtype-query",
-    "description": "Ibexa Field Type that defines a query.",
-    "type": "ibexa-bundle",
     "license": "GPL-2.0-only",
+    "type": "ibexa-bundle",
+    "description": "Ibexa Field Type that defines a query.",
     "replace": {
         "ezsystems/ezplatform-query-fieldtype": "*"
     },
-    "authors": [
-        {
-            "name": "Bertrand Dunogier",
-            "email": "bd@ez.no"
-        },
-        {
-            "name": "eZ Systems",
-            "homepage": "https://github.com/ezsystems/ezplatform-query-fieldtype/contributors"
-        }
-    ],
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-json": "*",

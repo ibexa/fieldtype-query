@@ -58,7 +58,7 @@ Use the `items` iterable to loop over the field's content items:
 </div>
 
 {% if isPaginationEnabled %}
-    {{ pagerfanta( items, 'ez', {'routeName': location, 'pageParameter': pageParameter } ) }}
+    {{ pagerfanta( items, 'ibexa', {'routeName': location, 'pageParameter': pageParameter } ) }}
 {% endif %}
 ```
 
