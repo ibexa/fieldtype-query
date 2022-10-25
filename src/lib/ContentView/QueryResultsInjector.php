@@ -105,7 +105,7 @@ final class QueryResultsInjector implements EventSubscriberInterface
         }
 
         if ($paginationLimit !== 0 && $disablePagination !== true) {
-            $request = $this->requestStack->getMasterRequest();
+            $request = $this->requestStack->getMainRequest();
 
             $queryParameters = $view->hasParameter('query') ? $view->getParameter('query') : [];
 
