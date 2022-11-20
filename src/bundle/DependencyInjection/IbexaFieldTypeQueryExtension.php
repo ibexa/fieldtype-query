@@ -71,7 +71,7 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
     {
         $container->prependExtensionConfig('jms_translation', [
             'configs' => [
-                'ezplatform_query_fieldtype' => [
+                'ibexa_fieldtype_query' => [
                     'dirs' => [
                         __DIR__ . '/../../',
                     ],
