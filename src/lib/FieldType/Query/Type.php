@@ -16,8 +16,10 @@ use Ibexa\Core\FieldType\FieldType;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as BaseValue;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
+use JMS\TranslationBundle\Model\Message;
+use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 
-final class Type extends FieldType
+final class Type extends FieldType implements TranslationContainerInterface
 {
     protected $validatorConfigurationSchema = [];
 
@@ -236,6 +238,13 @@ final class Type extends FieldType
         }
 
         return $errors;
+    }
+
+    public static function getTranslationMessages(): array
+    {
+        return [
+            Message::create('ezcontentquery.name', 'fieldtypes')->setDesc('Content query'),
+        ];
     }
 }
 
