@@ -77,7 +77,6 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
                     ],
                     'output_dir' => __DIR__ . '/../Resources/translations/',
                     'output_format' => 'xliff',
-                    'extractors' => ['ez_fieldtypes'],
                 ],
             ],
         ]);
