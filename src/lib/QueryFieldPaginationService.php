@@ -15,5 +15,3 @@ namespace Ibexa\FieldTypeQuery;
 interface QueryFieldPaginationService
 {
 }
-
-class_alias(QueryFieldPaginationService::class, 'EzSystems\EzPlatformQueryFieldType\API\QueryFieldPaginationService');

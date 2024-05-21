@@ -110,5 +110,3 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
         ]);
     }
 }
-
-class_alias(IbexaFieldTypeQueryExtension::class, 'EzSystems\EzPlatformQueryFieldType\Symfony\DependencyInjection\EzSystemsEzPlatformQueryFieldTypeExtension');

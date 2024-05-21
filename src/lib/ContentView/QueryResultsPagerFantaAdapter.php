@@ -50,5 +50,3 @@ final class QueryResultsPagerFantaAdapter implements AdapterInterface
         );
     }
 }
-
-class_alias(QueryResultsPagerFantaAdapter::class, 'EzSystems\EzPlatformQueryFieldType\eZ\ContentView\QueryResultsPagerFantaAdapter');

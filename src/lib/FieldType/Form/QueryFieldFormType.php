@@ -43,5 +43,3 @@ class QueryFieldFormType extends AbstractType
         $builder->addModelTransformer(new FieldValueTransformer($this->fieldTypeService->getFieldType('ezcontentquery')));
     }
 }
-
-class_alias(QueryFieldFormType::class, 'EzSystems\EzPlatformQueryFieldType\eZ\FieldType\Form\QueryFieldFormType');

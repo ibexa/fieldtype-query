@@ -153,5 +153,3 @@ final class QueryResultsInjector implements EventSubscriberInterface
         }
     }
 }
-
-class_alias(QueryResultsInjector::class, 'EzSystems\EzPlatformQueryFieldType\eZ\ContentView\QueryResultsInjector');

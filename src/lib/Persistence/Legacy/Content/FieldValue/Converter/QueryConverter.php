@@ -99,5 +99,3 @@ class QueryConverter implements Converter
         return 'sort_key_string';
     }
 }
-
-class_alias(QueryConverter::class, 'EzSystems\EzPlatformQueryFieldType\eZ\Persistence\Legacy\Content\FieldValue\Converter\QueryConverter');

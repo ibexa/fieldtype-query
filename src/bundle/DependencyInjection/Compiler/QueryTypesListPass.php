@@ -60,5 +60,3 @@ class QueryTypesListPass implements CompilerPassInterface
         );
     }
 }
-
-class_alias(QueryTypesListPass::class, 'EzSystems\EzPlatformQueryFieldType\Symfony\DependencyInjection\Compiler\QueryTypesListPass');

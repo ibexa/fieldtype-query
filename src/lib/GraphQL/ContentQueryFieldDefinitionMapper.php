@@ -107,5 +107,3 @@ final class ContentQueryFieldDefinitionMapper extends DecoratingFieldDefinitionM
         );
     }
 }
-
-class_alias(ContentQueryFieldDefinitionMapper::class, 'EzSystems\EzPlatformQueryFieldType\GraphQL\ContentQueryFieldDefinitionMapper');

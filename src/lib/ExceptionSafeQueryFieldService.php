@@ -115,5 +115,3 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
         }
     }
 }
-
-class_alias(ExceptionSafeQueryFieldService::class, 'EzSystems\EzPlatformQueryFieldType\API\ExceptionSafeQueryFieldService');

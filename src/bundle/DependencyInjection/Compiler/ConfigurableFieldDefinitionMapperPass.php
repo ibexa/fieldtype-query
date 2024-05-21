@@ -33,5 +33,3 @@ class ConfigurableFieldDefinitionMapperPass implements CompilerPassInterface
         $container->setParameter(self::PARAMETER, $parameter);
     }
 }
-
-class_alias(ConfigurableFieldDefinitionMapperPass::class, 'EzSystems\EzPlatformQueryFieldType\Symfony\DependencyInjection\Compiler\ConfigurableFieldDefinitionMapperPass');
