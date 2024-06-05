@@ -33,5 +33,3 @@ interface QueryFieldLocationService
      */
     public function countContentItemsForLocation(Location $location, string $fieldDefinitionIdentifier): int;
 }
-
-class_alias(QueryFieldLocationService::class, 'EzSystems\EzPlatformQueryFieldType\API\QueryFieldLocationService');

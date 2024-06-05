@@ -206,5 +206,3 @@ final class QueryFieldService implements QueryFieldServiceInterface, QueryFieldL
         );
     }
 }
-
-class_alias(QueryFieldService::class, 'EzSystems\EzPlatformQueryFieldType\API\QueryFieldService');

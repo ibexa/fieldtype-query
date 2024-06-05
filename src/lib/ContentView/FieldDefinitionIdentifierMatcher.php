@@ -83,5 +83,3 @@ final class FieldDefinitionIdentifierMatcher extends MultipleValued
         return in_array($view->getParameter('fieldIdentifier'), $this->getValues(), true);
     }
 }
-
-class_alias(FieldDefinitionIdentifierMatcher::class, 'EzSystems\EzPlatformQueryFieldType\eZ\ContentView\FieldDefinitionIdentifierMatcher');

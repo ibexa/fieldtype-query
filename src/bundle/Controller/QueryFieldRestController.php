@@ -122,5 +122,3 @@ final class QueryFieldRestController
         return $this->locationService->loadLocation((int)$locationId);
     }
 }
-
-class_alias(QueryFieldRestController::class, 'EzSystems\EzPlatformQueryFieldType\Controller\QueryFieldRestController');

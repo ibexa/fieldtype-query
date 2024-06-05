@@ -248,5 +248,3 @@ final class Type extends FieldType implements TranslationContainerInterface
         ];
     }
 }
-
-class_alias(Type::class, 'EzSystems\EzPlatformQueryFieldType\eZ\FieldType\Query\Type');

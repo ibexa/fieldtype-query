@@ -62,5 +62,3 @@ interface QueryFieldServiceInterface
      */
     public function getPaginationConfiguration(Content $content, string $fieldDefinitionIdentifier): int;
 }
-
-class_alias(QueryFieldServiceInterface::class, 'EzSystems\EzPlatformQueryFieldType\API\QueryFieldServiceInterface');

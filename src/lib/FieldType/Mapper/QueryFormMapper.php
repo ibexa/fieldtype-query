@@ -105,5 +105,3 @@ final class QueryFormMapper implements FieldDefinitionFormMapperInterface
         }
     }
 }
-
-class_alias(QueryFormMapper::class, 'EzSystems\EzPlatformQueryFieldType\eZ\FieldType\Mapper\QueryFormMapper');

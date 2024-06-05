@@ -43,5 +43,3 @@ class FieldDefinitionIdentifierViewMatcherPass implements CompilerPassInterface
         }
     }
 }
-
-class_alias(FieldDefinitionIdentifierViewMatcherPass::class, 'EzSystems\EzPlatformQueryFieldType\Symfony\DependencyInjection\Compiler\FieldDefinitionIdentifierViewMatcherPass');

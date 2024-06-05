@@ -20,5 +20,3 @@ final class IbexaFieldTypeQueryBundle extends Bundle
         $container->addCompilerPass(new Compiler\FieldDefinitionIdentifierViewMatcherPass());
     }
 }
-
-class_alias(IbexaFieldTypeQueryBundle::class, 'EzSystems\EzPlatformQueryFieldType\Symfony\EzSystemsEzPlatformQueryFieldTypeBundle');

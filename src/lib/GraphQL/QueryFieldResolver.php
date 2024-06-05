@@ -61,5 +61,3 @@ final class QueryFieldResolver
         return $return;
     }
 }
-
-class_alias(QueryFieldResolver::class, 'EzSystems\EzPlatformQueryFieldType\GraphQL\QueryFieldResolver');

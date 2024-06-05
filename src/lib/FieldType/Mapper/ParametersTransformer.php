@@ -30,5 +30,3 @@ final class ParametersTransformer implements DataTransformerInterface
         return Yaml::parse($value);
     }
 }
-
-class_alias(ParametersTransformer::class, 'EzSystems\EzPlatformQueryFieldType\eZ\FieldType\Mapper\ParametersTransformer');
