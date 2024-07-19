@@ -40,7 +40,7 @@ final class QueryResultsInjector implements EventSubscriberInterface
         $this->requestStack = $requestStack;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [ViewEvents::FILTER_VIEW_PARAMETERS => 'injectQueryResults'];
     }
