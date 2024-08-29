@@ -4,9 +4,7 @@ services:
         autowire: true
         public: true
 
-    Ibexa\Bundle\FieldTypeQuery\Controller\QueryFieldRestController:
-        arguments:
-            $requestParser: '@Ibexa\Bundle\Rest\RequestParser\Router'
+    Ibexa\Bundle\FieldTypeQuery\Controller\QueryFieldRestController: ~
 
     Ibexa\FieldTypeQuery\QueryFieldService:
         arguments:

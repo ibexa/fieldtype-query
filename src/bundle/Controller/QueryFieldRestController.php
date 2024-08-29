@@ -15,8 +15,8 @@ use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
+use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\FieldTypeQuery\QueryFieldService;
-use Ibexa\Rest\RequestParser;
 use Ibexa\Rest\Server\Values as RestValues;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -34,21 +34,20 @@ final class QueryFieldRestController
     /** @var \Ibexa\Contracts\Core\Repository\LocationService */
     private $locationService;
 
-    /** @var \Ibexa\Rest\RequestParser */
-    private $requestParser;
+    private UriParserInterface $uriParser;
 
     public function __construct(
         QueryFieldService $queryFieldService,
         ContentService $contentService,
         ContentTypeService $contentTypeService,
         LocationService $locationService,
-        RequestParser $requestParser
+        UriParserInterface $uriParser
     ) {
         $this->queryFieldService = $queryFieldService;
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->locationService = $locationService;
-        $this->requestParser = $requestParser;
+        $this->uriParser = $uriParser;
     }
 
     public function getResults(Request $request, $contentId, $versionNumber, $fieldDefinitionIdentifier): RestValues\ContentList
@@ -116,7 +115,7 @@ final class QueryFieldRestController
      */
     private function loadLocationByPath(Request $request): Location
     {
-        $locationHrefParts = explode('/', $this->requestParser->parseHref($request->query->get('location'), 'locationPath'));
+        $locationHrefParts = explode('/', $this->uriParser->getAttributeFromUri($request->query->get('location'), 'locationPath'));
         $locationId = array_pop($locationHrefParts);
 
         return $this->locationService->loadLocation((int)$locationId);
