@@ -36,20 +36,13 @@ final class QueryFieldService implements QueryFieldServiceInterface, QueryFieldL
     /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
-     */
-    private $locationService;
-
     public function __construct(
         SearchService $searchService,
         ContentTypeService $contentTypeService,
-        LocationService $locationService,
         QueryTypeRegistry $queryTypeRegistry
     ) {
         $this->searchService = $searchService;
         $this->contentTypeService = $contentTypeService;
-        $this->locationService = $locationService;
         $this->queryTypeRegistry = $queryTypeRegistry;
     }
 
