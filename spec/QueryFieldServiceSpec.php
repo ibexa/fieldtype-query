@@ -8,7 +8,6 @@
 namespace spec\Ibexa\FieldTypeQuery;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query as ApiContentQuery;
@@ -49,10 +48,6 @@ class QueryFieldServiceSpec extends ObjectBehavior
             'param1' => 'value1',
             'param2' => 'value2',
         ];
-
-        $location = new Values\Content\Location([
-            'id' => self::LOCATION_ID,
-        ]);
 
         $contentTypeWithPagination = $this->getContentType($parameters);
         $contentTypeService->loadContentType(self::CONTENT_TYPE_ID)->willReturn($contentTypeWithPagination);
