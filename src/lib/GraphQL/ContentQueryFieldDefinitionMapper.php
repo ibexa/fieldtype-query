@@ -95,14 +95,14 @@ final class ContentQueryFieldDefinitionMapper extends DecoratingFieldDefinitionM
 
     private function nameValueType($typeIdentifier): string
     {
-        return $this->nameHelper->domainContentName(
+        return $this->nameHelper->itemName(
             $this->contentTypeService->loadContentTypeByIdentifier($typeIdentifier)
         );
     }
 
     private function nameValueConnectionType($typeIdentifier): string
     {
-        return $this->nameHelper->domainContentConnection(
+        return $this->nameHelper->itemConnectionName(
             $this->contentTypeService->loadContentTypeByIdentifier($typeIdentifier)
         );
     }
