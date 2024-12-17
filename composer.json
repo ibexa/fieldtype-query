@@ -46,12 +46,16 @@
         "ibexa/http-cache": "~4.6.0@dev",
         "phpspec/phpspec": "^7.1",
         "ibexa/code-style": "^1.0",
-        "friendsofphp/php-cs-fixer": "^3.0"
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-symfony": "^2.0"
     },
     "scripts": {
         "fix-cs": "php-cs-fixer fix --config=.php-cs-fixer.php -v --show-progress=dots",
         "check-cs": "@fix-cs --dry-run",
-        "test": "phpspec run --format=pretty"
+        "test": "phpspec run --format=pretty",
+        "phpstan": "phpstan analyse"
     },
     "extra": {
         "branch-alias": {
@@ -59,8 +63,9 @@
         }
     },
     "config": {
+        "sort-packages": true,
         "allow-plugins": {
-            "composer/package-versions-deprecated": true
+            "php-http/discovery": false
         }
     }
 }
