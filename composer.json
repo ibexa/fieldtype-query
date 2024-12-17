@@ -15,13 +15,13 @@
         "ibexa/graphql": "~5.0.x-dev",
         "ibexa/rest": "~5.0.x-dev",
         "psr/log": "^1.1",
-        "symfony/dependency-injection": "^5.0",
-        "symfony/event-dispatcher": "^5.0",
-        "symfony/expression-language": "^5.0",
-        "symfony/framework-bundle": "^5.0",
-        "symfony/http-kernel": "^5.0",
-        "symfony/translation": "^5.0",
-        "symfony/yaml": "^5.0"
+        "symfony/dependency-injection": "^6.4",
+        "symfony/event-dispatcher": "^6.4",
+        "symfony/expression-language": "^6.4",
+        "symfony/framework-bundle": "^6.4",
+        "symfony/http-kernel": "^6.4",
+        "symfony/translation": "^6.4",
+        "symfony/yaml": "^6.4"
     },
     "autoload": {
         "psr-4": {
