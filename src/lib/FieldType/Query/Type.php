@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\FieldTypeQuery\FieldType\Query;
 
 use Ibexa\Contracts\Core\FieldType\Value as SPIValue;
@@ -47,13 +48,6 @@ final class Type extends FieldType implements TranslationContainerInterface
         $this->identifier = $identifier;
     }
 
-    /**
-     * Validates the validatorConfiguration of a FieldDefinitionCreateStruct or FieldDefinitionUpdateStruct.
-     *
-     * @param mixed $validatorConfiguration
-     *
-     * @return \Ibexa\Contracts\Core\FieldType\ValidationError[]
-     */
     public function validateValidatorConfiguration($validatorConfiguration)
     {
         $validationErrors = [];
@@ -61,59 +55,33 @@ final class Type extends FieldType implements TranslationContainerInterface
         return $validationErrors;
     }
 
-    /**
-     * Validates a field based on the validators in the field definition.
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDefinition The field definition of the field
-     * @param \Ibexa\Core\FieldType\TextLine\Value $fieldValue The field value for which an action is performed
-     *
-     * @return \Ibexa\Contracts\Core\FieldType\ValidationError[]
-     */
     public function validate(FieldDefinition $fieldDefinition, SPIValue $fieldValue)
     {
         return [];
     }
 
-    /**
-     * Returns the field type identifier for this field type.
-     *
-     * @return string
-     */
     public function getFieldTypeIdentifier()
     {
         return $this->identifier;
     }
 
     /**
-     * Returns the name of the given field value.
-     *
-     * It will be used to generate content name and url alias if current field is designated
-     * to be used in the content name/urlAlias pattern.
-     *
      * @param \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
-     *
-     * @return string
      */
     public function getName(SPIValue $value, FieldDefinition $fieldDefinition, string $languageCode): string
     {
         return (string)$value->text;
     }
 
-    public function getEmptyValue()
+    /**
+     * @return \Ibexa\FieldTypeQuery\FieldType\Query\Value
+     */
+    public function getEmptyValue(): BaseValue
     {
         return new Value();
     }
 
-    /**
-     * Returns if the given $value is considered empty by the field type.
-     *
-     * @param mixed $value
-     *
-     * @return bool
-     */
-    public function isEmptyValue(SPIValue $value)
+    public function isEmptyValue(SPIValue $value): bool
     {
         return false;
     }
@@ -132,9 +100,9 @@ final class Type extends FieldType implements TranslationContainerInterface
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
      *
-     * @param \Ibexa\Core\FieldType\TextLine\Value $value
+     * @param \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
      */
-    protected function checkValueStructure(BaseValue $value)
+    protected function checkValueStructure(BaseValue $value): void
     {
         if (!is_string($value->text)) {
             throw new InvalidArgumentType(
@@ -146,11 +114,7 @@ final class Type extends FieldType implements TranslationContainerInterface
     }
 
     /**
-     * Returns information for FieldValue->$sortKey relevant to the field type.
-     *
-     * @param \Ibexa\Core\FieldType\TextLine\Value $value
-     *
-     * @return array
+     * @param \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
      */
     protected function getSortInfo(BaseValue $value)
     {
@@ -162,7 +126,7 @@ final class Type extends FieldType implements TranslationContainerInterface
      *
      * @param mixed $hash
      *
-     * @return \Ibexa\Core\FieldType\TextLine\Value $value
+     * @return \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
      */
     public function fromHash($hash)
     {

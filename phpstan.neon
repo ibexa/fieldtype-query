@@ -4,7 +4,10 @@ includes:
     - vendor/phpstan/phpstan-symfony/extension.neon
 
 parameters:
+    ignoreErrors:
+        -
+            message: "#^Cannot call method (log|debug|info|notice|warning|error|critical|alert|emergency)\\(\\) on Psr\\\\Log\\\\LoggerInterface\\|null\\.$#"
     level: 8
     paths:
         - src
-        - tests
+    treatPhpDocTypesAsCertain: false

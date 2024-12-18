@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\FieldTypeQuery;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
@@ -22,7 +23,7 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
 {
     use LoggerAwareTrait;
 
-    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface */
+    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface&\Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService */
     private $inner;
 
     public function __construct(QueryFieldServiceInterface $inner, ?LoggerInterface $logger = null)

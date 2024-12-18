@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\FieldTypeQuery\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
@@ -16,7 +17,7 @@ use Symfony\Component\Yaml\Yaml;
 
 final class IbexaFieldTypeQueryExtension extends Extension implements PrependExtensionInterface
 {
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader(
             $container,
@@ -32,7 +33,7 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
         $this->addContentViewConfig($container);
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $this->prependFieldTemplateConfig($container);
         $this->prependJMSTranslationConfig($container);
@@ -46,6 +47,9 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
     protected function addContentViewConfig(ContainerBuilder $container): void
     {
         $contentViewDefaults = $container->getParameter('ibexa.site_access.config.default.content_view_defaults');
+        if (!is_array($contentViewDefaults)) {
+            return;
+        }
         $contentViewDefaults['content_query_field'] = [
             'default' => [
                 'template' => '@IbexaFieldTypeQuery/content/contentquery.html.twig',
