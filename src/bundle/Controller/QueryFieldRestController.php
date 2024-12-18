@@ -49,7 +49,6 @@ final class QueryFieldRestController
         $this->contentTypeService = $contentTypeService;
         $this->locationService = $locationService;
         $this->requestParser = $requestParser;
-
     }
 
     public function getResults(Request $request, int $contentId, int $versionNumber, string $fieldDefinitionIdentifier): RestValues\ContentList
