@@ -47,7 +47,11 @@ final class QueryFieldService implements QueryFieldServiceInterface, QueryFieldL
 
     public function loadContentItems(Content $content, string $fieldDefinitionIdentifier): iterable
     {
-        $query = $this->prepareQuery($content, $content->contentInfo->getMainLocation(), $fieldDefinitionIdentifier);
+        $mainLocation = $content->contentInfo->getMainLocation();
+        if ($mainLocation === null) {
+            return [];
+        }
+        $query = $this->prepareQuery($content, $mainLocation, $fieldDefinitionIdentifier);
 
         return $this->executeQueryAndMapResult($query);
     }
@@ -61,7 +65,11 @@ final class QueryFieldService implements QueryFieldServiceInterface, QueryFieldL
 
     public function countContentItems(Content $content, string $fieldDefinitionIdentifier): int
     {
-        $query = $this->prepareQuery($content, $content->contentInfo->getMainLocation(), $fieldDefinitionIdentifier);
+        $mainLocation = $content->contentInfo->getMainLocation();
+        if ($mainLocation === null) {
+            return 0;
+        }
+        $query = $this->prepareQuery($content, $mainLocation, $fieldDefinitionIdentifier);
         $query->limit = 0;
 
         $count = $this->searchService->findContent($query)->totalCount - $query->offset;
@@ -81,7 +89,11 @@ final class QueryFieldService implements QueryFieldServiceInterface, QueryFieldL
 
     public function loadContentItemsSlice(Content $content, string $fieldDefinitionIdentifier, int $offset, int $limit): iterable
     {
-        $query = $this->prepareQuery($content, $content->contentInfo->getMainLocation(), $fieldDefinitionIdentifier);
+        $mainLocation = $content->contentInfo->getMainLocation();
+        if ($mainLocation === null) {
+            return [];
+        }
+        $query = $this->prepareQuery($content, $mainLocation, $fieldDefinitionIdentifier);
         $query->offset += $offset;
         $query->limit = $limit;
 

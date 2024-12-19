@@ -10,6 +10,9 @@ namespace Ibexa\FieldTypeQuery\FieldType\Mapper;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * @implements DataTransformerInterface<mixed|null, string|null>
+ */
 final class ParametersTransformer implements DataTransformerInterface
 {
     public function transform($value)

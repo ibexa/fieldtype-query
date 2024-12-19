@@ -23,15 +23,21 @@ final class QueryFieldResolver
         $this->queryFieldService = $queryFieldService;
     }
 
-    public function resolveQueryField(Field $field, Content $content)
+    /**
+     * @return iterable<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
+     */
+    public function resolveQueryField(Field $field, Content $content): iterable
     {
         return $this->queryFieldService->loadContentItems($content, $field->fieldDefIdentifier);
     }
 
+    /**
+     * @return \GraphQL\Executor\Promise\Promise|\Overblog\GraphQLBundle\Relay\Connection\Output\Connection|null
+     */
     public function resolveQueryFieldConnection(Argument $args, ?Field $field, Content $content)
     {
         if ($field === null) {
-            return  null;
+            return null;
         }
 
         if (!isset($args['first'])) {
@@ -50,6 +56,11 @@ final class QueryFieldResolver
         );
     }
 
+    /**
+     * @param array<string, mixed> $parameters
+     *
+     * @return array<array{name: string, value: mixed}>
+     */
     public function resolveQueryFieldDefinitionParameters(array $parameters): array
     {
         $return = [];

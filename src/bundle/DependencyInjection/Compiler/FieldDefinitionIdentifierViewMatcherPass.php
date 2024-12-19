@@ -19,7 +19,7 @@ class FieldDefinitionIdentifierViewMatcherPass implements CompilerPassInterface
     private const LONG_IDENTIFIER = '@' . FieldDefinitionIdentifierMatcher::class;
     private const SHORT_IDENTIFIER = 'Identifier\FieldDefinition';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $configKeys = array_filter(
             array_keys($container->getParameterBag()->all()),

@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class IbexaFieldTypeQueryBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new Compiler\QueryTypesListPass());
         $container->addCompilerPass(new Compiler\ConfigurableFieldDefinitionMapperPass());

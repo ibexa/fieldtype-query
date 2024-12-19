@@ -1,0 +1,14 @@
+includes:
+    - phpstan-baseline.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/ibexa/phpstan/extension.neon
+
+parameters:
+    ignoreErrors:
+        -
+            message: "#^Cannot call method (log|debug|info|notice|warning|error|critical|alert|emergency)\\(\\) on Psr\\\\Log\\\\LoggerInterface\\|null\\.$#"
+    level: 8
+    paths:
+        - src
+    treatPhpDocTypesAsCertain: false

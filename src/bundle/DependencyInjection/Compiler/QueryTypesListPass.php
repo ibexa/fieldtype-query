@@ -25,7 +25,7 @@ class QueryTypesListPass implements CompilerPassInterface
         $this->nameConverter = new CamelCaseToSnakeCaseNameConverter();
     }
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has(ArrayQueryTypeRegistry::class) || !$container->has(QueryFormMapper::class)) {
             return;
@@ -48,12 +48,8 @@ class QueryTypesListPass implements CompilerPassInterface
 
     /**
      * Builds a human readable name out of a query type identifier.
-     *
-     * @param $queryTypeIdentifier
-     *
-     * @return string
      */
-    private function buildQueryTypeName($queryTypeIdentifier)
+    private function buildQueryTypeName(string $queryTypeIdentifier): string
     {
         return ucfirst(
             str_replace('_', ' ', $this->nameConverter->normalize($queryTypeIdentifier))

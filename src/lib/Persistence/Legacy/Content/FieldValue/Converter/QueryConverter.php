@@ -24,43 +24,25 @@ class QueryConverter implements Converter
     public function toStorageValue(FieldValue $value, StorageFieldValue $storageFieldValue)
     {
         $storageFieldValue->dataText = $value->data;
-        $storageFieldValue->sortKeyString = $value->sortKey;
+        $storageFieldValue->sortKeyString = (string)$value->sortKey;
     }
 
-    /**
-     * Converts data from $value to $fieldValue.
-     *
-     * @param \Ibexa\Core\Persistence\Legacy\Content\StorageFieldValue $value
-     * @param \Ibexa\Contracts\Core\Persistence\Content\FieldValue $fieldValue
-     */
-    public function toFieldValue(StorageFieldValue $value, FieldValue $fieldValue)
+    public function toFieldValue(StorageFieldValue $value, FieldValue $fieldValue): void
     {
         $fieldValue->data = $value->dataText;
         $fieldValue->sortKey = $value->sortKeyString;
     }
 
-    /**
-     * Converts field definition data in $fieldDef into $storageFieldDef.
-     *
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition $fieldDef
-     * @param \Ibexa\Core\Persistence\Legacy\Content\StorageFieldDefinition $storageDef
-     */
-    public function toStorageFieldDefinition(FieldDefinition $fieldDef, StorageFieldDefinition $storageDef)
+    public function toStorageFieldDefinition(FieldDefinition $fieldDef, StorageFieldDefinition $storageDef): void
     {
         $storageDef->dataText1 = $fieldDef->fieldTypeConstraints->fieldSettings['QueryType'];
         $storageDef->dataText2 = $fieldDef->fieldTypeConstraints->fieldSettings['ReturnedType'];
-        $storageDef->dataText5 = \json_encode($fieldDef->fieldTypeConstraints->fieldSettings['Parameters']);
+        $storageDef->dataText5 = \json_encode($fieldDef->fieldTypeConstraints->fieldSettings['Parameters']) ?: '';
         $storageDef->dataInt1 = (int)$fieldDef->fieldTypeConstraints->fieldSettings['EnablePagination'];
         $storageDef->dataInt2 = $fieldDef->fieldTypeConstraints->fieldSettings['ItemsPerPage'];
     }
 
-    /**
-     * Converts field definition data in $storageDef into $fieldDef.
-     *
-     * @param \Ibexa\Core\Persistence\Legacy\Content\StorageFieldDefinition $storageDef
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition $fieldDef
-     */
-    public function toFieldDefinition(StorageFieldDefinition $storageDef, FieldDefinition $fieldDef)
+    public function toFieldDefinition(StorageFieldDefinition $storageDef, FieldDefinition $fieldDef): void
     {
         $fieldDef->fieldTypeConstraints->fieldSettings = [
             'QueryType' => $storageDef->dataText1 ?: null,
@@ -71,15 +53,6 @@ class QueryConverter implements Converter
         ];
     }
 
-    /**
-     * Returns the name of the index column in the attribute table.
-     *
-     * Returns the name of the index column the datatype uses, which is either
-     * "sort_key_int" or "sort_key_string". This column is then used for
-     * filtering and sorting for this type.
-     *
-     * @return string
-     */
     public function getIndexColumn()
     {
         return 'sort_key_string';

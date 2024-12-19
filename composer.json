@@ -43,14 +43,19 @@
         "ibexa/fieldtype-richtext": "~5.0.x-dev",
         "ibexa/http-cache": "~5.0.x-dev",
         "ibexa/notifications": "~5.0.x-dev",
+        "ibexa/phpstan": "~5.0.0@dev",
         "ibexa/search": "~5.0.x-dev",
         "ibexa/user": "~5.0.x-dev",
-        "phpspec/phpspec": "^7.1"
+        "phpspec/phpspec": "^7.1",
+        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-symfony": "^2.0"
     },
     "scripts": {
         "fix-cs": "php-cs-fixer fix --config=.php-cs-fixer.php -v --show-progress=dots",
         "check-cs": "@fix-cs --dry-run",
-        "test": "phpspec run --format=pretty"
+        "test": "phpspec run --format=pretty",
+        "phpstan": "phpstan analyse"
     },
     "extra": {
         "branch-alias": {
@@ -58,10 +63,7 @@
         }
     },
     "config": {
-        "allow-plugins": {
-            "composer/package-versions-deprecated": true,
-            "php-http/discovery": false
-        },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": false
     }
 }

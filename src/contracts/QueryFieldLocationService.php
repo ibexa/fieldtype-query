@@ -17,14 +17,14 @@ interface QueryFieldLocationService
     /**
      * Returns the query results for the given location.
      *
-     * @return iterable An iterable that yields Content items.
+     * @return iterable<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
      */
     public function loadContentItemsForLocation(Location $location, string $fieldDefinitionIdentifier): iterable;
 
     /**
      * Returns a slice of the query results for the given location.
      *
-     * @return iterable An iterable that yields Content items.
+     * @return iterable<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
      */
     public function loadContentItemsSliceForLocation(Location $location, string $fieldDefinitionIdentifier, int $offset, int $limit): iterable;
 

@@ -22,10 +22,13 @@ final class QueryFormMapper implements FieldDefinitionFormMapperInterface
     /**
      * List of query types.
      *
-     * @var array
+     * @var array<int|string, string>
      */
     private $queryTypes;
 
+    /**
+     * @param array<int|string, string> $queryTypes
+     */
     public function __construct(ContentTypeService $contentTypeService, array $queryTypes = [])
     {
         $this->contentTypeService = $contentTypeService;
@@ -88,7 +91,7 @@ final class QueryFormMapper implements FieldDefinitionFormMapperInterface
             ->add($parametersForm);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
@@ -96,7 +99,10 @@ final class QueryFormMapper implements FieldDefinitionFormMapperInterface
             ]);
     }
 
-    private function getContentTypes()
+    /**
+     * @return iterable<string, string>
+     */
+    private function getContentTypes(): iterable
     {
         foreach ($this->contentTypeService->loadContentTypeGroups() as $contentTypeGroup) {
             foreach ($this->contentTypeService->loadContentTypes($contentTypeGroup) as $contentType) {
