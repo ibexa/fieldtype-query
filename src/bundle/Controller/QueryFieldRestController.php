@@ -37,18 +37,22 @@ final class QueryFieldRestController
 
     private UriParserInterface $uriParser;
 
+    private ContentService\RelationListFacadeInterface $relationListFacade;
+
     public function __construct(
         QueryFieldService $queryFieldService,
         ContentService $contentService,
         ContentTypeService $contentTypeService,
         LocationService $locationService,
-        UriParserInterface $uriParser
+        UriParserInterface $uriParser,
+        ContentService\RelationListFacadeInterface $relationListFacade
     ) {
         $this->queryFieldService = $queryFieldService;
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->locationService = $locationService;
         $this->uriParser = $uriParser;
+        $this->relationListFacade = $relationListFacade;
     }
 
     public function getResults(
@@ -94,7 +98,7 @@ final class QueryFieldRestController
                         $this->locationService->loadLocation($content->contentInfo->mainLocationId),
                         $content,
                         $this->getContentType($content->contentInfo),
-                        iterator_to_array($this->contentService->loadRelations($content->getVersionInfo()))
+                        iterator_to_array($this->relationListFacade->getRelations($content->getVersionInfo()))
                     );
                 },
                 iterator_to_array($items)

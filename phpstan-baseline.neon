@@ -1,13 +1,13 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Parameter \#1 \$href of method Ibexa\\Rest\\RequestParser\:\:parseHref\(\) expects string, string\|null given\.$#'
+			message: '#^Parameter \#1 \$locationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:loadLocation\(\) expects int, int\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/bundle/Controller/QueryFieldRestController.php
 
 		-
-			message: '#^Parameter \#1 \$locationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:loadLocation\(\) expects int, int\|null given\.$#'
+			message: '#^Parameter \#1 \$uri of method Ibexa\\Contracts\\Rest\\UriParser\\UriParserInterface\:\:getAttributeFromUri\(\) expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/bundle/Controller/QueryFieldRestController.php
