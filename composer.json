@@ -41,6 +41,7 @@
         "ibexa/doctrine-schema": "~4.6.0@dev",
         "ibexa/design-engine": "~4.6.0@dev",
         "ibexa/fieldtype-richtext": "~4.6.0@dev",
+        "ibexa/phpstan": "~4.6.0@dev",
         "ibexa/search": "~4.6.0@dev",
         "ibexa/user": "~4.6.0@dev",
         "ibexa/http-cache": "~4.6.0@dev",
