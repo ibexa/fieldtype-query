@@ -11,6 +11,9 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService;
 use Pagerfanta\Adapter\AdapterInterface;
 
+/**
+ * @implements AdapterInterface<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
+ */
 final class QueryResultsWithLocationPagerFantaAdapter implements AdapterInterface
 {
     /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService */
@@ -32,15 +35,15 @@ final class QueryResultsWithLocationPagerFantaAdapter implements AdapterInterfac
         $this->fieldDefinitionIdentifier = $fieldDefinitionIdentifier;
     }
 
-    public function getNbResults()
+    public function getNbResults(): int
     {
-        return $this->queryFieldService->countContentItemsForLocation(
+        return max($this->queryFieldService->countContentItemsForLocation(
             $this->location,
             $this->fieldDefinitionIdentifier
-        );
+        ), 0);
     }
 
-    public function getSlice($offset, $length)
+    public function getSlice($offset, $length): iterable
     {
         return $this->queryFieldService->loadContentItemsSliceForLocation(
             $this->location,

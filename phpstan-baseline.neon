@@ -91,12 +91,6 @@ parameters:
 			path: src/lib/Persistence/Legacy/Content/FieldValue/Converter/QueryConverter.php
 
 		-
-			message: '#^Anonymous function should return Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Content but returns Ibexa\\Contracts\\Core\\Repository\\Values\\ValueObject\.$#'
-			identifier: return.type
-			count: 1
-			path: src/lib/QueryFieldService.php
-
-		-
 			message: '#^Method Ibexa\\FieldTypeQuery\\QueryFieldService\:\:isExpression\(\) has parameter \$expression with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1

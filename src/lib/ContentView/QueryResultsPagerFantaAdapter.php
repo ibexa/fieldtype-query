@@ -11,6 +11,9 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Pagerfanta\Adapter\AdapterInterface;
 
+/**
+ * @implements AdapterInterface<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
+ */
 final class QueryResultsPagerFantaAdapter implements AdapterInterface
 {
     /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface */
@@ -32,15 +35,15 @@ final class QueryResultsPagerFantaAdapter implements AdapterInterface
         $this->fieldDefinitionIdentifier = $fieldDefinitionIdentifier;
     }
 
-    public function getNbResults()
+    public function getNbResults(): int
     {
-        return $this->queryFieldService->countContentItems(
+        return max($this->queryFieldService->countContentItems(
             $this->content,
             $this->fieldDefinitionIdentifier
-        );
+        ), 0);
     }
 
-    public function getSlice($offset, $length)
+    public function getSlice($offset, $length): iterable
     {
         return $this->queryFieldService->loadContentItemsSlice(
             $this->content,
