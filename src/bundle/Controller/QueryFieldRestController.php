@@ -16,6 +16,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\FieldTypeQuery\QueryFieldService;
+use function Ibexa\PolyfillPhp82\iterator_to_array;
 use Ibexa\Rest\RequestParser;
 use Ibexa\Rest\Server\Values as RestValues;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,8 +52,12 @@ final class QueryFieldRestController
         $this->requestParser = $requestParser;
     }
 
-    public function getResults(Request $request, int $contentId, int $versionNumber, string $fieldDefinitionIdentifier): RestValues\ContentList
-    {
+    public function getResults(
+        Request $request,
+        int $contentId,
+        int $versionNumber,
+        string $fieldDefinitionIdentifier
+    ): RestValues\ContentList {
         $offset = (int)$request->query->get('offset', '0');
         $limit = (int)$request->query->get('limit', '-1');
 
@@ -90,10 +95,10 @@ final class QueryFieldRestController
                         $this->locationService->loadLocation($content->contentInfo->mainLocationId),
                         $content,
                         $this->getContentType($content->contentInfo),
-                        \Ibexa\PolyfillPhp82\iterator_to_array($this->contentService->loadRelations($content->getVersionInfo()))
+                        iterator_to_array($this->contentService->loadRelations($content->getVersionInfo()))
                     );
                 },
-                \Ibexa\PolyfillPhp82\iterator_to_array($items)
+                iterator_to_array($items)
             ),
             $this->queryFieldService->countContentItems($content, $fieldDefinitionIdentifier)
         );
