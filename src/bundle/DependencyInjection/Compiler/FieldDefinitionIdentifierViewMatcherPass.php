@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\FieldTypeQuery\DependencyInjection\Compiler;
 
 use Ibexa\FieldTypeQuery\ContentView\FieldDefinitionIdentifierMatcher;
@@ -18,7 +19,7 @@ class FieldDefinitionIdentifierViewMatcherPass implements CompilerPassInterface
     private const LONG_IDENTIFIER = '@' . FieldDefinitionIdentifierMatcher::class;
     private const SHORT_IDENTIFIER = 'Identifier\FieldDefinition';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $configKeys = array_filter(
             array_keys($container->getParameterBag()->all()),

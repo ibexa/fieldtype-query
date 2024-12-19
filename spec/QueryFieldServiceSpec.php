@@ -4,10 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace spec\Ibexa\FieldTypeQuery;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query as ApiContentQuery;
@@ -38,7 +38,6 @@ class QueryFieldServiceSpec extends ObjectBehavior
     public function let(
         SearchService $searchService,
         ContentTypeService $contentTypeService,
-        LocationService $locationService,
         QueryTypeRegistry $queryTypeRegistry,
         QueryType $queryType
     ) {
@@ -60,12 +59,11 @@ class QueryFieldServiceSpec extends ObjectBehavior
         $contentTypeWithoutPagination = $this->getContentType($parameters, false, 10);
         $contentTypeService->loadContentType(self::CONTENT_TYPE_ID_WITHOUT_PAGINATION)->willReturn($contentTypeWithoutPagination);
 
-        $locationService->loadLocation(self::LOCATION_ID)->willReturn($location);
         $queryTypeRegistry->getQueryType(self::QUERY_TYPE_IDENTIFIER)->willReturn($queryType);
         $queryType->getQuery(Argument::any())->willReturn(new ApiQuery());
         // @todo this should fail. It does not.
         $searchService->findContent(Argument::any())->willReturn($this->searchResult);
-        $this->beConstructedWith($searchService, $contentTypeService, $locationService, $queryTypeRegistry);
+        $this->beConstructedWith($searchService, $contentTypeService, $queryTypeRegistry);
     }
 
     public function it_is_initializable()

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\FieldTypeQuery\GraphQL;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
@@ -92,14 +93,14 @@ final class ContentQueryFieldDefinitionMapper extends DecoratingFieldDefinitionM
         return $this->fieldTypeIdentifier;
     }
 
-    private function nameValueType($typeIdentifier): string
+    private function nameValueType(string $typeIdentifier): string
     {
         return $this->nameHelper->domainContentName(
             $this->contentTypeService->loadContentTypeByIdentifier($typeIdentifier)
         );
     }
 
-    private function nameValueConnectionType($typeIdentifier): string
+    private function nameValueConnectionType(string $typeIdentifier): string
     {
         return $this->nameHelper->domainContentConnection(
             $this->contentTypeService->loadContentTypeByIdentifier($typeIdentifier)

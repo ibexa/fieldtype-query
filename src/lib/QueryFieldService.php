@@ -4,10 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\FieldTypeQuery;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
@@ -35,26 +35,23 @@ final class QueryFieldService implements QueryFieldServiceInterface, QueryFieldL
     /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
-     */
-    private $locationService;
-
     public function __construct(
         SearchService $searchService,
         ContentTypeService $contentTypeService,
-        LocationService $locationService,
         QueryTypeRegistry $queryTypeRegistry
     ) {
         $this->searchService = $searchService;
         $this->contentTypeService = $contentTypeService;
-        $this->locationService = $locationService;
         $this->queryTypeRegistry = $queryTypeRegistry;
     }
 
     public function loadContentItems(Content $content, string $fieldDefinitionIdentifier): iterable
     {
-        $query = $this->prepareQuery($content, $content->contentInfo->getMainLocation(), $fieldDefinitionIdentifier);
+        $mainLocation = $content->contentInfo->getMainLocation();
+        if ($mainLocation === null) {
+            return [];
+        }
+        $query = $this->prepareQuery($content, $mainLocation, $fieldDefinitionIdentifier);
 
         return $this->executeQueryAndMapResult($query);
     }
@@ -68,7 +65,11 @@ final class QueryFieldService implements QueryFieldServiceInterface, QueryFieldL
 
     public function countContentItems(Content $content, string $fieldDefinitionIdentifier): int
     {
-        $query = $this->prepareQuery($content, $content->contentInfo->getMainLocation(), $fieldDefinitionIdentifier);
+        $mainLocation = $content->contentInfo->getMainLocation();
+        if ($mainLocation === null) {
+            return 0;
+        }
+        $query = $this->prepareQuery($content, $mainLocation, $fieldDefinitionIdentifier);
         $query->limit = 0;
 
         $count = $this->searchService->findContent($query)->totalCount - $query->offset;
@@ -88,7 +89,11 @@ final class QueryFieldService implements QueryFieldServiceInterface, QueryFieldL
 
     public function loadContentItemsSlice(Content $content, string $fieldDefinitionIdentifier, int $offset, int $limit): iterable
     {
-        $query = $this->prepareQuery($content, $content->contentInfo->getMainLocation(), $fieldDefinitionIdentifier);
+        $mainLocation = $content->contentInfo->getMainLocation();
+        if ($mainLocation === null) {
+            return [];
+        }
+        $query = $this->prepareQuery($content, $mainLocation, $fieldDefinitionIdentifier);
         $query->offset += $offset;
         $query->limit = $limit;
 

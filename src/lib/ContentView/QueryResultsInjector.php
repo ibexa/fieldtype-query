@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\FieldTypeQuery\ContentView;
 
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService;
@@ -19,7 +20,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class QueryResultsInjector implements EventSubscriberInterface
 {
-    /** @var \Ibexa\FieldTypeQuery\QueryFieldService */
+    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface&\Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService */
     private $queryFieldService;
 
     /** @var array */
@@ -47,7 +48,7 @@ final class QueryResultsInjector implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public function injectQueryResults(FilterViewParametersEvent $event)
+    public function injectQueryResults(FilterViewParametersEvent $event): void
     {
         if ($event->getView()->getViewType() === $this->views['field']) {
             $builderParameters = $event->getBuilderParameters();
@@ -70,20 +71,23 @@ final class QueryResultsInjector implements EventSubscriberInterface
     /**
      * @param \Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent $event
      *
-     * @return iterable
+     * @return iterable<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     private function buildResults(FilterViewParametersEvent $event): iterable
     {
         $view = $event->getView();
-        $location = $view instanceof LocationValueView ? $location = $view->getLocation() : null;
+        $location = $view instanceof LocationValueView ? $view->getLocation() : null;
         $content = $view instanceof ContentValueView ? $view->getContent() : null;
 
+        if ($location === null && $content === null) {
+            throw new \Exception('No content nor location to get query results for');
+        }
         $viewParameters = $event->getBuilderParameters();
         $fieldDefinitionIdentifier = $viewParameters['queryFieldDefinitionIdentifier'];
 
-        $paginationLimit = $this->queryFieldService->getPaginationConfiguration($content, $fieldDefinitionIdentifier);
+        $paginationLimit = $this->queryFieldService->getPaginationConfiguration($content ?? $location->getContent(), $fieldDefinitionIdentifier);
         $enablePagination = ($viewParameters['enablePagination'] === true);
         $disablePagination = ($viewParameters['disablePagination'] === true);
 
