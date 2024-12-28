@@ -18,7 +18,7 @@ ContentQueryFieldSettings:
             parameters:
                 type: "[ContentQueryFieldParameter]"
                 description: "Parameters used to generate the Query from the Query type"
-                resolve: "@=resolver('QueryFieldDefinitionParameters', [value['Parameters']])"
+                resolve: "@=query('QueryFieldDefinitionParameters', [value['Parameters']])"
             returnedType:
                 type: ContentType
                 description: "Content type returned by the field"
