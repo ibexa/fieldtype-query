@@ -1,6 +1,6 @@
 {% for item in items %}
     {# Should we pass the full item instead ? #}
-    {{ render(controller("ibexa_content:viewAction", {
+    {{ render(controller("ibexa_content::viewAction", {
         "contentId": item.id,
         "content": item,
         "viewType": itemViewType
