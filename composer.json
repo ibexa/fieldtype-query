@@ -15,7 +15,7 @@
         "ibexa/graphql": "~5.0.x-dev",
         "ibexa/rector": "~5.0.x-dev",
         "ibexa/rest": "~5.0.x-dev",
-        "psr/log": "^1.1",
+        "psr/log": "^3.0",
         "symfony/dependency-injection": "^7.2",
         "symfony/event-dispatcher": "^7.2",
         "symfony/expression-language": "^7.2",
