@@ -32,14 +32,11 @@ final class Type extends FieldType implements TranslationContainerInterface
         'ItemsPerPage' => ['type' => 'integer', 'default' => 10],
     ];
 
-    /** @var \Ibexa\Core\QueryType\QueryTypeRegistry */
-    private $queryTypeRegistry;
+    private QueryTypeRegistry $queryTypeRegistry;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
-    private $contentTypeService;
+    private ContentTypeService $contentTypeService;
 
-    /** @var string */
-    private $identifier;
+    private string $identifier;
 
     public function __construct(QueryTypeRegistry $queryTypeRegistry, ContentTypeService $contentTypeService, string $identifier)
     {

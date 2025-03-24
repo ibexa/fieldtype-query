@@ -15,8 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class QueryFieldFormType extends AbstractType
 {
-    /** @var \Ibexa\Contracts\Core\Repository\FieldTypeService */
-    private $fieldTypeService;
+    private FieldTypeService $fieldTypeService;
 
     public function __construct(FieldTypeService $fieldTypeService)
     {

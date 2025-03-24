@@ -15,14 +15,11 @@ use Ibexa\GraphQL\Schema\Domain\Content\NameHelper;
 
 final class ContentQueryFieldDefinitionMapper extends DecoratingFieldDefinitionMapper implements FieldDefinitionMapper
 {
-    /** @var \Ibexa\GraphQL\Schema\Domain\Content\NameHelper */
-    private $nameHelper;
+    private NameHelper $nameHelper;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
-    private $contentTypeService;
+    private ContentTypeService $contentTypeService;
 
-    /** @var string */
-    private $fieldTypeIdentifier;
+    private string $fieldTypeIdentifier;
 
     public function __construct(
         FieldDefinitionMapper $innerMapper,

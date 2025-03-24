@@ -16,14 +16,11 @@ use Pagerfanta\Adapter\AdapterInterface;
  */
 final class QueryResultsWithLocationPagerFantaAdapter implements AdapterInterface
 {
-    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService */
-    private $queryFieldService;
+    private QueryFieldLocationService $queryFieldService;
 
-    /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location */
-    private $location;
+    private Location $location;
 
-    /** @var string */
-    private $fieldDefinitionIdentifier;
+    private string $fieldDefinitionIdentifier;
 
     public function __construct(
         QueryFieldLocationService $queryFieldService,

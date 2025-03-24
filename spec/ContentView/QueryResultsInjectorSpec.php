@@ -28,11 +28,9 @@ class QueryResultsInjectorSpec extends ObjectBehavior
     public const VIEWS = ['field' => self::FIELD_VIEW, 'item' => self::ITEM_VIEW];
     public const FIELD_DEFINITION_IDENTIFIER = 'query_field';
 
-    /** @var \Ibexa\Core\MVC\Symfony\View\ContentView */
-    private $view;
+    private ContentView $view;
 
-    /** @var \Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent */
-    private $event;
+    private FilterViewParametersEvent $event;
 
     public function __construct()
     {
@@ -52,7 +50,7 @@ class QueryResultsInjectorSpec extends ObjectBehavior
         );
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(QueryResultsInjector::class);
     }
@@ -61,7 +59,7 @@ class QueryResultsInjectorSpec extends ObjectBehavior
         QueryFieldServiceInterface $queryFieldService,
         FilterViewParametersEvent $event,
         RequestStack $requestStack
-    ) {
+    ): void {
         $this->beConstructedWith($queryFieldService, self::VIEWS, $requestStack);
         $event->getView()->willReturn($this->view);
         $event->getBuilderParameters()->willReturn(
@@ -76,7 +74,7 @@ class QueryResultsInjectorSpec extends ObjectBehavior
     public function it_throws_an_InvalidArgumentException_if_no_item_view_is_provided(
         QueryFieldServiceInterface $queryFieldService,
         RequestStack $requestStack
-    ) {
+    ): void {
         $this->beConstructedWith($queryFieldService, ['field' => self::FIELD_VIEW], $requestStack);
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
@@ -84,29 +82,29 @@ class QueryResultsInjectorSpec extends ObjectBehavior
     public function it_throws_an_InvalidArgumentException_if_no_field_view_is_provided(
         QueryFieldServiceInterface $queryFieldService,
         RequestStack $requestStack
-    ) {
+    ): void {
         $this->beConstructedWith($queryFieldService, ['item' => 'field'], $requestStack);
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
-    public function it_is_an_event_subscriber()
+    public function it_is_an_event_subscriber(): void
     {
         $this->shouldHaveType(EventSubscriberInterface::class);
     }
 
-    public function it_subscribes_to_the_FILTER_VIEW_PARAMETERS_View_Event()
+    public function it_subscribes_to_the_FILTER_VIEW_PARAMETERS_View_Event(): void
     {
         $this->getSubscribedEvents()->shouldSubscribeTo(ViewEvents::FILTER_VIEW_PARAMETERS);
     }
 
-    public function it_does_nothing_for_non_field_views(QueryFieldServiceInterface $queryFieldService)
+    public function it_does_nothing_for_non_field_views(QueryFieldServiceInterface $queryFieldService): void
     {
         $this->event->getView()->setViewType(self::OTHER_VIEW);
         $this->injectQueryResults($this->event);
         $queryFieldService->getPaginationConfiguration(Argument::any())->shouldNotHaveBeenCalled();
     }
 
-    public function it_adds_the_query_results_for_the_field_view_without_pagination(QueryFieldServiceInterface $queryFieldService)
+    public function it_adds_the_query_results_for_the_field_view_without_pagination(QueryFieldServiceInterface $queryFieldService): void
     {
         $content = $this->createContentItem();
 
@@ -133,7 +131,7 @@ class QueryResultsInjectorSpec extends ObjectBehavior
     public function it_adds_the_query_results_for_the_field_view_with_pagination(
         FilterViewParametersEvent $event,
         QueryFieldServiceInterface $queryFieldService
-    ) {
+    ): void {
         $content = $this->createContentItem();
 
         $queryFieldService
@@ -161,7 +159,7 @@ class QueryResultsInjectorSpec extends ObjectBehavior
     public function getMatchers(): array
     {
         return [
-            'subscribeTo' => static function ($return, $event) {
+            'subscribeTo' => static function ($return, $event): bool {
                 return is_array($return) && isset($return[$event]);
             },
         ];

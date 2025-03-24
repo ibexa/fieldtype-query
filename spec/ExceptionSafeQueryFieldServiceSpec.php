@@ -15,7 +15,7 @@ use Prophecy\Argument;
 
 class ExceptionSafeQueryFieldServiceSpec extends ObjectBehavior
 {
-    public function let(QueryFieldServiceInterface $queryFieldService)
+    public function let(QueryFieldServiceInterface $queryFieldService): void
     {
         $arguments = [
             Argument::type(Content::class),
@@ -31,24 +31,24 @@ class ExceptionSafeQueryFieldServiceSpec extends ObjectBehavior
         $this->beConstructedWith($queryFieldService);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ExceptionSafeQueryFieldService::class);
     }
 
-    public function it_should_return_empty_results_on_count_content_items()
+    public function it_should_return_empty_results_on_count_content_items(): void
     {
         $result = $this->countContentItems(new Content([]), 'any');
         $result->shouldBe(0);
     }
 
-    public function it_should_return_empty_results_on_load_content_items()
+    public function it_should_return_empty_results_on_load_content_items(): void
     {
         $result = $this->loadContentItems(new Content([]), 'any');
         $result->shouldBe([]);
     }
 
-    public function it_should_return_empty_results_on_load_content_items_slice()
+    public function it_should_return_empty_results_on_load_content_items_slice(): void
     {
         $result = $this->loadContentItemsSlice(new Content([]), 'any', 0, 5);
         $result->shouldBe([]);

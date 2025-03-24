@@ -15,8 +15,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 final class QueryFieldResolver
 {
-    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface */
-    private $queryFieldService;
+    private QueryFieldServiceInterface $queryFieldService;
 
     public function __construct(QueryFieldServiceInterface $queryFieldService)
     {

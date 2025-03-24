@@ -15,10 +15,7 @@ use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
 
 class QueryTypesListPass implements CompilerPassInterface
 {
-    /**
-     * @var \Symfony\Component\Serializer\NameConverter\NameConverterInterface
-     */
-    private $nameConverter;
+    private CamelCaseToSnakeCaseNameConverter $nameConverter;
 
     public function __construct()
     {

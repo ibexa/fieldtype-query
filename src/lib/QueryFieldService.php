@@ -26,14 +26,11 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
  */
 final class QueryFieldService implements QueryFieldServiceInterface, QueryFieldLocationService
 {
-    /** @var \Ibexa\Core\QueryType\QueryTypeRegistry */
-    private $queryTypeRegistry;
+    private QueryTypeRegistry $queryTypeRegistry;
 
-    /** @var \Ibexa\Contracts\Core\Repository\SearchService */
-    private $searchService;
+    private SearchService $searchService;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
-    private $contentTypeService;
+    private ContentTypeService $contentTypeService;
 
     public function __construct(
         SearchService $searchService,
@@ -146,7 +143,7 @@ final class QueryFieldService implements QueryFieldServiceInterface, QueryFieldL
     /**
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException if $expression is not an expression.
      */
-    private function resolveExpression(string $expression, array $variables)
+    private function resolveExpression(string $expression, array $variables): mixed
     {
         if (!$this->isExpression($expression)) {
             throw new InvalidArgumentException('expression', 'is not an expression');

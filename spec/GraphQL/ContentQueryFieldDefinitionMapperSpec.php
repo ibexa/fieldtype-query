@@ -26,7 +26,7 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
         FieldDefinitionMapper $innerMapper,
         NameHelper $nameHelper,
         ContentTypeService $contentTypeService
-    ) {
+    ): void {
         $contentType = new ContentType(['identifier' => self::RETURNED_CONTENT_TYPE_IDENTIFIER]);
 
         $contentTypeService
@@ -40,13 +40,13 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
         $this->beConstructedWith($innerMapper, $nameHelper, $contentTypeService, self::FIELD_TYPE_IDENTIFIER);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ContentQueryFieldDefinitionMapper::class);
         $this->shouldHaveType(FieldDefinitionMapper::class);
     }
 
-    public function it_returns_as_value_type_the_configured_ContentType_for_query_field_definitions(FieldDefinitionMapper $innerMapper)
+    public function it_returns_as_value_type_the_configured_ContentType_for_query_field_definitions(FieldDefinitionMapper $innerMapper): void
     {
         $fieldDefinition = $this->fieldDefinition();
         $innerMapper->mapToFieldValueType($fieldDefinition)->shouldNotBeCalled();
@@ -55,7 +55,7 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
             ->shouldBe('[' . self::GRAPHQL_TYPE . ']');
     }
 
-    public function it_delegates_value_type_to_the_inner_mapper_for_a_non_query_field_definition(FieldDefinitionMapper $innerMapper)
+    public function it_delegates_value_type_to_the_inner_mapper_for_a_non_query_field_definition(FieldDefinitionMapper $innerMapper): void
     {
         $fieldDefinition = $this->getLambdaFieldDefinition();
         $innerMapper->mapToFieldValueType($fieldDefinition)->willReturn('SomeType');
@@ -64,7 +64,7 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
             ->shouldBe('SomeType');
     }
 
-    public function it_returns_the_correct_field_definition_GraphQL_type(FieldDefinitionMapper $innerMapper)
+    public function it_returns_the_correct_field_definition_GraphQL_type(FieldDefinitionMapper $innerMapper): void
     {
         $fieldDefinition = $this->fieldDefinition();
         $innerMapper->mapToFieldDefinitionType($fieldDefinition)->shouldNotBeCalled();
@@ -73,7 +73,7 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
             ->shouldBe('ContentQueryFieldDefinition');
     }
 
-    public function it_delegates_field_definition_type_to_the_parent_mapper_for_a_non_query_field_definition(FieldDefinitionMapper $innerMapper)
+    public function it_delegates_field_definition_type_to_the_parent_mapper_for_a_non_query_field_definition(FieldDefinitionMapper $innerMapper): void
     {
         $fieldDefinition = $this->getLambdaFieldDefinition();
         $innerMapper->mapToFieldDefinitionType($fieldDefinition)->willReturn('FieldValue');
@@ -82,7 +82,7 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
             ->shouldBe('FieldValue');
     }
 
-    public function it_maps_the_field_value_when_pagination_is_disabled(FieldDefinitionMapper $innerMapper)
+    public function it_maps_the_field_value_when_pagination_is_disabled(FieldDefinitionMapper $innerMapper): void
     {
         $fieldDefinition = $this->fieldDefinition();
         $innerMapper->mapToFieldValueResolver($fieldDefinition)->shouldNotBeCalled();
@@ -91,7 +91,7 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
             ->shouldBe('@=resolver("QueryFieldValue", [field, content])');
     }
 
-    public function it_maps_the_field_value_when_pagination_is_enabled(FieldDefinitionMapper $innerMapper)
+    public function it_maps_the_field_value_when_pagination_is_enabled(FieldDefinitionMapper $innerMapper): void
     {
         $fieldDefinition = $this->fieldDefinition(true);
         $innerMapper->mapToFieldValueResolver($fieldDefinition)->shouldNotBeCalled();
@@ -120,7 +120,7 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
     /**
      * @return \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
      */
-    protected function getLambdaFieldDefinition(): \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
+    protected function getLambdaFieldDefinition(): FieldDefinition
     {
         return new FieldDefinition(['fieldTypeIdentifier' => 'lambda']);
     }

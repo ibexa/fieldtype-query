@@ -29,18 +29,18 @@ class QueryFieldServiceSpec extends ObjectBehavior
     public const QUERY_TYPE_IDENTIFIER = 'query_type_identifier';
     public const FIELD_DEFINITION_IDENTIFIER = 'test';
 
-    private $searchResult;
+    private ?SearchResult $searchResult = null;
 
-    private $searchHits;
+    private ?array $searchHits = null;
 
-    private $totalCount = 0;
+    private int $totalCount = 0;
 
     public function let(
         SearchService $searchService,
         ContentTypeService $contentTypeService,
         QueryTypeRegistry $queryTypeRegistry,
         QueryType $queryType
-    ) {
+    ): void {
         $this->searchHits = [];
         $this->searchResult = new SearchResult(['searchHits' => $this->searchHits, 'totalCount' => $this->totalCount]);
 
@@ -62,22 +62,22 @@ class QueryFieldServiceSpec extends ObjectBehavior
         $this->beConstructedWith($searchService, $contentTypeService, $queryTypeRegistry);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(QueryFieldService::class);
     }
 
-    public function it_loads_items_from_a_query_field_for_a_given_content_item()
+    public function it_loads_items_from_a_query_field_for_a_given_content_item(): void
     {
         $this->loadContentItems($this->getContent(), self::FIELD_DEFINITION_IDENTIFIER)->shouldBe($this->searchHits);
     }
 
-    public function it_counts_items_from_a_query_field_for_a_given_content_item()
+    public function it_counts_items_from_a_query_field_for_a_given_content_item(): void
     {
         $this->countContentItems($this->getContent(), self::FIELD_DEFINITION_IDENTIFIER)->shouldBe($this->totalCount);
     }
 
-    public function it_deducts_any_offset_when_counting_results(QueryType $queryType, SearchService $searchService)
+    public function it_deducts_any_offset_when_counting_results(QueryType $queryType, SearchService $searchService): void
     {
         $query = new ApiContentQuery();
         $query->offset = 5;
@@ -90,7 +90,7 @@ class QueryFieldServiceSpec extends ObjectBehavior
         $this->countContentItems($this->getContent(), self::FIELD_DEFINITION_IDENTIFIER)->shouldBe(2);
     }
 
-    public function it_returns_zero_if_offset_is_bigger_than_count(QueryType $queryType, SearchService $searchService)
+    public function it_returns_zero_if_offset_is_bigger_than_count(QueryType $queryType, SearchService $searchService): void
     {
         $query = new ApiContentQuery();
         $query->offset = 8;
@@ -103,7 +103,7 @@ class QueryFieldServiceSpec extends ObjectBehavior
         $this->countContentItems($this->getContent(), self::FIELD_DEFINITION_IDENTIFIER)->shouldBe(0);
     }
 
-    public function it_returns_0_as_pagination_configuration_if_pagination_is_disabled()
+    public function it_returns_0_as_pagination_configuration_if_pagination_is_disabled(): void
     {
         $this->getPaginationConfiguration(
             $this->getContent(self::CONTENT_TYPE_ID_WITHOUT_PAGINATION),
@@ -111,7 +111,7 @@ class QueryFieldServiceSpec extends ObjectBehavior
         )->shouldBe(0);
     }
 
-    public function it_returns_the_items_per_page_number_as_pagination_configuration_if_pagination_is_enabled()
+    public function it_returns_the_items_per_page_number_as_pagination_configuration_if_pagination_is_enabled(): void
     {
         $this->getPaginationConfiguration(
             $this->getContent(),
@@ -142,7 +142,7 @@ class QueryFieldServiceSpec extends ObjectBehavior
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
      */
-    private function getContentType(array $parameters, bool $enablePagination = true, $itemsPerPage = 10): ContentType
+    private function getContentType(array $parameters, bool $enablePagination = true, int $itemsPerPage = 10): ContentType
     {
         $contentType = new Values\ContentType\ContentType([
             'fieldDefinitions' => new Values\ContentType\FieldDefinitionCollection([

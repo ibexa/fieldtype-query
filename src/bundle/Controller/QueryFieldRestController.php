@@ -19,21 +19,18 @@ use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\FieldTypeQuery\QueryFieldService;
 use function Ibexa\PolyfillPhp82\iterator_to_array;
 use Ibexa\Rest\Server\Values as RestValues;
+use Ibexa\Rest\Server\Values\RestContent;
 use Symfony\Component\HttpFoundation\Request;
 
 final class QueryFieldRestController
 {
-    /** @var \Ibexa\FieldTypeQuery\QueryFieldService */
-    private $queryFieldService;
+    private QueryFieldService $queryFieldService;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentService */
-    private $contentService;
+    private ContentService $contentService;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
-    private $contentTypeService;
+    private ContentTypeService $contentTypeService;
 
-    /** @var \Ibexa\Contracts\Core\Repository\LocationService */
-    private $locationService;
+    private LocationService $locationService;
 
     private UriParserInterface $uriParser;
 
@@ -92,8 +89,8 @@ final class QueryFieldRestController
 
         return new RestValues\ContentList(
             array_map(
-                function (Content $content) {
-                    return new RestValues\RestContent(
+                function (Content $content): RestContent {
+                    return new RestContent(
                         $content->contentInfo,
                         $this->locationService->loadLocation($content->contentInfo->mainLocationId),
                         $content,

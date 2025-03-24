@@ -30,7 +30,7 @@ class FieldDefinitionIdentifierMatcherSpec extends ObjectBehavior
 
     public const FIELD_DEFINITION_IDENTIFIER = 'field_definition';
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(FieldDefinitionIdentifierMatcher::class);
         $this->shouldHaveType(ViewMatcherInterface::class);
@@ -45,7 +45,7 @@ class FieldDefinitionIdentifierMatcherSpec extends ObjectBehavior
         return  $matcher;
     }
 
-    public function let(Repository $repository, ContentTypeService $contentTypeService)
+    public function let(Repository $repository, ContentTypeService $contentTypeService): void
     {
         $repository->getContentTypeService()->willReturn($contentTypeService);
         $contentTypeService->loadContentType(self::CONTENT_TYPE_ID_WITHOUT_FIELD_DEFINITION)->willReturn($this->createContentTypeWithoutFieldDefinition());
@@ -53,19 +53,19 @@ class FieldDefinitionIdentifierMatcherSpec extends ObjectBehavior
         $this->beConstructedThrough([$this, 'initialize'], [$repository, [self::FIELD_DEFINITION_IDENTIFIER]]);
     }
 
-    public function it_does_not_match_if_field_definition_identifier_does_not_exist()
+    public function it_does_not_match_if_field_definition_identifier_does_not_exist(): void
     {
         $view = $this->buildView(self::CONTENT_TYPE_ID_WITHOUT_FIELD_DEFINITION);
         $this->match($view)->shouldBe(false);
     }
 
-    public function it_matches_if_field_definition_identifier_matches()
+    public function it_matches_if_field_definition_identifier_matches(): void
     {
         $view = $this->buildView(self::CONTENT_TYPE_ID_WITH_FIELD_DEFINITION);
         $this->match($view)->shouldBe(true);
     }
 
-    private function buildView($contentTypeId): ContentView
+    private function buildView(int $contentTypeId): ContentView
     {
         $view = new ContentView();
         $view->setContent(
