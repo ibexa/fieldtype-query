@@ -17,17 +17,17 @@ class QueryFieldResolverSpec extends ObjectBehavior
 {
     public const FIELD_DEFINITION_IDENTIFIER = 'test';
 
-    public function let(QueryFieldServiceInterface $queryFieldService)
+    public function let(QueryFieldServiceInterface $queryFieldService): void
     {
         $this->beConstructedWith($queryFieldService);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(QueryFieldResolver::class);
     }
 
-    public function it_resolves_a_query_field(QueryFieldServiceInterface $queryFieldService)
+    public function it_resolves_a_query_field(QueryFieldServiceInterface $queryFieldService): void
     {
         $content = new Content();
         $field = new Field(['fieldDefIdentifier' => self::FIELD_DEFINITION_IDENTIFIER, 'value' => new \stdClass()]);

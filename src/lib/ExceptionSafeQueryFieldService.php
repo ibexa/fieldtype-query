@@ -24,7 +24,7 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
     use LoggerAwareTrait;
 
     /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface&\Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService */
-    private $inner;
+    private QueryFieldServiceInterface $inner;
 
     public function __construct(QueryFieldServiceInterface $inner, ?LoggerInterface $logger = null)
     {

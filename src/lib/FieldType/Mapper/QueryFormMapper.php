@@ -16,15 +16,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class QueryFormMapper implements FieldDefinitionFormMapperInterface
 {
-    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
-    private $contentTypeService;
+    private ContentTypeService $contentTypeService;
 
     /**
      * List of query types.
      *
      * @var array<int|string, string>
      */
-    private $queryTypes;
+    private array $queryTypes;
 
     /**
      * @param array<int|string, string> $queryTypes
@@ -35,6 +34,9 @@ final class QueryFormMapper implements FieldDefinitionFormMapperInterface
         $this->queryTypes = $queryTypes;
     }
 
+    /**
+     * @param \Symfony\Component\Form\FormInterface<mixed> $fieldDefinitionForm
+     */
     public function mapFieldDefinitionForm(FormInterface $fieldDefinitionForm, FieldDefinitionData $data): void
     {
         $parametersForm = $fieldDefinitionForm->getConfig()->getFormFactory()->createBuilder()
