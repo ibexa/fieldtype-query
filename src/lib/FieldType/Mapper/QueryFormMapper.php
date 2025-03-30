@@ -34,6 +34,9 @@ final class QueryFormMapper implements FieldDefinitionFormMapperInterface
         $this->queryTypes = $queryTypes;
     }
 
+    /**
+     * @param \Symfony\Component\Form\FormInterface<mixed> $fieldDefinitionForm
+     */
     public function mapFieldDefinitionForm(FormInterface $fieldDefinitionForm, FieldDefinitionData $data): void
     {
         $parametersForm = $fieldDefinitionForm->getConfig()->getFormFactory()->createBuilder()

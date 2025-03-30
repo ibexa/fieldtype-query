@@ -78,9 +78,8 @@ final class QueryFieldRestController
                 $items = $this->queryFieldService->loadContentItemsSliceForLocation($location, $fieldDefinitionIdentifier, $offset, $limit);
             }
         } else {
-            $location = null;
             $content = $this->contentService->loadContent($contentId, null, $versionNumber);
-            if ($limit === -1 || !method_exists($this->queryFieldService, 'loadContentItemsSlice')) {
+            if ($limit === -1) {
                 $items = $this->queryFieldService->loadContentItems($content, $fieldDefinitionIdentifier);
             } else {
                 $items = $this->queryFieldService->loadContentItemsSlice($content, $fieldDefinitionIdentifier, $offset, $limit);

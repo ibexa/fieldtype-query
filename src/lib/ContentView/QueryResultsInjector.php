@@ -102,7 +102,7 @@ final class QueryResultsInjector implements EventSubscriberInterface
             $paginationLimit = $viewParameters['itemsPerPage'];
         }
 
-        if (($enablePagination === true) && (!is_numeric($paginationLimit) || $paginationLimit === 0)) {
+        if (($enablePagination === true) && (!$paginationLimit || $paginationLimit <= 0)) {
             throw new \InvalidArgumentException("The 'itemsPerPage' parameter must be given with a positive integer value if 'enablePagination' is set");
         }
 
