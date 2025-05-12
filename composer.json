@@ -15,14 +15,14 @@
         "ibexa/graphql": "~5.0.x-dev",
         "ibexa/rector": "~5.0.x-dev",
         "ibexa/rest": "~5.0.x-dev",
-        "psr/log": "^1.1",
-        "symfony/dependency-injection": "^6.4",
-        "symfony/event-dispatcher": "^6.4",
-        "symfony/expression-language": "^6.4",
-        "symfony/framework-bundle": "^6.4",
-        "symfony/http-kernel": "^6.4",
-        "symfony/translation": "^6.4",
-        "symfony/yaml": "^6.4"
+        "psr/log": "^3.0",
+        "symfony/dependency-injection": "^7.2",
+        "symfony/event-dispatcher": "^7.2",
+        "symfony/expression-language": "^7.2",
+        "symfony/framework-bundle": "^7.2",
+        "symfony/http-kernel": "^7.2",
+        "symfony/translation": "^7.2",
+        "symfony/yaml": "^7.2"
     },
     "autoload": {
         "psr-4": {

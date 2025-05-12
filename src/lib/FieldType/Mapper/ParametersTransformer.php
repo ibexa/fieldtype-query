@@ -15,7 +15,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 final class ParametersTransformer implements DataTransformerInterface
 {
-    public function transform($value)
+    public function transform($value): ?string
     {
         if ($value === null) {
             return null;
@@ -24,7 +24,7 @@ final class ParametersTransformer implements DataTransformerInterface
         return Yaml::dump($value, 2, 4);
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform($value): mixed
     {
         if ($value === null) {
             return null;
