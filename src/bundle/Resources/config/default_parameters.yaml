@@ -1,4 +1,5 @@
 parameters:
     ibexa.field_type.query.content.view.field: 'content_query_field'
     ibexa.field_type.query.content.view.item: 'line'
-    ibexa.field_type.query.content.identifier: 'ezcontentquery'
+    ibexa.field_type.query.content.identifier: 'ibexa_content_query'
+    ibexa.field_type.query.content.legacy_identifier: 'ezcontentquery'

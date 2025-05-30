@@ -1,14 +1,14 @@
 {% extends '@IbexaCore/content_fields.html.twig' %}
 
-{% block ezcontentquery_field %}
+{% block ibexa_content_query_field %}
 {{ render(controller(
     "ibexa_content::viewAction",
     {
         "content": content,
         "location": location ?? null,
         "queryFieldDefinitionIdentifier": field.fieldDefIdentifier,
-        "viewType": ezContentQueryViews['field'],
-        "itemViewType": itemViewType|default(ezContentQueryViews['item']),
+        "viewType": ibexaContentQueryViews['field'],
+        "itemViewType": itemViewType|default(ibexaContentQueryViews['item']),
         "enablePagination": parameters.enablePagination|default(false),
         "disablePagination": parameters.disablePagination|default(false),
         "itemsPerPage": parameters.itemsPerPage|default(false)
