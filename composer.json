@@ -47,6 +47,7 @@
         "ibexa/phpstan": "~5.0.0@dev",
         "ibexa/search": "~5.0.x-dev",
         "ibexa/user": "~5.0.x-dev",
+        "ibexa/twig-components": "~5.0.x-dev",
         "phpspec/phpspec": "^7.1",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
