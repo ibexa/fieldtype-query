@@ -10,7 +10,7 @@ services:
         autowire: true
         autoconfigure: false
         tags:
-            - { name: ibexa.field_type, alias: '%ibexa.field_type.query.content.identifier%' }
+            - { name: ibexa.field_type, alias: '%ibexa.field_type.query.content.identifier%', legacy_alias: '%ibexa.field_type.query.content.legacy_identifier%' }
         arguments:
             $queryTypeRegistry: '@Ibexa\Core\QueryType\ArrayQueryTypeRegistry'
             $identifier: '%ibexa.field_type.query.content.identifier%'

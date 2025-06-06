@@ -148,7 +148,7 @@ class QueryFieldServiceSpec extends ObjectBehavior
             'fieldDefinitions' => new Values\ContentType\FieldDefinitionCollection([
                 new Values\ContentType\FieldDefinition([
                     'identifier' => self::FIELD_DEFINITION_IDENTIFIER,
-                    'fieldTypeIdentifier' => 'ezcontentquery',
+                    'fieldTypeIdentifier' => 'ibexa_content_query',
                     'fieldSettings' => [
                         'ReturnedType' => 'folder',
                         'QueryType' => self::QUERY_TYPE_IDENTIFIER,

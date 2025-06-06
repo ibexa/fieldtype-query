@@ -204,7 +204,7 @@ final class Type extends FieldType implements TranslationContainerInterface
     public static function getTranslationMessages(): array
     {
         return [
-            Message::create('ezcontentquery.name', 'ibexa_fieldtypes')->setDesc('Content query'),
+            Message::create('ibexa_content_query.name', 'ibexa_fieldtypes')->setDesc('Content query'),
         ];
     }
 }

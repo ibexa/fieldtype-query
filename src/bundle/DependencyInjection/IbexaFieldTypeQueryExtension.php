@@ -63,7 +63,7 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
     {
         $views = Yaml::parseFile(__DIR__ . '/../Resources/config/default_parameters.yaml')['parameters'];
         $twigGlobals = [
-            'ezContentQueryViews' => [
+            'ibexaContentQueryViews' => [
                 'field' => $views['ibexa.field_type.query.content.view.field'],
                 'item' => $views['ibexa.field_type.query.content.view.item'],
             ],

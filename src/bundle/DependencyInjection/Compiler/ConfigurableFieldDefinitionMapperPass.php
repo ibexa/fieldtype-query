@@ -28,7 +28,7 @@ class ConfigurableFieldDefinitionMapperPass implements CompilerPassInterface
         if (!is_array($parameter)) {
             return;
         }
-        $parameter['ezcontentquery'] = [
+        $parameter['ibexa_content_query'] = [
             'definition_type' => 'QueryFieldDefinition',
             'value_resolver' => 'resolver("QueryFieldValue", [field, content])',
         ];

@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
 class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
 {
     public const FIELD_IDENTIFIER = 'test';
-    public const FIELD_TYPE_IDENTIFIER = 'ezcontentquery';
+    public const FIELD_TYPE_IDENTIFIER = 'ibexa_content_query';
     public const RETURNED_CONTENT_TYPE_IDENTIFIER = 'folder';
     public const GRAPHQL_TYPE = 'FolderContent';
 
