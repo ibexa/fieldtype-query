@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Bundle\FieldTypeQuery\DependencyInjection\Compiler;
 
@@ -14,22 +15,22 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Replaces the short alias 'Identifier\FieldDefinition' by the matcher's service.
  */
-class FieldDefinitionIdentifierViewMatcherPass implements CompilerPassInterface
+final class FieldDefinitionIdentifierViewMatcherPass implements CompilerPassInterface
 {
-    private const LONG_IDENTIFIER = '@' . FieldDefinitionIdentifierMatcher::class;
-    private const SHORT_IDENTIFIER = 'Identifier\FieldDefinition';
+    private const string LONG_IDENTIFIER = '@' . FieldDefinitionIdentifierMatcher::class;
+    private const string SHORT_IDENTIFIER = 'Identifier\FieldDefinition';
 
     public function process(ContainerBuilder $container): void
     {
         $configKeys = array_filter(
             array_keys($container->getParameterBag()->all()),
-            static function ($parameterName): int|false {
+            static function (string $parameterName): int|false {
                 return preg_match('/ibexa.site_access.config\..+\.content_view/', $parameterName);
             }
         );
 
         foreach ($configKeys as $configKey) {
-            $configuration = $container->getParameter($configKey);
+            $configuration = $container->getParameter($configKey) ?? [];
             foreach ($configuration as $viewType => $viewConfigurations) {
                 foreach ($viewConfigurations as $viewConfigurationName => $viewConfiguration) {
                     if (isset($viewConfiguration['match'][self::SHORT_IDENTIFIER])) {

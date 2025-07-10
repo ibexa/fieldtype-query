@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\FieldTypeQuery\FieldType\Query;
 
@@ -17,6 +18,7 @@ use Ibexa\Core\FieldType\FieldType;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as BaseValue;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
+use Ibexa\FieldTypeQuery\FieldType\Query\Value as FieldTypeQueryValue;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 
@@ -32,32 +34,24 @@ final class Type extends FieldType implements TranslationContainerInterface
         'ItemsPerPage' => ['type' => 'integer', 'default' => 10],
     ];
 
-    private QueryTypeRegistry $queryTypeRegistry;
-
-    private ContentTypeService $contentTypeService;
-
-    private string $identifier;
-
-    public function __construct(QueryTypeRegistry $queryTypeRegistry, ContentTypeService $contentTypeService, string $identifier)
-    {
-        $this->queryTypeRegistry = $queryTypeRegistry;
-        $this->contentTypeService = $contentTypeService;
-        $this->identifier = $identifier;
+    public function __construct(
+        private readonly QueryTypeRegistry $queryTypeRegistry,
+        private readonly ContentTypeService $contentTypeService,
+        private readonly string $identifier
+    ) {
     }
 
-    public function validateValidatorConfiguration($validatorConfiguration)
-    {
-        $validationErrors = [];
-
-        return $validationErrors;
-    }
-
-    public function validate(FieldDefinition $fieldDefinition, SPIValue $fieldValue)
+    public function validateValidatorConfiguration($validatorConfiguration): array
     {
         return [];
     }
 
-    public function getFieldTypeIdentifier()
+    public function validate(FieldDefinition $fieldDefinition, SPIValue $fieldValue): array
+    {
+        return [];
+    }
+
+    public function getFieldTypeIdentifier(): string
     {
         return $this->identifier;
     }
@@ -70,9 +64,6 @@ final class Type extends FieldType implements TranslationContainerInterface
         return (string)$value->text;
     }
 
-    /**
-     * @return \Ibexa\FieldTypeQuery\FieldType\Query\Value
-     */
     public function getEmptyValue(): BaseValue
     {
         return new Value();
@@ -83,7 +74,7 @@ final class Type extends FieldType implements TranslationContainerInterface
         return false;
     }
 
-    protected function createValueFromInput($inputValue)
+    protected function createValueFromInput($inputValue): mixed
     {
         if (is_string($inputValue)) {
             $inputValue = new Value($inputValue);
@@ -115,17 +106,16 @@ final class Type extends FieldType implements TranslationContainerInterface
      */
     protected function getSortInfo(BaseValue $value)
     {
-        return $this->transformationProcessor->transformByGroup((string)$value, 'lowercase');
+        return $this->transformationProcessor->transformByGroup(
+            (string)$value,
+            'lowercase'
+        );
     }
 
     /**
      * Converts an $hash to the Value defined by the field type.
-     *
-     * @param mixed $hash
-     *
-     * @return \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
      */
-    public function fromHash($hash)
+    public function fromHash(mixed $hash): FieldTypeQueryValue|BaseValue
     {
         if ($hash === null) {
             return $this->getEmptyValue();
@@ -138,10 +128,8 @@ final class Type extends FieldType implements TranslationContainerInterface
      * Converts a $Value to a hash.
      *
      * @param \Ibexa\Core\FieldType\TextLine\Value $value
-     *
-     * @return mixed
      */
-    public function toHash(SPIValue $value)
+    public function toHash(SPIValue $value): mixed
     {
         if ($this->isEmptyValue($value)) {
             return null;
@@ -150,17 +138,12 @@ final class Type extends FieldType implements TranslationContainerInterface
         return $value->text;
     }
 
-    /**
-     * Returns whether the field type is searchable.
-     *
-     * @return bool
-     */
-    public function isSearchable()
+    public function isSearchable(): false
     {
         return false;
     }
 
-    public function validateFieldSettings($fieldSettings)
+    public function validateFieldSettings($fieldSettings): array
     {
         $errors = [];
 

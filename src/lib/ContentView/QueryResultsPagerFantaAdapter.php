@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\FieldTypeQuery\ContentView;
 
@@ -12,24 +13,15 @@ use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Pagerfanta\Adapter\AdapterInterface;
 
 /**
- * @implements AdapterInterface<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
+ * @implements \Pagerfanta\Adapter\AdapterInterface<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
  */
-final class QueryResultsPagerFantaAdapter implements AdapterInterface
+final readonly class QueryResultsPagerFantaAdapter implements AdapterInterface
 {
-    private QueryFieldServiceInterface $queryFieldService;
-
-    private Content $content;
-
-    private string $fieldDefinitionIdentifier;
-
     public function __construct(
-        QueryFieldServiceInterface $queryFieldService,
-        Content $content,
-        string $fieldDefinitionIdentifier
+        private QueryFieldServiceInterface $queryFieldService,
+        private Content $content,
+        private string $fieldDefinitionIdentifier
     ) {
-        $this->queryFieldService = $queryFieldService;
-        $this->content = $content;
-        $this->fieldDefinitionIdentifier = $fieldDefinitionIdentifier;
     }
 
     public function getNbResults(): int
@@ -40,6 +32,9 @@ final class QueryResultsPagerFantaAdapter implements AdapterInterface
         ), 0);
     }
 
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     */
     public function getSlice($offset, $length): iterable
     {
         return $this->queryFieldService->loadContentItemsSlice(

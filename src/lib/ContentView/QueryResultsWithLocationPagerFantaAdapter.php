@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\FieldTypeQuery\ContentView;
 
@@ -12,24 +13,15 @@ use Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService;
 use Pagerfanta\Adapter\AdapterInterface;
 
 /**
- * @implements AdapterInterface<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
+ * @implements \Pagerfanta\Adapter\AdapterInterface<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
  */
-final class QueryResultsWithLocationPagerFantaAdapter implements AdapterInterface
+final readonly class QueryResultsWithLocationPagerFantaAdapter implements AdapterInterface
 {
-    private QueryFieldLocationService $queryFieldService;
-
-    private Location $location;
-
-    private string $fieldDefinitionIdentifier;
-
     public function __construct(
-        QueryFieldLocationService $queryFieldService,
-        Location $location,
-        string $fieldDefinitionIdentifier
+        private QueryFieldLocationService $queryFieldService,
+        private Location $location,
+        private string $fieldDefinitionIdentifier
     ) {
-        $this->queryFieldService = $queryFieldService;
-        $this->location = $location;
-        $this->fieldDefinitionIdentifier = $fieldDefinitionIdentifier;
     }
 
     public function getNbResults(): int

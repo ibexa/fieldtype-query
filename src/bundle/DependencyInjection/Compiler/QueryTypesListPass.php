@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Bundle\FieldTypeQuery\DependencyInjection\Compiler;
 
@@ -13,7 +14,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 
-class QueryTypesListPass implements CompilerPassInterface
+final class QueryTypesListPass implements CompilerPassInterface
 {
     private CamelCaseToSnakeCaseNameConverter $nameConverter;
 
@@ -44,7 +45,7 @@ class QueryTypesListPass implements CompilerPassInterface
     }
 
     /**
-     * Builds a human readable name out of a query type identifier.
+     * Builds a human-readable name out of a query type identifier.
      */
     private function buildQueryTypeName(string $queryTypeIdentifier): string
     {

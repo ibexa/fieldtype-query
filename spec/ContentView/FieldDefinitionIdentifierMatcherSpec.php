@@ -4,8 +4,9 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
-namespace spec\Ibexa\FieldTypeQuery\ContentView;
+namespace spec\Ibexa\FieldTypeQuery\spec\ContentView;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Repository;
@@ -20,15 +21,15 @@ use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Ibexa\FieldTypeQuery\ContentView\FieldDefinitionIdentifierMatcher;
 use PhpSpec\ObjectBehavior;
 
-class FieldDefinitionIdentifierMatcherSpec extends ObjectBehavior
+final class FieldDefinitionIdentifierMatcherSpec extends ObjectBehavior
 {
-    private const CONTENT_TYPE_ID_WITHOUT_FIELD_DEFINITION = 2;
-    private const CONTENT_TYPE_IDENTIFIER_WITHOUT_FIELD_DEFINITION = 'type_matching_without_field_def';
+    private const int CONTENT_TYPE_ID_WITHOUT_FIELD_DEFINITION = 2;
+    private const string CONTENT_TYPE_IDENTIFIER_WITHOUT_FIELD_DEFINITION = 'type_matching_without_field_def';
 
-    private const CONTENT_TYPE_ID_WITH_FIELD_DEFINITION = 3;
-    private const CONTENT_TYPE_IDENTIFIER_WITH_FIELD_DEFINITION = 'type_matching_with_field_def';
+    private const int CONTENT_TYPE_ID_WITH_FIELD_DEFINITION = 3;
+    private const string CONTENT_TYPE_IDENTIFIER_WITH_FIELD_DEFINITION = 'type_matching_with_field_def';
 
-    public const FIELD_DEFINITION_IDENTIFIER = 'field_definition';
+    public const string FIELD_DEFINITION_IDENTIFIER = 'field_definition';
 
     public function it_is_initializable(): void
     {

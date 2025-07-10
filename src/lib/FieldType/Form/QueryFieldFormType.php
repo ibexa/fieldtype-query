@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\FieldTypeQuery\FieldType\Form;
 
@@ -16,13 +17,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @phpstan-extends \Symfony\Component\Form\AbstractType<string>
  */
-class QueryFieldFormType extends AbstractType
+final class QueryFieldFormType extends AbstractType
 {
-    private FieldTypeService $fieldTypeService;
-
-    public function __construct(FieldTypeService $fieldTypeService)
+    public function __construct(private readonly FieldTypeService $fieldTypeService)
     {
-        $this->fieldTypeService = $fieldTypeService;
     }
 
     public function getName(): string
@@ -35,13 +33,17 @@ class QueryFieldFormType extends AbstractType
         return 'ezplatform_fieldtype_query';
     }
 
-    public function getParent(): ?string
+    public function getParent(): string
     {
         return TextType::class;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addModelTransformer(new FieldValueTransformer($this->fieldTypeService->getFieldType('ibexa_content_query')));
+        $builder->addModelTransformer(
+            new FieldValueTransformer(
+                $this->fieldTypeService->getFieldType('ibexa_content_query')
+            )
+        );
     }
 }

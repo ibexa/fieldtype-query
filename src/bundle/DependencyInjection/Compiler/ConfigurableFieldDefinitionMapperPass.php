@@ -14,9 +14,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * Adds the configuration for the query field type to the ibexa.graphql.schema.content.mapping.field_definition_type
  * configuration variable.
  */
-class ConfigurableFieldDefinitionMapperPass implements CompilerPassInterface
+final class ConfigurableFieldDefinitionMapperPass implements CompilerPassInterface
 {
-    public const PARAMETER = 'ibexa.graphql.schema.content.mapping.field_definition_type';
+    public const string PARAMETER = 'ibexa.graphql.schema.content.mapping.field_definition_type';
 
     public function process(ContainerBuilder $container): void
     {

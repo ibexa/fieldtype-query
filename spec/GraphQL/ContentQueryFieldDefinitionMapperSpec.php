@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace spec\Ibexa\FieldTypeQuery\GraphQL;
 
@@ -15,12 +16,12 @@ use Ibexa\FieldTypeQuery\GraphQL\ContentQueryFieldDefinitionMapper;
 use Ibexa\GraphQL\Schema\Domain\Content\NameHelper;
 use PhpSpec\ObjectBehavior;
 
-class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
+final class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
 {
-    public const FIELD_IDENTIFIER = 'test';
-    public const FIELD_TYPE_IDENTIFIER = 'ibexa_content_query';
-    public const RETURNED_CONTENT_TYPE_IDENTIFIER = 'folder';
-    public const GRAPHQL_TYPE = 'FolderContent';
+    public const string FIELD_IDENTIFIER = 'test';
+    public const string FIELD_TYPE_IDENTIFIER = 'ibexa_content_query';
+    public const string RETURNED_CONTENT_TYPE_IDENTIFIER = 'folder';
+    public const string GRAPHQL_TYPE = 'FolderContent';
 
     public function let(
         FieldDefinitionMapper $innerMapper,
@@ -100,11 +101,6 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
             ->shouldBe('@=resolver("QueryFieldValueConnection", [args, field, content])');
     }
 
-    /**
-     * @param bool $enablePagination
-     *
-     * @return \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
-     */
     private function fieldDefinition(bool $enablePagination = false): FieldDefinition
     {
         return new FieldDefinition([
@@ -117,9 +113,6 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
         ]);
     }
 
-    /**
-     * @return \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
-     */
     protected function getLambdaFieldDefinition(): FieldDefinition
     {
         return new FieldDefinition(['fieldTypeIdentifier' => 'lambda']);
