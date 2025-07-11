@@ -72,7 +72,13 @@ final class FieldDefinitionIdentifierMatcherSpec extends ObjectBehavior
         $view->setContent(
             new Content([
                 'versionInfo' => new VersionInfo([
-                    'contentInfo' => new ContentInfo(['contentTypeId' => $contentTypeId]),
+                    'contentInfo' => new ContentInfo([
+                        'contentTypeId' => $contentTypeId,
+                        'contentType' => new ContentType([
+                            'id' => $contentTypeId,
+                            'identifier' => 'foo_content_type',
+                        ]),
+                    ]),
                 ]),
             ])
         );
