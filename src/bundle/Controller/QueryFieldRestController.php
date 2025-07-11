@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Bundle\FieldTypeQuery\Controller;
 
@@ -22,36 +23,24 @@ use Ibexa\Rest\Server\Values as RestValues;
 use Ibexa\Rest\Server\Values\RestContent;
 use Symfony\Component\HttpFoundation\Request;
 
-final class QueryFieldRestController
+final readonly class QueryFieldRestController
 {
-    private QueryFieldService $queryFieldService;
-
-    private ContentService $contentService;
-
-    private ContentTypeService $contentTypeService;
-
-    private LocationService $locationService;
-
-    private UriParserInterface $uriParser;
-
-    private ContentService\RelationListFacadeInterface $relationListFacade;
-
     public function __construct(
-        QueryFieldService $queryFieldService,
-        ContentService $contentService,
-        ContentTypeService $contentTypeService,
-        LocationService $locationService,
-        UriParserInterface $uriParser,
-        ContentService\RelationListFacadeInterface $relationListFacade
+        private QueryFieldService $queryFieldService,
+        private ContentService $contentService,
+        private ContentTypeService $contentTypeService,
+        private LocationService $locationService,
+        private UriParserInterface $uriParser,
+        private ContentService\RelationListFacadeInterface $relationListFacade
     ) {
-        $this->queryFieldService = $queryFieldService;
-        $this->contentService = $contentService;
-        $this->contentTypeService = $contentTypeService;
-        $this->locationService = $locationService;
-        $this->uriParser = $uriParser;
-        $this->relationListFacade = $relationListFacade;
     }
 
+    /**
+     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
     public function getResults(
         Request $request,
         int $contentId,
@@ -89,11 +78,18 @@ final class QueryFieldRestController
         return new RestValues\ContentList(
             array_map(
                 function (Content $content): RestContent {
+                    $contentInfo = $content->getContentInfo();
+                    if ($contentInfo->getMainLocationId() === null) {
+                        throw new NotFoundException(
+                            sprintf('Content with ID "%s" has no main location.', $contentInfo->getId())
+                        );
+                    }
+
                     return new RestContent(
-                        $content->contentInfo,
-                        $this->locationService->loadLocation($content->contentInfo->mainLocationId),
+                        $content->getContentInfo(),
+                        $this->locationService->loadLocation($contentInfo->getMainLocationId()),
                         $content,
-                        $this->getContentType($content->contentInfo),
+                        $this->getContentType($contentInfo),
                         iterator_to_array($this->relationListFacade->getRelations($content->getVersionInfo()))
                     );
                 },
@@ -116,11 +112,19 @@ final class QueryFieldRestController
 
     /**
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     private function loadLocationByPath(Request $request): Location
     {
-        $locationHrefParts = explode('/', $this->uriParser->getAttributeFromUri($request->query->get('location'), 'locationPath'));
+        $locationHrefParts = explode(
+            '/',
+            $this->uriParser->getAttributeFromUri(
+                $request->query->get('location') ?? '',
+                'locationPath'
+            )
+        );
+
         $locationId = array_pop($locationHrefParts);
 
         return $this->locationService->loadLocation((int)$locationId);

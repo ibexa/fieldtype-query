@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Contracts\FieldTypeQuery;
 
@@ -26,7 +27,12 @@ interface QueryFieldLocationService
      *
      * @return iterable<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
      */
-    public function loadContentItemsSliceForLocation(Location $location, string $fieldDefinitionIdentifier, int $offset, int $limit): iterable;
+    public function loadContentItemsSliceForLocation(
+        Location $location,
+        string $fieldDefinitionIdentifier,
+        int $offset,
+        int $limit
+    ): iterable;
 
     /**
      * Counts the results for the given location.

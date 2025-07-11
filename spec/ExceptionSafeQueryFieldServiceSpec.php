@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace spec\Ibexa\FieldTypeQuery;
 
@@ -13,7 +14,7 @@ use Ibexa\FieldTypeQuery\ExceptionSafeQueryFieldService;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class ExceptionSafeQueryFieldServiceSpec extends ObjectBehavior
+final class ExceptionSafeQueryFieldServiceSpec extends ObjectBehavior
 {
     public function let(QueryFieldServiceInterface $queryFieldService): void
     {

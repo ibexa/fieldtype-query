@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace spec\Ibexa\FieldTypeQuery\GraphQL;
 
@@ -13,9 +14,9 @@ use Ibexa\FieldTypeQuery\GraphQL\QueryFieldResolver;
 use Ibexa\GraphQL\Value\Field;
 use PhpSpec\ObjectBehavior;
 
-class QueryFieldResolverSpec extends ObjectBehavior
+final class QueryFieldResolverSpec extends ObjectBehavior
 {
-    public const FIELD_DEFINITION_IDENTIFIER = 'test';
+    public const string FIELD_DEFINITION_IDENTIFIER = 'test';
 
     public function let(QueryFieldServiceInterface $queryFieldService): void
     {

@@ -4,10 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\FieldTypeQuery\ContentView;
 
-use Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService;
+use Exception;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\MVC\Symfony\View\ContentValueView;
@@ -18,24 +19,20 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class QueryResultsInjector implements EventSubscriberInterface
+final readonly class QueryResultsInjector implements EventSubscriberInterface
 {
-    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface&\Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService */
-    private QueryFieldServiceInterface $queryFieldService;
-
-    private array $views;
-
-    private RequestStack $requestStack;
-
-    public function __construct(QueryFieldServiceInterface $queryFieldService, array $views, RequestStack $requestStack)
-    {
+    /**
+     * @param \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface&\Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService $queryFieldService
+     * @param array<string, mixed> $views
+     */
+    public function __construct(
+        private QueryFieldServiceInterface $queryFieldService,
+        private array $views,
+        private RequestStack $requestStack
+    ) {
         if (!isset($views['item']) || !isset($views['field'])) {
             throw new \InvalidArgumentException("Both 'item' and 'field' views must be provided");
         }
-
-        $this->queryFieldService = $queryFieldService;
-        $this->views = $views;
-        $this->requestStack = $requestStack;
     }
 
     public static function getSubscribedEvents(): array
@@ -44,7 +41,7 @@ final class QueryResultsInjector implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function injectQueryResults(FilterViewParametersEvent $event): void
     {
@@ -67,11 +64,10 @@ final class QueryResultsInjector implements EventSubscriberInterface
     }
 
     /**
-     * @param \Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent $event
-     *
      * @return iterable<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Exception
      */
     private function buildResults(FilterViewParametersEvent $event): iterable
     {
@@ -80,12 +76,16 @@ final class QueryResultsInjector implements EventSubscriberInterface
         $content = $view instanceof ContentValueView ? $view->getContent() : null;
 
         if ($location === null && $content === null) {
-            throw new \Exception('No content nor location to get query results for');
+            throw new Exception('No content nor location to get query results for');
         }
         $viewParameters = $event->getBuilderParameters();
         $fieldDefinitionIdentifier = $viewParameters['queryFieldDefinitionIdentifier'];
 
-        $paginationLimit = $this->queryFieldService->getPaginationConfiguration($content ?? $location->getContent(), $fieldDefinitionIdentifier);
+        $paginationLimit = $this->queryFieldService->getPaginationConfiguration(
+            $content ?? $location->getContent(),
+            $fieldDefinitionIdentifier
+        );
+
         $enablePagination = ($viewParameters['enablePagination'] === true);
         $disablePagination = ($viewParameters['disablePagination'] === true);
 
@@ -138,7 +138,7 @@ final class QueryResultsInjector implements EventSubscriberInterface
 
             return $pager;
         } else {
-            if ($this->queryFieldService instanceof QueryFieldLocationService && $location !== null) {
+            if ($location !== null) {
                 return $this->queryFieldService->loadContentItemsForLocation(
                     $location,
                     $fieldDefinitionIdentifier
@@ -149,7 +149,7 @@ final class QueryResultsInjector implements EventSubscriberInterface
                     $fieldDefinitionIdentifier
                 );
             } else {
-                throw new \Exception('No content nor location to get query results for');
+                throw new Exception('No content nor location to get query results for');
             }
         }
     }

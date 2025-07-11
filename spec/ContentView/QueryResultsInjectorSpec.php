@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace spec\Ibexa\FieldTypeQuery\ContentView;
 
@@ -12,7 +13,6 @@ use Ibexa\Core\MVC\Symfony\View\ContentView;
 use Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent;
 use Ibexa\Core\MVC\Symfony\View\ViewEvents;
 use Ibexa\Core\Repository\Values\Content\Content;
-use Ibexa\FieldTypeQuery\ContentView\QueryResultsInjector;
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -20,13 +20,13 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
-class QueryResultsInjectorSpec extends ObjectBehavior
+final class QueryResultsInjectorSpec extends ObjectBehavior
 {
-    public const FIELD_VIEW = 'content_query_field';
-    public const OTHER_VIEW = 'anything_else';
-    public const ITEM_VIEW = 'line';
-    public const VIEWS = ['field' => self::FIELD_VIEW, 'item' => self::ITEM_VIEW];
-    public const FIELD_DEFINITION_IDENTIFIER = 'query_field';
+    public const string FIELD_VIEW = 'content_query_field';
+    public const string OTHER_VIEW = 'anything_else';
+    public const string ITEM_VIEW = 'line';
+    public const array VIEWS = ['field' => self::FIELD_VIEW, 'item' => self::ITEM_VIEW];
+    public const string FIELD_DEFINITION_IDENTIFIER = 'query_field';
 
     private ContentView $view;
 
@@ -48,11 +48,6 @@ class QueryResultsInjectorSpec extends ObjectBehavior
                 'disablePagination' => false,
             ]
         );
-    }
-
-    public function it_is_initializable(): void
-    {
-        $this->shouldHaveType(QueryResultsInjector::class);
     }
 
     public function let(
@@ -104,8 +99,9 @@ class QueryResultsInjectorSpec extends ObjectBehavior
         $queryFieldService->getPaginationConfiguration(Argument::any())->shouldNotHaveBeenCalled();
     }
 
-    public function it_adds_the_query_results_for_the_field_view_without_pagination(QueryFieldServiceInterface $queryFieldService): void
-    {
+    public function it_adds_the_query_results_for_the_field_view_without_pagination(
+        QueryFieldServiceInterface $queryFieldService
+    ): void {
         $content = $this->createContentItem();
 
         $queryFieldService
@@ -128,6 +124,9 @@ class QueryResultsInjectorSpec extends ObjectBehavior
         Assert::eq($parameters->get('items'), $this->getResults());
     }
 
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     */
     public function it_adds_the_query_results_for_the_field_view_with_pagination(
         FilterViewParametersEvent $event,
         QueryFieldServiceInterface $queryFieldService
@@ -156,6 +155,9 @@ class QueryResultsInjectorSpec extends ObjectBehavior
         Assert::isInstanceOf($parameters->get('items'), Pagerfanta::class);
     }
 
+    /**
+     * @return array<string, callable>
+     */
     public function getMatchers(): array
     {
         return [
@@ -170,6 +172,9 @@ class QueryResultsInjectorSpec extends ObjectBehavior
         return new Content();
     }
 
+    /**
+     * @return \Ibexa\Core\Repository\Values\Content\Content[]
+     */
     private function getResults(): array
     {
         return [

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\FieldTypeQuery\ContentView;
 
@@ -17,9 +18,9 @@ use Ibexa\Core\MVC\Symfony\View\View;
 final class FieldDefinitionIdentifierMatcher extends MultipleValued
 {
     /**
-     * {@inheritdoc}
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
-    public function matchLocation(Location $location)
+    public function matchLocation(Location $location): bool
     {
         $contentType = $this->repository
             ->getContentTypeService()
@@ -29,9 +30,9 @@ final class FieldDefinitionIdentifierMatcher extends MultipleValued
     }
 
     /**
-     * {@inheritdoc}
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
-    public function matchContentInfo(ContentInfo $contentInfo)
+    public function matchContentInfo(ContentInfo $contentInfo): bool
     {
         $contentType = $this->repository
             ->getContentTypeService()
@@ -40,11 +41,6 @@ final class FieldDefinitionIdentifierMatcher extends MultipleValued
         return $this->hasFieldDefinition($contentType);
     }
 
-    /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
-     *
-     * @return bool
-     */
     private function hasFieldDefinition(ContentType $contentType): bool
     {
         foreach ($contentType->getFieldDefinitions() as $fieldDefinition) {
@@ -57,20 +53,19 @@ final class FieldDefinitionIdentifierMatcher extends MultipleValued
     }
 
     /**
-     * @param \Ibexa\Core\MVC\Symfony\View\View $view
-     *
-     * @return bool
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
-    public function match(View $view)
+    public function match(View $view): bool
     {
         if (!$view instanceof ContentValueView) {
             return false;
         }
+
         $contentType = $this->repository
             ->getContentTypeService()
-            ->loadContentType($view->getContent()->contentInfo->contentTypeId);
+            ->loadContentType(
+                $view->getContent()->getContentInfo()->getContentType()->id
+            );
 
         if (!$this->hasFieldDefinition($contentType)) {
             return false;
@@ -80,6 +75,10 @@ final class FieldDefinitionIdentifierMatcher extends MultipleValued
             return false;
         }
 
-        return in_array($view->getParameter('fieldIdentifier'), $this->getValues(), true);
+        return in_array(
+            $view->getParameter('fieldIdentifier'),
+            $this->getValues(),
+            true
+        );
     }
 }

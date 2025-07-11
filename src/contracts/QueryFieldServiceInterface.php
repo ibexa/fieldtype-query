@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Contracts\FieldTypeQuery;
 
@@ -37,11 +38,14 @@ interface QueryFieldServiceInterface
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
-    public function loadContentItemsSlice(Content $content, string $fieldDefinitionIdentifier, int $offset, int $limit): iterable;
+    public function loadContentItemsSlice(
+        Content $content,
+        string $fieldDefinitionIdentifier,
+        int $offset,
+        int $limit
+    ): iterable;
 
     /**
-     * @return int The page size, or 0 if pagination is disabled.
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function getPaginationConfiguration(Content $content, string $fieldDefinitionIdentifier): int;

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\FieldTypeQuery;
 
@@ -15,6 +16,7 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Throwable;
 
 /**
  * Silences exceptions when they occur in query field service, for example due to field type misconfigurations.
@@ -23,12 +25,13 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
 {
     use LoggerAwareTrait;
 
-    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface&\Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService */
-    private QueryFieldServiceInterface $inner;
-
-    public function __construct(QueryFieldServiceInterface $inner, ?LoggerInterface $logger = null)
-    {
-        $this->inner = $inner;
+    /**
+     * @param \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface&\Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService $inner
+     */
+    public function __construct(
+        private readonly QueryFieldServiceInterface $inner,
+        ?LoggerInterface $logger = null
+    ) {
         $this->logger = $logger ?: new NullLogger();
     }
 
@@ -36,7 +39,7 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
     {
         try {
             return $this->inner->loadContentItems($content, $fieldDefinitionIdentifier);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->logger->error($e->getMessage(), [
                 'exception' => $e,
             ]);
@@ -49,7 +52,7 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
     {
         try {
             return $this->inner->countContentItems($content, $fieldDefinitionIdentifier);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->logger->error($e->getMessage(), [
                 'exception' => $e,
             ]);
@@ -58,11 +61,15 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
         }
     }
 
-    public function loadContentItemsSlice(Content $content, string $fieldDefinitionIdentifier, int $offset, int $limit): iterable
-    {
+    public function loadContentItemsSlice(
+        Content $content,
+        string $fieldDefinitionIdentifier,
+        int $offset,
+        int $limit
+    ): iterable {
         try {
             return $this->inner->loadContentItemsSlice($content, $fieldDefinitionIdentifier, $offset, $limit);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->logger->error($e->getMessage(), [
                 'exception' => $e,
             ]);
@@ -80,7 +87,7 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
     {
         try {
             return $this->inner->loadContentItemsForLocation($location, $fieldDefinitionIdentifier);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->logger->error($e->getMessage(), [
                 'exception' => $e,
             ]);
@@ -89,11 +96,15 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
         }
     }
 
-    public function loadContentItemsSliceForLocation(Location $location, string $fieldDefinitionIdentifier, int $offset, int $limit): iterable
-    {
+    public function loadContentItemsSliceForLocation(
+        Location $location,
+        string $fieldDefinitionIdentifier,
+        int $offset,
+        int $limit
+    ): iterable {
         try {
             return $this->inner->loadContentItemsSliceForLocation($location, $fieldDefinitionIdentifier, $offset, $limit);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->logger->error($e->getMessage(), [
                 'exception' => $e,
             ]);
@@ -106,7 +117,7 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
     {
         try {
             return $this->inner->countContentItemsForLocation($location, $fieldDefinitionIdentifier);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->logger->error($e->getMessage(), [
                 'exception' => $e,
             ]);

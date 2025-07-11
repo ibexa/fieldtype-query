@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\FieldTypeQuery\FieldType\Mapper;
 
@@ -14,31 +15,24 @@ use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class QueryFormMapper implements FieldDefinitionFormMapperInterface
+final readonly class QueryFormMapper implements FieldDefinitionFormMapperInterface
 {
-    private ContentTypeService $contentTypeService;
-
-    /**
-     * List of query types.
-     *
-     * @var array<int|string, string>
-     */
-    private array $queryTypes;
-
     /**
      * @param array<int|string, string> $queryTypes
      */
-    public function __construct(ContentTypeService $contentTypeService, array $queryTypes = [])
-    {
-        $this->contentTypeService = $contentTypeService;
-        $this->queryTypes = $queryTypes;
+    public function __construct(
+        private ContentTypeService $contentTypeService,
+        private array $queryTypes = []
+    ) {
     }
 
     /**
      * @param \Symfony\Component\Form\FormInterface<mixed> $fieldDefinitionForm
      */
-    public function mapFieldDefinitionForm(FormInterface $fieldDefinitionForm, FieldDefinitionData $data): void
-    {
+    public function mapFieldDefinitionForm(
+        FormInterface $fieldDefinitionForm,
+        FieldDefinitionData $data
+    ): void {
         $parametersForm = $fieldDefinitionForm->getConfig()->getFormFactory()->createBuilder()
             ->create(
                 'Parameters',

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Bundle\FieldTypeQuery\DependencyInjection;
 
@@ -41,9 +42,6 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
         $this->prependGraphQL($container);
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     protected function addContentViewConfig(ContainerBuilder $container): void
     {
         $contentViewDefaults = $container->getParameter('ibexa.site_access.config.default.content_view_defaults');
@@ -92,7 +90,7 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
     protected function prependFieldTemplateConfig(ContainerBuilder $container): void
     {
         $configFile = __DIR__ . '/../Resources/config/field_templates.yaml';
-        $config = Yaml::parse(file_get_contents($configFile));
+        $config = Yaml::parseFile($configFile);
         $container->prependExtensionConfig('ibexa', $config);
         $container->addResource(new FileResource($configFile));
     }

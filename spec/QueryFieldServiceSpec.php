@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace spec\Ibexa\FieldTypeQuery;
 
@@ -21,16 +22,15 @@ use Ibexa\FieldTypeQuery\QueryFieldService;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class QueryFieldServiceSpec extends ObjectBehavior
+final class QueryFieldServiceSpec extends ObjectBehavior
 {
-    public const CONTENT_TYPE_ID = 1;
-    public const CONTENT_TYPE_ID_WITHOUT_PAGINATION = 2;
-    public const LOCATION_ID = 1;
-    public const QUERY_TYPE_IDENTIFIER = 'query_type_identifier';
-    public const FIELD_DEFINITION_IDENTIFIER = 'test';
+    public const int CONTENT_TYPE_ID = 1;
+    public const int CONTENT_TYPE_ID_WITHOUT_PAGINATION = 2;
+    public const int LOCATION_ID = 1;
+    public const string QUERY_TYPE_IDENTIFIER = 'query_type_identifier';
+    public const string FIELD_DEFINITION_IDENTIFIER = 'test';
 
-    private ?SearchResult $searchResult = null;
-
+    /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit[]|null */
     private ?array $searchHits = null;
 
     private int $totalCount = 0;
@@ -42,7 +42,7 @@ class QueryFieldServiceSpec extends ObjectBehavior
         QueryType $queryType
     ): void {
         $this->searchHits = [];
-        $this->searchResult = new SearchResult(['searchHits' => $this->searchHits, 'totalCount' => $this->totalCount]);
+        $searchResult = new SearchResult(['searchHits' => $this->searchHits, 'totalCount' => $this->totalCount]);
 
         $parameters = [
             'param1' => 'value1',
@@ -58,7 +58,7 @@ class QueryFieldServiceSpec extends ObjectBehavior
         $queryTypeRegistry->getQueryType(self::QUERY_TYPE_IDENTIFIER)->willReturn($queryType);
         $queryType->getQuery(Argument::any())->willReturn(new ApiQuery());
         // @todo this should fail. It does not.
-        $searchService->findContent(Argument::any())->willReturn($this->searchResult);
+        $searchService->findContent(Argument::any())->willReturn($searchResult);
         $this->beConstructedWith($searchService, $contentTypeService, $queryTypeRegistry);
     }
 
@@ -119,9 +119,6 @@ class QueryFieldServiceSpec extends ObjectBehavior
         )->shouldBe(10);
     }
 
-    /**
-     * @return \Ibexa\Core\Repository\Values\Content\Content
-     */
     private function getContent(int $contentTypeId = self::CONTENT_TYPE_ID): Values\Content\Content
     {
         return new Values\Content\Content([
@@ -138,13 +135,11 @@ class QueryFieldServiceSpec extends ObjectBehavior
     }
 
     /**
-     * @param array $parameters
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
+     * @param array<string, mixed> $parameters
      */
     private function getContentType(array $parameters, bool $enablePagination = true, int $itemsPerPage = 10): ContentType
     {
-        $contentType = new Values\ContentType\ContentType([
+        return new Values\ContentType\ContentType([
             'fieldDefinitions' => new Values\ContentType\FieldDefinitionCollection([
                 new Values\ContentType\FieldDefinition([
                     'identifier' => self::FIELD_DEFINITION_IDENTIFIER,
@@ -159,7 +154,5 @@ class QueryFieldServiceSpec extends ObjectBehavior
                 ]),
             ]),
         ]);
-
-        return $contentType;
     }
 }

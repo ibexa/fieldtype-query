@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace spec\Ibexa\FieldTypeQuery\Persistence\Legacy\Content\FieldValue\Converter;
 
@@ -13,13 +14,13 @@ use Ibexa\FieldTypeQuery\Persistence\Legacy\Content\FieldValue\Converter\QueryCo
 use PhpSpec\ObjectBehavior;
 use Webmozart\Assert\Assert;
 
-class QueryConverterSpec extends ObjectBehavior
+final class QueryConverterSpec extends ObjectBehavior
 {
-    public const PARAMETERS = ['param1' => 'value1', 'param2' => 'value2'];
-    public const QUERY_TYPE = 'SomeQueryType';
-    public const RETURNED_TYPE = 'folder';
-    public const ENABLE_PAGINATION = true;
-    public const ITEMS_PER_PAGE = 10;
+    public const array PARAMETERS = ['param1' => 'value1', 'param2' => 'value2'];
+    public const string QUERY_TYPE = 'SomeQueryType';
+    public const string RETURNED_TYPE = 'folder';
+    public const bool ENABLE_PAGINATION = true;
+    public const int ITEMS_PER_PAGE = 10;
 
     public function it_is_initializable(): void
     {
