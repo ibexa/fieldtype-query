@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace spec\Ibexa\FieldTypeQuery\spec\ContentView;
+namespace spec\Ibexa\FieldTypeQuery\ContentView;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Repository;
