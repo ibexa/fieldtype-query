@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="726a8ce42306cda8f57496e18fc6573e3862f733" resname="EnablePagination is not a boolean">
+        <source>EnablePagination is not a boolean</source>
+        <target state="new">EnablePagination is not a boolean</target>
+        <note>key: EnablePagination is not a boolean</note>
+      </trans-unit>
+      <trans-unit id="1f11aa1725d4aa134e66f6851c94699f4bb56709" resname="ItemsPerPage is not an integer">
+        <source>ItemsPerPage is not an integer</source>
+        <target state="new">ItemsPerPage is not an integer</target>
+        <note>key: ItemsPerPage is not an integer</note>
+      </trans-unit>
+      <trans-unit id="dffaa194650dd1d72e5ec0056218716f9e0c80ff" resname="Parameters is not a valid YAML string">
+        <source>Parameters is not a valid YAML string</source>
+        <target state="new">Parameters is not a valid YAML string</target>
+        <note>key: Parameters is not a valid YAML string</note>
+      </trans-unit>
+      <trans-unit id="0cc105a5573b8c33c95c0d66497ed16b767b92ab" resname="The selected query type does not exist">
+        <source>The selected query type does not exist</source>
+        <target state="new">The selected query type does not exist</target>
+        <note>key: The selected query type does not exist</note>
+      </trans-unit>
+      <trans-unit id="7ebbf8332b91286f9a35c61e3054747e96c37fc4" resname="The selected returned type could not be loaded">
+        <source>The selected returned type could not be loaded</source>
+        <target state="new">The selected returned type could not be loaded</target>
+        <note>key: The selected returned type could not be loaded</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
