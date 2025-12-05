@@ -1,6 +1,6 @@
 {
     "name": "ibexa/fieldtype-query",
-    "license": ["(GPL-2.0-only or proprietary)"],
+    "license": "(GPL-2.0-only or proprietary)",
     "type": "ibexa-bundle",
     "description": "Ibexa Field Type that defines a query.",
     "replace": {
