@@ -25,12 +25,6 @@ parameters:
 			path: src/bundle/DependencyInjection/Compiler/FieldDefinitionIdentifierViewMatcherPass.php
 
 		-
-			message: '#^Parameter \#2 \$callback of function array_filter expects \(callable\(int\|string\)\: bool\)\|null, Closure\(mixed\)\: \(0\|1\|false\) given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/bundle/DependencyInjection/Compiler/FieldDefinitionIdentifierViewMatcherPass.php
-
-		-
 			message: '#^Parameter \#1 \$queryTypeIdentifier of method Ibexa\\Bundle\\FieldTypeQuery\\DependencyInjection\\Compiler\\QueryTypesListPass\:\:buildQueryTypeName\(\) expects string, int\|string given\.$#'
 			identifier: argument.type
 			count: 1
