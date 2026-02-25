@@ -89,7 +89,7 @@ final class QueryFieldRestController
 
         return new RestValues\ContentList(
             array_map(
-                function (Content $content) {
+                function (Content $content): RestValues\RestContent {
                     return new RestValues\RestContent(
                         $content->contentInfo,
                         $this->locationService->loadLocation($content->contentInfo->mainLocationId),

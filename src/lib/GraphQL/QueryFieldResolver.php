@@ -44,13 +44,13 @@ final class QueryFieldResolver
             $args['first'] = $this->queryFieldService->getPaginationConfiguration($content, $field->fieldDefIdentifier);
         }
 
-        $paginator = new Paginator(function ($offset, $limit) use ($content, $field) {
+        $paginator = new Paginator(function ($offset, $limit) use ($content, $field): iterable {
             return $this->queryFieldService->loadContentItemsSlice($content, $field->fieldDefIdentifier, $offset, $limit);
         });
 
         return $paginator->auto(
             $args,
-            function () use ($content, $field) {
+            function () use ($content, $field): int {
                 return $this->queryFieldService->countContentItems($content, $field->fieldDefIdentifier);
             }
         );
