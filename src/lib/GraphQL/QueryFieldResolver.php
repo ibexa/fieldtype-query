@@ -45,7 +45,7 @@ final readonly class QueryFieldResolver
             $args['first'] = $this->queryFieldService->getPaginationConfiguration($content, $field->fieldDefIdentifier);
         }
 
-        $paginator = new Paginator(function ($offset, $limit) use ($content, $field) {
+        $paginator = new Paginator(function ($offset, $limit) use ($content, $field): iterable {
             return $this->queryFieldService->loadContentItemsSlice($content, $field->fieldDefIdentifier, $offset, $limit);
         });
 
