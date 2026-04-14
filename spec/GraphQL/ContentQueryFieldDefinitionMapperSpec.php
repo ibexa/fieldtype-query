@@ -88,7 +88,7 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
         $innerMapper->mapToFieldValueResolver($fieldDefinition)->shouldNotBeCalled();
         $this
             ->mapToFieldValueResolver($fieldDefinition)
-            ->shouldBe('@=resolver("QueryFieldValue", [field, content])');
+            ->shouldBe('@=query("QueryFieldValue", field, content)');
     }
 
     public function it_maps_the_field_value_when_pagination_is_enabled(FieldDefinitionMapper $innerMapper)
@@ -97,7 +97,7 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
         $innerMapper->mapToFieldValueResolver($fieldDefinition)->shouldNotBeCalled();
         $this
             ->mapToFieldValueResolver($fieldDefinition)
-            ->shouldBe('@=resolver("QueryFieldValueConnection", [args, field, content])');
+            ->shouldBe('@=query("QueryFieldValueConnection", args, field, content)');
     }
 
     /**
