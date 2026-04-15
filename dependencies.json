@@ -3,9 +3,9 @@
   "packages": [
     {
       "requirement": "dev-ibx-11606-bump-trhirdparty-due-to-security as 4.6.x-dev",
-      "repositoryUrl": "https://github.com/ibexa/graphql",
+      "repositoryUrl": "git@github.com:ibexa/graphql.git",
       "package": "ibexa/graphql",
-      "shouldBeAddedAsVCS": true
+      "shouldBeAddedAsVCS": false
     }
   ]
 }
