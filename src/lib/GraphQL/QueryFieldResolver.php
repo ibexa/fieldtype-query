@@ -32,7 +32,7 @@ final class QueryFieldResolver
     }
 
     /**
-     * @return \GraphQL\Executor\Promise\Promise|\Overblog\GraphQLBundle\Relay\Connection\Output\Connection|null
+     * @return \GraphQL\Executor\Promise\Promise|\Overblog\GraphQLBundle\Relay\Connection\Output\Connection<\Ibexa\Contracts\Core\Repository\Values\Content\Content>|null
      */
     public function resolveQueryFieldConnection(Argument $args, ?Field $field, Content $content)
     {
