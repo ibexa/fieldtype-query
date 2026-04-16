@@ -1,0 +1,7 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^PHPDoc tag @return contains generic type Overblog\\GraphQLBundle\\Relay\\Connection\\Output\\Connection\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Content\> but class Overblog\\GraphQLBundle\\Relay\\Connection\\Output\\Connection is not generic\.$#'
+			identifier: generics.notGeneric
+			count: 1
+			path: src/lib/GraphQL/QueryFieldResolver.php
