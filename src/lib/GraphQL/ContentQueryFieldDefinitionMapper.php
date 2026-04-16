@@ -58,9 +58,9 @@ final class ContentQueryFieldDefinitionMapper extends DecoratingFieldDefinitionM
         $fieldSettings = $fieldDefinition->getFieldSettings();
 
         if ($fieldSettings['EnablePagination']) {
-            return '@=resolver("QueryFieldValueConnection", [args, field, content])';
+            return '@=query("QueryFieldValueConnection", args, field, content)';
         } else {
-            return '@=resolver("QueryFieldValue", [field, content])';
+            return '@=query("QueryFieldValue", field, content)';
         }
     }
 
