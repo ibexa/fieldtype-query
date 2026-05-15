@@ -18,7 +18,6 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\FieldTypeQuery\QueryFieldService;
-use function Ibexa\PolyfillPhp82\iterator_to_array;
 use Ibexa\Rest\Server\Values as RestValues;
 use Ibexa\Rest\Server\Values\RestContent;
 use Symfony\Component\HttpFoundation\Request;
