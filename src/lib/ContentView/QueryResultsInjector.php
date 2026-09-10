@@ -113,12 +113,7 @@ final readonly class QueryResultsInjector implements EventSubscriberInterface
 
             $limit = $queryParameters['limit'] ?? $paginationLimit;
             $pageParam = sprintf('%s_page', $fieldDefinitionIdentifier);
-            $page = isset($request) ? match (true) {
-                $request->attributes->has($pageParam) => $request->attributes->get($pageParam),
-                $request->query->has($pageParam) => $request->query->all()[$pageParam],
-                $request->request->has($pageParam) => $request->request->all()[$pageParam],
-                default => 1,
-            } : 1;
+            $page = $request?->query->getInt($pageParam, 1) ?? 1;
 
             if ($location !== null) {
                 $pager = new Pagerfanta(
