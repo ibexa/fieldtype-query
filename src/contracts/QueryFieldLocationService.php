@@ -7,6 +7,7 @@
 
 namespace Ibexa\Contracts\FieldTypeQuery;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 
 /**
@@ -17,21 +18,32 @@ interface QueryFieldLocationService
     /**
      * Returns the query results for the given location.
      *
-     * @return iterable<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
+     * @return iterable<Content>
      */
-    public function loadContentItemsForLocation(Location $location, string $fieldDefinitionIdentifier): iterable;
+    public function loadContentItemsForLocation(
+        Location $location,
+        string $fieldDefinitionIdentifier
+    ): iterable;
 
     /**
      * Returns a slice of the query results for the given location.
      *
-     * @return iterable<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
+     * @return iterable<Content>
      */
-    public function loadContentItemsSliceForLocation(Location $location, string $fieldDefinitionIdentifier, int $offset, int $limit): iterable;
+    public function loadContentItemsSliceForLocation(
+        Location $location,
+        string $fieldDefinitionIdentifier,
+        int $offset,
+        int $limit
+    ): iterable;
 
     /**
      * Counts the results for the given location.
      */
-    public function countContentItemsForLocation(Location $location, string $fieldDefinitionIdentifier): int;
+    public function countContentItemsForLocation(
+        Location $location,
+        string $fieldDefinitionIdentifier
+    ): int;
 }
 
 class_alias(QueryFieldLocationService::class, 'EzSystems\EzPlatformQueryFieldType\API\QueryFieldLocationService');

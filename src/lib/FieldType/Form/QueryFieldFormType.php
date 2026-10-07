@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class QueryFieldFormType extends AbstractType
 {
-    /** @var \Ibexa\Contracts\Core\Repository\FieldTypeService */
+    /** @var FieldTypeService */
     private $fieldTypeService;
 
     public function __construct(FieldTypeService $fieldTypeService)
@@ -38,8 +38,10 @@ class QueryFieldFormType extends AbstractType
         return TextType::class;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ): void {
         $builder->addModelTransformer(new FieldValueTransformer($this->fieldTypeService->getFieldType('ezcontentquery')));
     }
 }

@@ -17,6 +17,7 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Core\QueryType\QueryType;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
 use Ibexa\Core\Repository\Values;
+use Ibexa\Core\Repository\Values\Content\Content;
 use Ibexa\FieldTypeQuery\QueryFieldService;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -81,8 +82,10 @@ class QueryFieldServiceSpec extends ObjectBehavior
         $this->countContentItems($this->getContent(), self::FIELD_DEFINITION_IDENTIFIER)->shouldBe($this->totalCount);
     }
 
-    public function it_deducts_any_offset_when_counting_results(QueryType $queryType, SearchService $searchService)
-    {
+    public function it_deducts_any_offset_when_counting_results(
+        QueryType $queryType,
+        SearchService $searchService
+    ) {
         $query = new ApiContentQuery();
         $query->offset = 5;
 
@@ -94,8 +97,10 @@ class QueryFieldServiceSpec extends ObjectBehavior
         $this->countContentItems($this->getContent(), self::FIELD_DEFINITION_IDENTIFIER)->shouldBe(2);
     }
 
-    public function it_returns_zero_if_offset_is_bigger_than_count(QueryType $queryType, SearchService $searchService)
-    {
+    public function it_returns_zero_if_offset_is_bigger_than_count(
+        QueryType $queryType,
+        SearchService $searchService
+    ) {
         $query = new ApiContentQuery();
         $query->offset = 8;
 
@@ -124,11 +129,11 @@ class QueryFieldServiceSpec extends ObjectBehavior
     }
 
     /**
-     * @return \Ibexa\Core\Repository\Values\Content\Content
+     * @return Content
      */
-    private function getContent(int $contentTypeId = self::CONTENT_TYPE_ID): Values\Content\Content
+    private function getContent(int $contentTypeId = self::CONTENT_TYPE_ID): Content
     {
-        return new Values\Content\Content([
+        return new Content([
             'versionInfo' => new Values\Content\VersionInfo([
                 'contentInfo' => new ContentInfo([
                     'contentTypeId' => $contentTypeId,
@@ -144,10 +149,13 @@ class QueryFieldServiceSpec extends ObjectBehavior
     /**
      * @param array $parameters
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
+     * @return ContentType
      */
-    private function getContentType(array $parameters, bool $enablePagination = true, $itemsPerPage = 10): ContentType
-    {
+    private function getContentType(
+        array $parameters,
+        bool $enablePagination = true,
+        $itemsPerPage = 10
+    ): ContentType {
         $contentType = new Values\ContentType\ContentType([
             'fieldDefinitions' => new Values\ContentType\FieldDefinitionCollection([
                 new Values\ContentType\FieldDefinition([

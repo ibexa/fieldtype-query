@@ -7,6 +7,7 @@
 
 namespace Ibexa\FieldTypeQuery\ContentView;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
@@ -20,17 +21,20 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class QueryResultsInjector implements EventSubscriberInterface
 {
-    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface&\Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService */
+    /** @var QueryFieldServiceInterface&QueryFieldLocationService */
     private $queryFieldService;
 
     /** @var array */
     private $views;
 
-    /** @var \Symfony\Component\HttpFoundation\RequestStack */
+    /** @var RequestStack */
     private $requestStack;
 
-    public function __construct(QueryFieldServiceInterface $queryFieldService, array $views, RequestStack $requestStack)
-    {
+    public function __construct(
+        QueryFieldServiceInterface $queryFieldService,
+        array $views,
+        RequestStack $requestStack
+    ) {
         if (!isset($views['item']) || !isset($views['field'])) {
             throw new \InvalidArgumentException("Both 'item' and 'field' views must be provided");
         }
@@ -69,9 +73,9 @@ final class QueryResultsInjector implements EventSubscriberInterface
     }
 
     /**
-     * @param \Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent $event
+     * @param FilterViewParametersEvent $event
      *
-     * @return iterable<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
+     * @return iterable<Content>
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
