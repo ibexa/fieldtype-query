@@ -23,17 +23,21 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
 {
     use LoggerAwareTrait;
 
-    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface&\Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService */
+    /** @var QueryFieldServiceInterface&QueryFieldLocationService */
     private $inner;
 
-    public function __construct(QueryFieldServiceInterface $inner, ?LoggerInterface $logger = null)
-    {
+    public function __construct(
+        QueryFieldServiceInterface $inner,
+        ?LoggerInterface $logger = null
+    ) {
         $this->inner = $inner;
         $this->logger = $logger ?: new NullLogger();
     }
 
-    public function loadContentItems(Content $content, string $fieldDefinitionIdentifier): iterable
-    {
+    public function loadContentItems(
+        Content $content,
+        string $fieldDefinitionIdentifier
+    ): iterable {
         try {
             return $this->inner->loadContentItems($content, $fieldDefinitionIdentifier);
         } catch (\Throwable $e) {
@@ -45,8 +49,10 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
         }
     }
 
-    public function countContentItems(Content $content, string $fieldDefinitionIdentifier): int
-    {
+    public function countContentItems(
+        Content $content,
+        string $fieldDefinitionIdentifier
+    ): int {
         try {
             return $this->inner->countContentItems($content, $fieldDefinitionIdentifier);
         } catch (\Throwable $e) {
@@ -58,8 +64,12 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
         }
     }
 
-    public function loadContentItemsSlice(Content $content, string $fieldDefinitionIdentifier, int $offset, int $limit): iterable
-    {
+    public function loadContentItemsSlice(
+        Content $content,
+        string $fieldDefinitionIdentifier,
+        int $offset,
+        int $limit
+    ): iterable {
         try {
             return $this->inner->loadContentItemsSlice($content, $fieldDefinitionIdentifier, $offset, $limit);
         } catch (\Throwable $e) {
@@ -71,13 +81,17 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
         }
     }
 
-    public function getPaginationConfiguration(Content $content, string $fieldDefinitionIdentifier): int
-    {
+    public function getPaginationConfiguration(
+        Content $content,
+        string $fieldDefinitionIdentifier
+    ): int {
         return $this->inner->getPaginationConfiguration($content, $fieldDefinitionIdentifier);
     }
 
-    public function loadContentItemsForLocation(Location $location, string $fieldDefinitionIdentifier): iterable
-    {
+    public function loadContentItemsForLocation(
+        Location $location,
+        string $fieldDefinitionIdentifier
+    ): iterable {
         try {
             return $this->inner->loadContentItemsForLocation($location, $fieldDefinitionIdentifier);
         } catch (\Throwable $e) {
@@ -89,8 +103,12 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
         }
     }
 
-    public function loadContentItemsSliceForLocation(Location $location, string $fieldDefinitionIdentifier, int $offset, int $limit): iterable
-    {
+    public function loadContentItemsSliceForLocation(
+        Location $location,
+        string $fieldDefinitionIdentifier,
+        int $offset,
+        int $limit
+    ): iterable {
         try {
             return $this->inner->loadContentItemsSliceForLocation($location, $fieldDefinitionIdentifier, $offset, $limit);
         } catch (\Throwable $e) {
@@ -102,8 +120,10 @@ final class ExceptionSafeQueryFieldService implements QueryFieldServiceInterface
         }
     }
 
-    public function countContentItemsForLocation(Location $location, string $fieldDefinitionIdentifier): int
-    {
+    public function countContentItemsForLocation(
+        Location $location,
+        string $fieldDefinitionIdentifier
+    ): int {
         try {
             return $this->inner->countContentItemsForLocation($location, $fieldDefinitionIdentifier);
         } catch (\Throwable $e) {

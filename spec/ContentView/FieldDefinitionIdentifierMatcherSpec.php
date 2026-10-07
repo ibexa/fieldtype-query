@@ -36,17 +36,21 @@ class FieldDefinitionIdentifierMatcherSpec extends ObjectBehavior
         $this->shouldHaveType(ViewMatcherInterface::class);
     }
 
-    public static function initialize(Repository $repository, array $matchingConfig): FieldDefinitionIdentifierMatcher
-    {
+    public static function initialize(
+        Repository $repository,
+        array $matchingConfig
+    ): FieldDefinitionIdentifierMatcher {
         $matcher = new FieldDefinitionIdentifierMatcher();
         $matcher->setRepository($repository);
         $matcher->setMatchingConfig($matchingConfig);
 
-        return  $matcher;
+        return $matcher;
     }
 
-    public function let(Repository $repository, ContentTypeService $contentTypeService)
-    {
+    public function let(
+        Repository $repository,
+        ContentTypeService $contentTypeService
+    ) {
         $repository->getContentTypeService()->willReturn($contentTypeService);
         $contentTypeService->loadContentType(self::CONTENT_TYPE_ID_WITHOUT_FIELD_DEFINITION)->willReturn($this->createContentTypeWithoutFieldDefinition());
         $contentTypeService->loadContentType(self::CONTENT_TYPE_ID_WITH_FIELD_DEFINITION)->willReturn($this->createMatchingContentTypeWithFieldDefinition());
@@ -98,8 +102,11 @@ class FieldDefinitionIdentifierMatcherSpec extends ObjectBehavior
         );
     }
 
-    private function createContentType(int $contentTypeId, string $contentTypeIdentifier, bool $withFieldDefinition): ContentType
-    {
+    private function createContentType(
+        int $contentTypeId,
+        string $contentTypeIdentifier,
+        bool $withFieldDefinition
+    ): ContentType {
         $fieldDefinitions = [];
         if ($withFieldDefinition === true) {
             $fieldDefinitions[] = new FieldDefinition(['identifier' => self::FIELD_DEFINITION_IDENTIFIER]);

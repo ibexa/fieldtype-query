@@ -9,6 +9,7 @@ namespace Ibexa\Bundle\FieldTypeQuery\Controller;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
@@ -16,26 +17,27 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\FieldTypeQuery\QueryFieldService;
-use function Ibexa\PolyfillPhp82\iterator_to_array;
 use Ibexa\Rest\RequestParser;
 use Ibexa\Rest\Server\Values as RestValues;
 use Symfony\Component\HttpFoundation\Request;
 
+use function Ibexa\PolyfillPhp82\iterator_to_array;
+
 final class QueryFieldRestController
 {
-    /** @var \Ibexa\FieldTypeQuery\QueryFieldService */
+    /** @var QueryFieldService */
     private $queryFieldService;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentService */
+    /** @var ContentService */
     private $contentService;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
+    /** @var ContentTypeService */
     private $contentTypeService;
 
-    /** @var \Ibexa\Contracts\Core\Repository\LocationService */
+    /** @var LocationService */
     private $locationService;
 
-    /** @var \Ibexa\Rest\RequestParser */
+    /** @var RequestParser */
     private $requestParser;
 
     public function __construct(
@@ -117,7 +119,7 @@ final class QueryFieldRestController
 
     /**
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws UnauthorizedException
      */
     private function loadLocationByPath(Request $request): Location
     {

@@ -28,10 +28,10 @@ class QueryResultsInjectorSpec extends ObjectBehavior
     public const VIEWS = ['field' => self::FIELD_VIEW, 'item' => self::ITEM_VIEW];
     public const FIELD_DEFINITION_IDENTIFIER = 'query_field';
 
-    /** @var \Ibexa\Core\MVC\Symfony\View\ContentView */
+    /** @var ContentView */
     private $view;
 
-    /** @var \Ibexa\Core\MVC\Symfony\View\Event\FilterViewParametersEvent */
+    /** @var FilterViewParametersEvent */
     private $event;
 
     public function __construct()
@@ -161,7 +161,10 @@ class QueryResultsInjectorSpec extends ObjectBehavior
     public function getMatchers(): array
     {
         return [
-            'subscribeTo' => static function ($return, $event) {
+            'subscribeTo' => static function (
+                $return,
+                $event
+            ) {
                 return is_array($return) && isset($return[$event]);
             },
         ];
