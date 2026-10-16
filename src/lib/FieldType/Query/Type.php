@@ -131,7 +131,7 @@ final class Type extends FieldType implements TranslationContainerInterface
     /**
      * Converts a $Value to a hash.
      *
-     * @param \Ibexa\Core\FieldType\TextLine\Value $value
+     * @param FieldTypeQueryValue $value
      */
     public function toHash(SPIValue $value): mixed
     {
