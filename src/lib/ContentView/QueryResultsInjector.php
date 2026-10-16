@@ -9,6 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeQuery\ContentView;
 
 use Exception;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\MVC\Symfony\View\ContentValueView;
@@ -22,7 +24,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 final readonly class QueryResultsInjector implements EventSubscriberInterface
 {
     /**
-     * @param \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface&\Ibexa\Contracts\FieldTypeQuery\QueryFieldLocationService $queryFieldService
+     * @param QueryFieldServiceInterface&QueryFieldLocationService $queryFieldService
      * @param array<string, mixed> $views
      */
     public function __construct(
@@ -64,10 +66,10 @@ final readonly class QueryResultsInjector implements EventSubscriberInterface
     }
 
     /**
-     * @return iterable<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
+     * @return iterable<Content>
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Exception
+     * @throws Exception
      */
     private function buildResults(FilterViewParametersEvent $event): iterable
     {

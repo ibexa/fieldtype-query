@@ -18,8 +18,10 @@ use Symfony\Component\Yaml\Yaml;
 
 final class IbexaFieldTypeQueryExtension extends Extension implements PrependExtensionInterface
 {
-    public function load(array $configs, ContainerBuilder $container): void
-    {
+    public function load(
+        array $configs,
+        ContainerBuilder $container
+    ): void {
         $loader = new YamlFileLoader(
             $container,
             new FileLocator(__DIR__ . '/../Resources/config/')
@@ -85,7 +87,7 @@ final class IbexaFieldTypeQueryExtension extends Extension implements PrependExt
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      */
     protected function prependFieldTemplateConfig(ContainerBuilder $container): void
     {

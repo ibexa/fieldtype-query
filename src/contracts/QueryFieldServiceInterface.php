@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\FieldTypeQuery;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 
 /**
@@ -18,25 +19,31 @@ interface QueryFieldServiceInterface
     /**
      * Executes the query without pagination and returns the content items.
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Content[]
+     * @return Content[]
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public function loadContentItems(Content $content, string $fieldDefinitionIdentifier): iterable;
+    public function loadContentItems(
+        Content $content,
+        string $fieldDefinitionIdentifier
+    ): iterable;
 
     /**
      * Counts the total results of a query.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public function countContentItems(Content $content, string $fieldDefinitionIdentifier): int;
+    public function countContentItems(
+        Content $content,
+        string $fieldDefinitionIdentifier
+    ): int;
 
     /**
      * Executes a paginated query and return the requested content items slice.
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Content[]
+     * @return Content[]
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function loadContentItemsSlice(
         Content $content,
@@ -46,7 +53,10 @@ interface QueryFieldServiceInterface
     ): iterable;
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public function getPaginationConfiguration(Content $content, string $fieldDefinitionIdentifier): int;
+    public function getPaginationConfiguration(
+        Content $content,
+        string $fieldDefinitionIdentifier
+    ): int;
 }

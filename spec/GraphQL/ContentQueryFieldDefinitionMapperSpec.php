@@ -109,7 +109,7 @@ final class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
             'fieldSettings' => [
                 'ReturnedType' => self::RETURNED_CONTENT_TYPE_IDENTIFIER,
                 'EnablePagination' => $enablePagination,
-             ],
+            ],
         ]);
     }
 

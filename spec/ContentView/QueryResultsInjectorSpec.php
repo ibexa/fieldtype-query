@@ -161,7 +161,10 @@ final class QueryResultsInjectorSpec extends ObjectBehavior
     public function getMatchers(): array
     {
         return [
-            'subscribeTo' => static function ($return, $event): bool {
+            'subscribeTo' => static function (
+                $return,
+                $event
+            ): bool {
                 return is_array($return) && isset($return[$event]);
             },
         ];
@@ -173,7 +176,7 @@ final class QueryResultsInjectorSpec extends ObjectBehavior
     }
 
     /**
-     * @return \Ibexa\Core\Repository\Values\Content\Content[]
+     * @return Content[]
      */
     private function getResults(): array
     {

@@ -23,11 +23,10 @@ final readonly class QueryFormMapper implements FieldDefinitionFormMapperInterfa
     public function __construct(
         private ContentTypeService $contentTypeService,
         private array $queryTypes = []
-    ) {
-    }
+    ) {}
 
     /**
-     * @param \Symfony\Component\Form\FormInterface<mixed> $fieldDefinitionForm
+     * @param FormInterface<mixed> $fieldDefinitionForm
      */
     public function mapFieldDefinitionForm(
         FormInterface $fieldDefinitionForm,
