@@ -38,16 +38,17 @@ final class Type extends FieldType implements TranslationContainerInterface
         private readonly QueryTypeRegistry $queryTypeRegistry,
         private readonly ContentTypeService $contentTypeService,
         private readonly string $identifier
-    ) {
-    }
+    ) {}
 
     public function validateValidatorConfiguration($validatorConfiguration): array
     {
         return [];
     }
 
-    public function validate(FieldDefinition $fieldDefinition, SPIValue $fieldValue): array
-    {
+    public function validate(
+        FieldDefinition $fieldDefinition,
+        SPIValue $fieldValue
+    ): array {
         return [];
     }
 
@@ -57,16 +58,19 @@ final class Type extends FieldType implements TranslationContainerInterface
     }
 
     /**
-     * @param \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
+     * @param FieldTypeQueryValue $value
      */
-    public function getName(SPIValue $value, FieldDefinition $fieldDefinition, string $languageCode): string
-    {
+    public function getName(
+        SPIValue $value,
+        FieldDefinition $fieldDefinition,
+        string $languageCode
+    ): string {
         return (string)$value->text;
     }
 
     public function getEmptyValue(): BaseValue
     {
-        return new Value();
+        return new FieldTypeQueryValue();
     }
 
     public function isEmptyValue(SPIValue $value): bool
@@ -77,7 +81,7 @@ final class Type extends FieldType implements TranslationContainerInterface
     protected function createValueFromInput($inputValue): mixed
     {
         if (is_string($inputValue)) {
-            $inputValue = new Value($inputValue);
+            $inputValue = new FieldTypeQueryValue($inputValue);
         }
 
         return $inputValue;
@@ -88,7 +92,7 @@ final class Type extends FieldType implements TranslationContainerInterface
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
      *
-     * @param \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
+     * @param FieldTypeQueryValue $value
      */
     protected function checkValueStructure(BaseValue $value): void
     {
@@ -102,7 +106,7 @@ final class Type extends FieldType implements TranslationContainerInterface
     }
 
     /**
-     * @param \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
+     * @param FieldTypeQueryValue $value
      */
     protected function getSortInfo(BaseValue $value)
     {
@@ -115,13 +119,13 @@ final class Type extends FieldType implements TranslationContainerInterface
     /**
      * Converts an $hash to the Value defined by the field type.
      */
-    public function fromHash(mixed $hash): FieldTypeQueryValue|BaseValue
+    public function fromHash(mixed $hash): FieldTypeQueryValue | BaseValue
     {
         if ($hash === null) {
             return $this->getEmptyValue();
         }
 
-        return new Value($hash);
+        return new FieldTypeQueryValue($hash);
     }
 
     /**

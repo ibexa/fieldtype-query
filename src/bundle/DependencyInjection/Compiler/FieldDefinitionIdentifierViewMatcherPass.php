@@ -24,7 +24,7 @@ final class FieldDefinitionIdentifierViewMatcherPass implements CompilerPassInte
     {
         $configKeys = array_filter(
             array_keys($container->getParameterBag()->all()),
-            static function (string $parameterName): int|false {
+            static function (string $parameterName): int | false {
                 return preg_match('/ibexa.site_access.config\..+\.content_view/', $parameterName);
             }
         );

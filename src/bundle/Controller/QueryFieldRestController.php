@@ -10,6 +10,8 @@ namespace Ibexa\Bundle\FieldTypeQuery\Controller;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
@@ -31,14 +33,13 @@ final readonly class QueryFieldRestController
         private LocationService $locationService,
         private UriParserInterface $uriParser,
         private ContentService\RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
      */
     public function getResults(
         Request $request,
@@ -111,8 +112,8 @@ final readonly class QueryFieldRestController
 
     /**
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
      */
     private function loadLocationByPath(Request $request): Location
     {

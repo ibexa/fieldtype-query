@@ -21,8 +21,7 @@ final readonly class QueryResultsWithLocationPagerFantaAdapter implements Adapte
         private QueryFieldLocationService $queryFieldService,
         private Location $location,
         private string $fieldDefinitionIdentifier
-    ) {
-    }
+    ) {}
 
     public function getNbResults(): int
     {
@@ -32,8 +31,10 @@ final readonly class QueryResultsWithLocationPagerFantaAdapter implements Adapte
         ), 0);
     }
 
-    public function getSlice($offset, $length): iterable
-    {
+    public function getSlice(
+        $offset,
+        $length
+    ): iterable {
         return $this->queryFieldService->loadContentItemsSliceForLocation(
             $this->location,
             $this->fieldDefinitionIdentifier,

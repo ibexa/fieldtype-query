@@ -31,11 +31,12 @@ final readonly class QueryFieldService implements QueryFieldServiceInterface, Qu
         private SearchService $searchService,
         private ContentTypeService $contentTypeService,
         private QueryTypeRegistry $queryTypeRegistry
-    ) {
-    }
+    ) {}
 
-    public function loadContentItems(Content $content, string $fieldDefinitionIdentifier): iterable
-    {
+    public function loadContentItems(
+        Content $content,
+        string $fieldDefinitionIdentifier
+    ): iterable {
         $mainLocation = $content->getContentInfo()->getMainLocation();
         if ($mainLocation === null) {
             return [];
@@ -48,15 +49,19 @@ final readonly class QueryFieldService implements QueryFieldServiceInterface, Qu
     /**
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
-    public function loadContentItemsForLocation(Location $location, string $fieldDefinitionIdentifier): iterable
-    {
+    public function loadContentItemsForLocation(
+        Location $location,
+        string $fieldDefinitionIdentifier
+    ): iterable {
         $query = $this->prepareQuery($location->getContent(), $location, $fieldDefinitionIdentifier);
 
         return $this->executeQueryAndMapResult($query);
     }
 
-    public function countContentItems(Content $content, string $fieldDefinitionIdentifier): int
-    {
+    public function countContentItems(
+        Content $content,
+        string $fieldDefinitionIdentifier
+    ): int {
         $mainLocation = $content->getContentInfo()->getMainLocation();
         if ($mainLocation === null) {
             return 0;
@@ -72,8 +77,10 @@ final readonly class QueryFieldService implements QueryFieldServiceInterface, Qu
     /**
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
-    public function countContentItemsForLocation(Location $location, string $fieldDefinitionIdentifier): int
-    {
+    public function countContentItemsForLocation(
+        Location $location,
+        string $fieldDefinitionIdentifier
+    ): int {
         $query = $this->prepareQuery($location->getContent(), $location, $fieldDefinitionIdentifier);
         $query->limit = 0;
 
@@ -82,8 +89,12 @@ final readonly class QueryFieldService implements QueryFieldServiceInterface, Qu
         return $count < 0 ? 0 : $count;
     }
 
-    public function loadContentItemsSlice(Content $content, string $fieldDefinitionIdentifier, int $offset, int $limit): iterable
-    {
+    public function loadContentItemsSlice(
+        Content $content,
+        string $fieldDefinitionIdentifier,
+        int $offset,
+        int $limit
+    ): iterable {
         $mainLocation = $content->getContentInfo()->getMainLocation();
         if ($mainLocation === null) {
             return [];
@@ -111,8 +122,10 @@ final readonly class QueryFieldService implements QueryFieldServiceInterface, Qu
         return $this->executeQueryAndMapResult($query);
     }
 
-    public function getPaginationConfiguration(Content $content, string $fieldDefinitionIdentifier): int
-    {
+    public function getPaginationConfiguration(
+        Content $content,
+        string $fieldDefinitionIdentifier
+    ): int {
         $fieldDefinition = $this->loadFieldDefinition($content, $fieldDefinitionIdentifier);
 
         if ($fieldDefinition->getFieldSettings()['EnablePagination'] === false) {
@@ -128,8 +141,10 @@ final readonly class QueryFieldService implements QueryFieldServiceInterface, Qu
      *
      * @return array<string, mixed>
      */
-    private function resolveParameters(array $expressions, array $variables): array
-    {
+    private function resolveParameters(
+        array $expressions,
+        array $variables
+    ): array {
         foreach ($expressions as $key => $expression) {
             if (is_array($expression)) {
                 $expressions[$key] = $this->resolveParameters($expression, $variables);
@@ -149,10 +164,12 @@ final readonly class QueryFieldService implements QueryFieldServiceInterface, Qu
     }
 
     /**
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException if $expression is not an expression.
+     * @throws InvalidArgumentException if $expression is not an expression.
      */
-    private function resolveExpression(string $expression, array $variables): mixed
-    {
+    private function resolveExpression(
+        string $expression,
+        array $variables
+    ): mixed {
         if (!$this->isExpression($expression)) {
             throw new InvalidArgumentException('expression', 'is not an expression');
         }
@@ -196,8 +213,10 @@ final readonly class QueryFieldService implements QueryFieldServiceInterface, Qu
     /**
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
-    private function loadFieldDefinition(Content $content, string $fieldDefinitionIdentifier): FieldDefinition
-    {
+    private function loadFieldDefinition(
+        Content $content,
+        string $fieldDefinitionIdentifier
+    ): FieldDefinition {
         $contentType = $this->contentTypeService->loadContentType(
             $content->getContentInfo()->contentTypeId
         );
@@ -215,7 +234,7 @@ final readonly class QueryFieldService implements QueryFieldServiceInterface, Qu
     }
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Content[]
+     * @return Content[]
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
