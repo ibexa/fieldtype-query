@@ -37,7 +37,7 @@
         }
     },
     "require-dev": {
-        "ibexa/code-style": "~2.0.0",
+        "ibexa/code-style": "~2.3.1",
         "ibexa/design-engine": "~5.0.x-dev",
         "ibexa/doctrine-schema": "~5.0.x-dev",
         "ibexa/fieldtype-richtext": "~5.0.x-dev",
