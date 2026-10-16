@@ -22,27 +22,33 @@ class QueryConverter implements Converter
      *
      * @deprecated since 6.8, will be removed in 7.x, use default constructor instead.
      *
-     * @return \Ibexa\FieldTypeQuery\Persistence\Legacy\Content\FieldValue\Converter\QueryConverter
+     * @return QueryConverter
      */
     public static function create()
     {
         return new self();
     }
 
-    public function toStorageValue(FieldValue $value, StorageFieldValue $storageFieldValue): void
-    {
+    public function toStorageValue(
+        FieldValue $value,
+        StorageFieldValue $storageFieldValue
+    ): void {
         $storageFieldValue->dataText = $value->data;
         $storageFieldValue->sortKeyString = (string)$value->sortKey;
     }
 
-    public function toFieldValue(StorageFieldValue $value, FieldValue $fieldValue): void
-    {
+    public function toFieldValue(
+        StorageFieldValue $value,
+        FieldValue $fieldValue
+    ): void {
         $fieldValue->data = $value->dataText;
         $fieldValue->sortKey = $value->sortKeyString;
     }
 
-    public function toStorageFieldDefinition(FieldDefinition $fieldDef, StorageFieldDefinition $storageDef): void
-    {
+    public function toStorageFieldDefinition(
+        FieldDefinition $fieldDef,
+        StorageFieldDefinition $storageDef
+    ): void {
         $storageDef->dataText1 = $fieldDef->fieldTypeConstraints->fieldSettings['QueryType'];
         $storageDef->dataText2 = $fieldDef->fieldTypeConstraints->fieldSettings['ReturnedType'];
         $storageDef->dataText5 = \json_encode($fieldDef->fieldTypeConstraints->fieldSettings['Parameters']) ?: '';
@@ -50,8 +56,10 @@ class QueryConverter implements Converter
         $storageDef->dataInt2 = $fieldDef->fieldTypeConstraints->fieldSettings['ItemsPerPage'];
     }
 
-    public function toFieldDefinition(StorageFieldDefinition $storageDef, FieldDefinition $fieldDef): void
-    {
+    public function toFieldDefinition(
+        StorageFieldDefinition $storageDef,
+        FieldDefinition $fieldDef
+    ): void {
         $fieldDef->fieldTypeConstraints->fieldSettings = [
             'QueryType' => $storageDef->dataText1 ?: null,
             'ReturnedType' => $storageDef->dataText2 ?: null,

@@ -103,7 +103,7 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
     /**
      * @param bool $enablePagination
      *
-     * @return \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
+     * @return FieldDefinition
      */
     private function fieldDefinition(bool $enablePagination = false): FieldDefinition
     {
@@ -118,9 +118,9 @@ class ContentQueryFieldDefinitionMapperSpec extends ObjectBehavior
     }
 
     /**
-     * @return \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
+     * @return FieldDefinition
      */
-    protected function getLambdaFieldDefinition(): \Ibexa\Core\Repository\Values\ContentType\FieldDefinition
+    protected function getLambdaFieldDefinition(): FieldDefinition
     {
         return new FieldDefinition(['fieldTypeIdentifier' => 'lambda']);
     }

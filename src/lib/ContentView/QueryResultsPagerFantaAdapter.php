@@ -13,10 +13,10 @@ use Pagerfanta\Adapter\AdapterInterface;
 
 final class QueryResultsPagerFantaAdapter implements AdapterInterface
 {
-    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface */
+    /** @var QueryFieldServiceInterface */
     private $queryFieldService;
 
-    /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content */
+    /** @var Content */
     private $content;
 
     /** @var string */
@@ -40,8 +40,10 @@ final class QueryResultsPagerFantaAdapter implements AdapterInterface
         );
     }
 
-    public function getSlice($offset, $length)
-    {
+    public function getSlice(
+        $offset,
+        $length
+    ) {
         return $this->queryFieldService->loadContentItemsSlice(
             $this->content,
             $this->fieldDefinitionIdentifier,

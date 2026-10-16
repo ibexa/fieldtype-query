@@ -7,6 +7,7 @@
 
 namespace Ibexa\FieldTypeQuery\ContentView;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
@@ -41,7 +42,7 @@ final class FieldDefinitionIdentifierMatcher extends MultipleValued
     }
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
+     * @param ContentType $contentType
      *
      * @return bool
      */
@@ -57,11 +58,11 @@ final class FieldDefinitionIdentifierMatcher extends MultipleValued
     }
 
     /**
-     * @param \Ibexa\Core\MVC\Symfony\View\View $view
+     * @param View $view
      *
      * @return bool
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
     public function match(View $view)
     {

@@ -32,17 +32,20 @@ final class Type extends FieldType implements TranslationContainerInterface
         'ItemsPerPage' => ['type' => 'integer', 'default' => 10],
     ];
 
-    /** @var \Ibexa\Core\QueryType\QueryTypeRegistry */
+    /** @var QueryTypeRegistry */
     private $queryTypeRegistry;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
+    /** @var ContentTypeService */
     private $contentTypeService;
 
     /** @var string */
     private $identifier;
 
-    public function __construct(QueryTypeRegistry $queryTypeRegistry, ContentTypeService $contentTypeService, string $identifier)
-    {
+    public function __construct(
+        QueryTypeRegistry $queryTypeRegistry,
+        ContentTypeService $contentTypeService,
+        string $identifier
+    ) {
         $this->queryTypeRegistry = $queryTypeRegistry;
         $this->contentTypeService = $contentTypeService;
         $this->identifier = $identifier;
@@ -55,8 +58,10 @@ final class Type extends FieldType implements TranslationContainerInterface
         return $validationErrors;
     }
 
-    public function validate(FieldDefinition $fieldDefinition, SPIValue $fieldValue)
-    {
+    public function validate(
+        FieldDefinition $fieldDefinition,
+        SPIValue $fieldValue
+    ) {
         return [];
     }
 
@@ -66,15 +71,18 @@ final class Type extends FieldType implements TranslationContainerInterface
     }
 
     /**
-     * @param \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
+     * @param Value $value
      */
-    public function getName(SPIValue $value, FieldDefinition $fieldDefinition, string $languageCode): string
-    {
+    public function getName(
+        SPIValue $value,
+        FieldDefinition $fieldDefinition,
+        string $languageCode
+    ): string {
         return (string)$value->text;
     }
 
     /**
-     * @return \Ibexa\FieldTypeQuery\FieldType\Query\Value
+     * @return Value
      */
     public function getEmptyValue(): BaseValue
     {
@@ -100,7 +108,7 @@ final class Type extends FieldType implements TranslationContainerInterface
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
      *
-     * @param \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
+     * @param Value $value
      */
     protected function checkValueStructure(BaseValue $value): void
     {
@@ -114,7 +122,7 @@ final class Type extends FieldType implements TranslationContainerInterface
     }
 
     /**
-     * @param \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
+     * @param Value $value
      */
     protected function getSortInfo(BaseValue $value)
     {
@@ -126,7 +134,7 @@ final class Type extends FieldType implements TranslationContainerInterface
      *
      * @param mixed $hash
      *
-     * @return \Ibexa\FieldTypeQuery\FieldType\Query\Value $value
+     * @return Value $value
      */
     public function fromHash($hash)
     {

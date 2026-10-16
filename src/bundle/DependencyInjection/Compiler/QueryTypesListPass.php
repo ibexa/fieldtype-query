@@ -12,11 +12,12 @@ use Ibexa\FieldTypeQuery\FieldType\Mapper\QueryFormMapper;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 class QueryTypesListPass implements CompilerPassInterface
 {
     /**
-     * @var \Symfony\Component\Serializer\NameConverter\NameConverterInterface
+     * @var NameConverterInterface
      */
     private $nameConverter;
 

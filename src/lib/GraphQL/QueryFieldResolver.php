@@ -7,15 +7,17 @@
 
 namespace Ibexa\FieldTypeQuery\GraphQL;
 
+use GraphQL\Executor\Promise\Promise;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface;
 use Ibexa\GraphQL\Value\Field;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 final class QueryFieldResolver
 {
-    /** @var \Ibexa\Contracts\FieldTypeQuery\QueryFieldServiceInterface */
+    /** @var QueryFieldServiceInterface */
     private $queryFieldService;
 
     public function __construct(QueryFieldServiceInterface $queryFieldService)
@@ -24,18 +26,23 @@ final class QueryFieldResolver
     }
 
     /**
-     * @return iterable<\Ibexa\Contracts\Core\Repository\Values\Content\Content>
+     * @return iterable<Content>
      */
-    public function resolveQueryField(Field $field, Content $content): iterable
-    {
+    public function resolveQueryField(
+        Field $field,
+        Content $content
+    ): iterable {
         return $this->queryFieldService->loadContentItems($content, $field->fieldDefIdentifier);
     }
 
     /**
-     * @return \GraphQL\Executor\Promise\Promise|\Overblog\GraphQLBundle\Relay\Connection\Output\Connection<\Ibexa\Contracts\Core\Repository\Values\Content\Content>|null
+     * @return Promise|Connection<Content>|null
      */
-    public function resolveQueryFieldConnection(Argument $args, ?Field $field, Content $content)
-    {
+    public function resolveQueryFieldConnection(
+        Argument $args,
+        ?Field $field,
+        Content $content
+    ) {
         if ($field === null) {
             return null;
         }
@@ -44,7 +51,10 @@ final class QueryFieldResolver
             $args['first'] = $this->queryFieldService->getPaginationConfiguration($content, $field->fieldDefIdentifier);
         }
 
-        $paginator = new Paginator(function ($offset, $limit) use ($content, $field): iterable {
+        $paginator = new Paginator(function (
+            $offset,
+            $limit
+        ) use ($content, $field): iterable {
             return $this->queryFieldService->loadContentItemsSlice($content, $field->fieldDefIdentifier, $offset, $limit);
         });
 

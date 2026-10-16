@@ -12,8 +12,6 @@ namespace Ibexa\FieldTypeQuery;
  *
  * @deprecated since 1.0, will be part of the regular QueryFieldService interface in 2.0.
  */
-interface QueryFieldPaginationService
-{
-}
+interface QueryFieldPaginationService {}
 
 class_alias(QueryFieldPaginationService::class, 'EzSystems\EzPlatformQueryFieldType\API\QueryFieldPaginationService');
